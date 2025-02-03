@@ -65,7 +65,7 @@ const HeroSection = () => {
             {/* Main Content */}
             <div className="flex w-full flex-col items-start">
               <h1 className="mb-4 text-balance text-[36px] font-semibold leading-[1.2] md:mb-6 md:text-[48px] lg:text-wrap lg:text-start lg:text-[60px] lg:leading-[1.15]">
-                Micro-agents to make your teams 100x more productive
+                Micro-agents to 100x your team&apos;s productivity
               </h1>
               <h2 className="mb-6 text-lg text-white/80 md:mb-8 md:text-xl lg:text-start lg:text-xl lg:leading-[1.55]">
                 You know those little tasks that eat up your day—like chasing status updates, scheduling calls, combing through resumes, or extracting data from yet another report? Yeah, those. Let our agents take them away.
