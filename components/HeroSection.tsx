@@ -3,16 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import CirclesBackground from './CirclesBackground';
-// import { useState } from 'react';
-import { Application } from './recruit/application';
-// import clsx from 'clsx';
 import Header from './Header';
-
-// type Tab = 'recruit' | 'returns' | 'tracking';
+import { DemoCarousel } from './demo/DemoCarousel';
 
 const HeroSection = () => {
-  // const [isScrolled, setIsScrolled] = useState(false);
-  // const [activeTab, setActiveTab] = useState<Tab>('recruit');
 
   return (
     <div className="relative overflow-hidden">
@@ -29,7 +23,7 @@ const HeroSection = () => {
         </div>
 
         {/* Content Container */}
-        <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-56px)] w-full flex-col px-8 py-12 md:py-16 lg:flex-row lg:items-center lg:py-20">
+        <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-56px)] w-full flex-col px-8 py-12 md:py-16 lg:flex-row lg:items-center lg:py-10">
           {/* Left Column */}
           <div className="flex flex-1 flex-col items-start lg:max-w-[50%]">
             {/* Announcement Banner */}
@@ -71,12 +65,22 @@ const HeroSection = () => {
                 You know those little tasks that eat up your day—like chasing status updates, scheduling calls, combing through resumes, or extracting data from yet another report? Yeah, those. Let our agents take them away.
               </h2>
             </div>
+                <div className="flex items-center">
+                    <Link
+                      href='https://dashboard.appliedai.club/sign-up'
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-base font-semibold text-black transition-colors hover:bg-[white]/70"
+                    >
+                      Sign Up
+                    </Link>
+                </div>
           </div>
 
-          {/* Right Column - Application Container */}
+          {/* Right Column - Replace Application with DemoCarousel */}
           <div className="flex flex-1 items-center justify-center lg:max-w-[50%]">
             <div className="w-full max-w-[500px]">
-              <Application />
+              <DemoCarousel />
             </div>
           </div>
         </div>

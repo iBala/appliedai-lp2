@@ -6,6 +6,7 @@ import Link from 'next/link';
 import AgentCirclesBackground from './AgentCirclesBackground';
 import Header from '../Header';
 import WaitlistModal from './WaitlistModal';
+import { DemoBackground } from './DemoBackground';
 
 interface CTAConfig {
   type: 'waitlist' | 'link';
@@ -56,7 +57,7 @@ const AgentHeroSection = ({
         <AgentCirclesBackground theme={theme} />
 
         {/* Content Container - adjusted padding */}
-        <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-56px)] w-full flex-col px-8 py-12 md:py-20 lg:flex-row lg:items-center lg:py-20">
+        <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-56px)] w-full flex-col px-8 py-12 md:py-10 lg:flex-row lg:items-center lg:py-20">
           {/* Left Column */}
           <div className="flex flex-1 flex-col items-start lg:max-w-[50%]">
             <div className="flex w-full flex-col items-start">
@@ -123,8 +124,13 @@ const AgentHeroSection = ({
 
           {/* Right Column */}
           <div className="flex flex-1 items-center justify-center lg:max-w-[50%]">
-            <div className="w-full max-w-[500px] relative z-10">
-              {rightContent}
+            <div className="relative w-[500px]">
+              <div className="relative h-[600px] rounded-xl overflow-hidden">
+                <DemoBackground />
+                <div className="relative z-10 p-8 h-full flex items-center justify-center">
+                  {rightContent}
+                </div>
+              </div>
             </div>
           </div>
         </div>

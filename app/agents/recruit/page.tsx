@@ -1,9 +1,13 @@
+'use client';
+
 import AgentPageLayout from '@/components/agents/AgentPageLayout';
 import AgentHeroSection from '@/components/agents/AgentHeroSection';
 import FeatureSection from '@/components/agents/FeatureSection';
 import ValueProposition from '@/components/agents/ValueProposition';
-import { Application } from '@/components/recruit/application';
 import Footer from '@/components/Footer';
+import ApplicationScreen from '@/components/demo/screens/ApplicationScreen';
+import { DemoWrapper } from '@/components/demo/wrappers/DemoWrapper';
+import { FeatureDemoWrapper } from '@/components/agents/FeatureDemoWrapper';
 
 const RecruitIcon = () => (
   <svg 
@@ -28,13 +32,14 @@ export default function RecruitAgentPage() {
         theme="light"
         tag="Recruitment"
         tagIcon={<RecruitIcon />}
-        title="Find the right fit from a 1000 applicants"
-        description="Stop wasting time on unqualified candidates. Recruit agent ensures only the top 5% of resumes reach your hiring panel—boosting efficiency, improving scheduling, and enhancing candidate experience."
-        rightContent={<Application />}
+        title="Screen candidates with precision"
+        description="Stop wasting time on unqualified candidates. Our AI screens resumes, schedules interviews, and manages your hiring pipeline."
+        rightContent={
+          <DemoWrapper>
+            <ApplicationScreen onComplete={() => {}} />
+          </DemoWrapper>
+        }
         cta={{
-          // type: 'waitlist',
-          // text: 'Join Waitlist'
-          // Or for external link:
           type: 'link',
           text: 'Sign Up',
           href: 'https://dashboard.appliedai.club'
@@ -63,8 +68,13 @@ export default function RecruitAgentPage() {
             description: "Recruit AI can talk to your candidates and keep them engaged throughout the hiring process and ensure their success."
           }
         ]}
-        imageSrc="/images/recruitment-features.png"
-        imageAlt="AI Recruitment Features"
+        imageSrc={
+          <div className="w-full">
+            <FeatureDemoWrapper>
+              <ApplicationScreen onComplete={() => {}} />
+            </FeatureDemoWrapper>
+          </div>
+        }
       />
 
       <Footer />

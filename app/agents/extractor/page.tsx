@@ -1,11 +1,15 @@
+'use client';
+
 import AgentPageLayout from '@/components/agents/AgentPageLayout';
 import AgentHeroSection from '@/components/agents/AgentHeroSection';
 import FeatureSection from '@/components/agents/FeatureSection';
 import ValueProposition from '@/components/agents/ValueProposition';
-import { Application } from '@/components/recruit/application';
 import Footer from '@/components/Footer';
+import ExtractorScreen from '@/components/demo/screens/ExtractorScreen';
+import { DemoWrapper } from '@/components/demo/wrappers/DemoWrapper';
+import { FeatureDemoWrapper } from '@/components/agents/FeatureDemoWrapper';
 
-const RecruitIcon = () => (
+const ExtractorIcon = () => (
   <svg 
     width="24" 
     height="24" 
@@ -21,20 +25,21 @@ const RecruitIcon = () => (
   </svg>
 );
 
-export default function RecruitAgentPage() {
+export default function ExtractorAgentPage() {
   return (
     <AgentPageLayout>
       <AgentHeroSection
         theme="light"
-        tag="Recruitment"
-        tagIcon={<RecruitIcon />}
-        title="Find the right fit from a 1000 applicants"
-        description="Stop wasting time on unqualified candidates. Recruit agent ensures only the top 5% of resumes reach your hiring panel—boosting efficiency, improving scheduling, and enhancing candidate experience."
-        rightContent={<Application />}
+        tag="Document Processing"
+        tagIcon={<ExtractorIcon />}
+        title="Extract structured data from any document"
+        description="Stop wasting time manually processing documents. Our AI extracts key information from invoices, receipts, and more with high accuracy."
+        rightContent={
+          <DemoWrapper>
+            <ExtractorScreen onComplete={() => {}} />
+          </DemoWrapper>
+        }
         cta={{
-          // type: 'waitlist',
-          // text: 'Join Waitlist'
-          // Or for external link:
           type: 'link',
           text: 'Sign Up',
           href: 'https://dashboard.appliedai.club'
@@ -46,8 +51,8 @@ export default function RecruitAgentPage() {
       />
       
       <FeatureSection
-        category="Recruitment"
-        title="360 degree evaluation with AI"
+        category="Document Processing"
+        title="Extract data from any document"
         description="Don't just depend on resume, use public data to improve candidate evaluation and find the right candidate"
         features={[
           {
@@ -63,8 +68,13 @@ export default function RecruitAgentPage() {
             description: "Recruit AI can talk to your candidates and keep them engaged throughout the hiring process and ensure their success."
           }
         ]}
-        imageSrc="/images/recruitment-features.png"
-        imageAlt="AI Recruitment Features"
+        imageSrc={
+          <div className="w-full">
+            <FeatureDemoWrapper>
+              <ExtractorScreen onComplete={() => {}} />
+            </FeatureDemoWrapper>
+          </div>
+        }
       />
 
       <Footer />

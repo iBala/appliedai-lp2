@@ -1,9 +1,13 @@
+'use client';
+
 import AgentPageLayout from '@/components/agents/AgentPageLayout';
 import AgentHeroSection from '@/components/agents/AgentHeroSection';
 import FeatureSection from '@/components/agents/FeatureSection';
 import ValueProposition from '@/components/agents/ValueProposition';
-import { Application } from '@/components/recruit/application';
 import Footer from '@/components/Footer';
+import SchedulerScreen from '@/components/demo/screens/SchedulerScreen';
+import { DemoWrapper } from '@/components/demo/wrappers/DemoWrapper';
+import { FeatureDemoWrapper } from '@/components/agents/FeatureDemoWrapper';
 
 const SchedulerIcon = () => (
   <svg 
@@ -30,7 +34,11 @@ export default function SchedulerAgentPage() {
         tagIcon={<SchedulerIcon />}
         title={`"I'm looping in Eva to find us time."`}
         description="Just cc: @eva to your conversations. She will take care of the scheduling, conflicts and follow ups."
-        rightContent={<Application />}
+        rightContent={
+          <DemoWrapper>
+            <SchedulerScreen onComplete={() => {}} />
+          </DemoWrapper>
+        }
         cta={{
           type: 'waitlist',
           text: 'Join Waitlist'
@@ -63,8 +71,13 @@ export default function SchedulerAgentPage() {
             description: "Just like a human assistant, Eva can consult you to handle complex scheduling/rescheduling requests."
           }
         ]}
-        imageSrc="/images/scheduler-features.png"
-        imageAlt="AI Scheduler Features"
+        imageSrc={
+          <div className="w-full">
+            <FeatureDemoWrapper>
+              <SchedulerScreen onComplete={() => {}} />
+            </FeatureDemoWrapper>
+          </div>
+        }
       />
 
       <Footer />

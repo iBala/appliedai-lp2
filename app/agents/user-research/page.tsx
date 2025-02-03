@@ -1,9 +1,13 @@
+'use client';
+
 import AgentPageLayout from '@/components/agents/AgentPageLayout';
 import AgentHeroSection from '@/components/agents/AgentHeroSection';
 import FeatureSection from '@/components/agents/FeatureSection';
 import ValueProposition from '@/components/agents/ValueProposition';
-import { Application } from '@/components/recruit/application';
 import Footer from '@/components/Footer';
+import UserResearchScreen from '@/components/demo/screens/UserResearchScreen';
+import { DemoWrapper } from '@/components/demo/wrappers/DemoWrapper';
+import { FeatureDemoWrapper } from '@/components/agents/FeatureDemoWrapper';
 
 const UserResearchIcon = () => (
   <svg 
@@ -30,11 +34,12 @@ export default function UserResearchAgentPage() {
         tagIcon={<UserResearchIcon />}
         title="Have in depth conversations with your users"
         description="Our Research AI is specifically designed to understand user's emotion, identify topics and have open ended, in depth conversations."
-        rightContent={<Application />}
+        rightContent={
+          <DemoWrapper>
+            <UserResearchScreen onComplete={() => {}} />
+          </DemoWrapper>
+        }
         cta={{
-          // type: 'waitlist',
-          // text: 'Join Waitlist'
-          // Or for external link:
           type: 'link',
           text: 'Sign Up',
           href: 'https://dashboard.appliedai.club'
@@ -63,8 +68,13 @@ export default function UserResearchAgentPage() {
             description: "Send out the campaigns in bulk, get structured insights as a summary and also access to individual raw conversations."
           }
         ]}
-        imageSrc="/images/user-research-features.png"
-        imageAlt="AI User Research Features"
+        imageSrc={
+          <div className="w-full">
+            <FeatureDemoWrapper>
+              <UserResearchScreen onComplete={() => {}} />
+            </FeatureDemoWrapper>
+          </div>
+        }
       />
 
       <Footer />

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { useState } from 'react';
 
-interface FeaturePoint {
+interface Feature {
   title: string;
   description: string;
 }
@@ -13,9 +13,9 @@ interface FeatureSectionProps {
   category: string;
   title: string;
   description: string;
-  features: FeaturePoint[];
-  imageSrc: string;
-  imageAlt: string;
+  features: Feature[];
+  imageSrc: string | React.ReactNode;
+  imageAlt?: string;
 }
 
 const FeatureSection = ({
@@ -82,13 +82,17 @@ const FeatureSection = ({
           >
             <div className="p-4 transition duration-1000 ease-out will-change-[opacity] relative h-full opacity-100">
               <div className="overflow-hidden rounded-lg">
-                <Image
-                  src={imageSrc}
-                  alt={imageAlt}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 600px"
-                />
+                {typeof imageSrc === 'string' ? (
+                  <Image
+                    src={imageSrc}
+                    alt={imageAlt || title}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 600px"
+                  />
+                ) : (
+                  imageSrc
+                )}
               </div>
             </div>
           </div>

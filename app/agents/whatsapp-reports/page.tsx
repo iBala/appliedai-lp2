@@ -1,9 +1,13 @@
+'use client';
+
 import AgentPageLayout from '@/components/agents/AgentPageLayout';
 import AgentHeroSection from '@/components/agents/AgentHeroSection';
 import FeatureSection from '@/components/agents/FeatureSection';
 import ValueProposition from '@/components/agents/ValueProposition';
-import { Application } from '@/components/recruit/application';
 import Footer from '@/components/Footer';
+import RevenueScreen from '@/components/demo/screens/RevenueScreen';
+import { DemoWrapper } from '@/components/demo/wrappers/DemoWrapper';
+import { FeatureDemoWrapper } from '@/components/agents/FeatureDemoWrapper';
 
 const WhatsappReportsIcon = () => (
   <svg 
@@ -30,14 +34,14 @@ export default function WhatsappReportsAgentPage() {
         tagIcon={<WhatsappReportsIcon />}
         title="Get your reports directly from Whatsapp"
         description="Want to know yesterday's sales? Just ping on whatsapp. Eva will respond with the report instantly."
-        rightContent={<Application />}
+        rightContent={
+          <DemoWrapper>
+            <RevenueScreen onComplete={() => {}} />
+          </DemoWrapper>
+        }
         cta={{
           type: 'waitlist',
           text: 'Join Waitlist'
-          // Or for external link:
-          // type: 'link',
-          // text: 'Try Now',
-          // href: 'https://example.com'
         }}
       />
       <ValueProposition 
@@ -63,8 +67,13 @@ export default function WhatsappReportsAgentPage() {
             description: "When the request is complex, Eva can take human help to get the report. "
           }
         ]}
-        imageSrc="/images/whatsapp-reports-features.png"
-        imageAlt="AI Whatsapp Reports Features"
+        imageSrc={
+          <div className="w-full">
+            <FeatureDemoWrapper>
+              <RevenueScreen onComplete={() => {}} />
+            </FeatureDemoWrapper>
+          </div>
+        }
       />
 
       <Footer />

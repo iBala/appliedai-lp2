@@ -3,7 +3,11 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Application } from './recruit/application'
+import ApplicationScreen from './demo/screens/ApplicationScreen'
+import ExtractorScreen from '@/components/demo/screens/ExtractorScreen'
+import UserResearchScreen from './demo/screens/UserResearchScreen'
+import SchedulerScreen from './demo/screens/SchedulerScreen'
+import RevenueScreen from '@/components/demo/screens/RevenueScreen'
 
 const agents = [
   {
@@ -11,31 +15,40 @@ const agents = [
     name: "Recruit",
     description: "Screen resumes, schedule interviews, and manage your hiring pipeline with precision.",
     image: "/images/agents/recruit.png",
-    component: "recruit"
+    component: "recruit",
+    href: "/agents/recruit"
   },
   {
     id: 2,
     name: "Image/Doc Extractor",
     description: "Extract structured data from any document or image with high accuracy.",
-    image: "/images/agents/extractor.png"
+    image: "/images/agents/extractor.png",
+    component: "extractor",
+    href: "/agents/extractor"
   },
   {
     id: 3,
     name: "User Research",
     description: "Conduct user interviews, analyze feedback, and generate actionable insights.",
-    image: "/images/agents/research.png"
+    image: "/images/agents/research.png",
+    component: "research",
+    href: "/agents/user-research"
   },
   {
     id: 4,
     name: "Scheduler",
     description: "Coordinate meetings across time zones, handle follow-ups, and manage your calendar.",
-    image: "/images/agents/scheduler.png"
+    image: "/images/agents/scheduler.png",
+    component: "scheduler",
+    href: "/agents/scheduler"
   },
   {
     id: 5,
     name: "Data Analysis",
     description: "Transform raw data into meaningful insights with automated analysis and visualization.",
-    image: "/images/agents/analysis.png"
+    image: "/images/agents/analysis.png",
+    component: "analysis",
+    href: "/agents/whatsapp-reports"
   }
 ]
 
@@ -89,25 +102,58 @@ const AgentList = () => {
   const [activeTab, setActiveTab] = useState(agents[0].name)
 
   const renderAgentContent = (agent: typeof agents[0]) => {
-    if (agent.component === 'recruit') {
-      return (
-        <div className="relative h-full w-full flex items-center justify-center">
-          <div className="w-[500px]"> {/* Fixed width matching the HeroSection */}
-            <Application />
+    switch (agent.component) {
+      case 'recruit':
+        return (
+          <div className="relative h-full w-full flex items-center justify-center">
+            <div className="w-[500px]">
+              <ApplicationScreen onComplete={() => {}} />
+            </div>
           </div>
-        </div>
-      )
+        )
+      case 'extractor':
+        return (
+          <div className="relative h-full w-full flex items-center justify-center">
+            <div className="w-[500px]">
+              <ExtractorScreen onComplete={() => {}} />
+            </div>
+          </div>
+        )
+      case 'research':
+        return (
+          <div className="relative h-full w-full flex items-center justify-center">
+            <div className="w-[500px]">
+              <UserResearchScreen onComplete={() => {}} />
+            </div>
+          </div>
+        )
+      case 'scheduler':
+        return (
+          <div className="relative h-full w-full flex items-center justify-center">
+            <div className="w-[500px]">
+              <SchedulerScreen onComplete={() => {}} />
+            </div>
+          </div>
+        )
+      case 'analysis':
+        return (
+          <div className="relative h-full w-full flex items-center justify-center">
+            <div className="w-[500px]">
+              <RevenueScreen onComplete={() => {}} />
+            </div>
+          </div>
+        )
+      default:
+        return (
+          <Image
+            src={agent.image}
+            alt={`${agent.name} demo`}
+            fill
+            className="object-cover rounded-lg"
+            priority
+          />
+        )
     }
-
-    return (
-      <Image
-        src={agent.image}
-        alt={`${agent.name} demo`}
-        fill
-        className="object-cover rounded-lg"
-        priority
-      />
-    )
   }
 
   return (
@@ -182,7 +228,7 @@ const AgentList = () => {
                 {/* Try it out button */}
                 <div className="absolute bottom-8 right-8 z-20">
                   <Link
-                    href={`/agents/${selectedAgent.name.toLowerCase()}`}
+                    href={selectedAgent.href}
                     className="group flex items-center gap-2 rounded-full bg-black/10 px-6 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:bg-black/20"
                   >
                     Try it out
