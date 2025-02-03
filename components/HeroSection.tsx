@@ -29,16 +29,16 @@ const HeroSection = () => {
         </div>
 
         {/* Content Container */}
-        <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-56px)] w-full flex-col px-8 py-12 md:py-16 lg:flex-row lg:items-center lg:py-40">
+        <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-56px)] w-full flex-col px-8 py-12 md:py-16 lg:flex-row lg:items-center lg:py-20">
           {/* Left Column */}
           <div className="flex flex-1 flex-col items-start lg:max-w-[50%]">
             {/* Announcement Banner */}
             <Link 
-              href="/blog/loop-acquires-wonderment/"
+              href="/club"
               className="group relative mb-6 animate-[heroBannerIn_1s_ease_0s_1_normal_forwards_running] cursor-pointer overflow-hidden rounded-full border border-white/10 bg-white/10 px-2.5 py-1 text-md font-medium backdrop-blur-sm"
             >
               <div className="pointer-events-none absolute inset-0 animate-[blurIn_0.1s_ease_0s_1_normal_forwards_running] rounded-full bg-white/0 transition-all duration-300 will-change-[opacity] hover:bg-white/20 group-hover:bg-white/10" />
-              <div className="relative flex animate-[fadeIn_1s_ease_0s_1_normal_backwards_running] items-center">
+              <div className="relative flex  items-center">
                 <Image
                   alt="Slack logo"
                   src="/images/slack-new-logo.svg"
@@ -65,7 +65,7 @@ const HeroSection = () => {
             {/* Main Content */}
             <div className="flex w-full flex-col items-start">
               <h1 className="mb-4 text-balance text-[36px] font-semibold leading-[1.2] md:mb-6 md:text-[48px] lg:text-wrap lg:text-start lg:text-[60px] lg:leading-[1.15]">
-                Micro-agents to make your team 100x more productive
+                Micro-agents to make your teams 100x more productive
               </h1>
               <h2 className="mb-6 text-lg text-white/80 md:mb-8 md:text-xl lg:text-start lg:text-xl lg:leading-[1.55]">
                 You know those little tasks that eat up your day—like chasing status updates, scheduling calls, combing through resumes, or extracting data from yet another report? Yeah, those. Let our agents take them away.
