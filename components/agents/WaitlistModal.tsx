@@ -59,7 +59,7 @@ const WaitlistModal = ({ isOpen, onClose, agentType }: WaitlistModalProps) => {
             Join the waitlist for {agentType}
           </DialogTitle>
           <DialogDescription className="text-gray-500 dark:text-gray-400">
-            Be the first to know when we launch. We'll notify you as soon as {agentType} is ready.
+            Be the first to know when we launch. We&apos;ll notify you as soon as {agentType} is ready.
           </DialogDescription>
         </DialogHeader>
         {!success ? (
@@ -88,7 +88,7 @@ const WaitlistModal = ({ isOpen, onClose, agentType }: WaitlistModalProps) => {
         ) : (
           <div className="py-6">
             <p className="text-center text-green-600">
-              Thanks for joining! We'll keep you updated.
+              Thanks for joining! We&apos;ll keep you updated.
             </p>
           </div>
         )}

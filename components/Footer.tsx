@@ -79,7 +79,7 @@ const Footer = () => {
           {/* Slogan */}
           <div className="border-t border-white/10 pt-6">
             <p className="text-center text-sm font-medium italic text-white/40">
-              "Great work is a lot of little things done well."
+              &quot;Great work is a lot of little things done well.&quot;
             </p>
           </div>
         </div>

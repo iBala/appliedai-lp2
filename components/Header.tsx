@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from 'react';
 import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
+// import { usePathname } from 'next/navigation';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -52,9 +52,9 @@ interface HeaderProps {
 }
 
 const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderProps) => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const isRecruitPage = pathname.includes('/recruit');
+  // const isRecruitPage = pathname.includes('/recruit');
 
   // Compute theme-based styles
   const textColorClass = theme === 'light' ? 'text-gray-900' : 'text-white';

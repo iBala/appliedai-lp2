@@ -39,11 +39,11 @@ const HowItWorks = () => {
         <div className="mx-auto max-w-[900px]">
           <div className="mb-10">
             <p className="text-[24px] leading-[1.3] text-black/60 md:text-[28px]">
-              Most software companies start to solve specific problems. But overtime, they end up justifying their valuation by building so many features that 90% of the customers don't use.{' '}
+              Most software companies start to solve specific problems. But overtime, they end up justifying their valuation by building so many features that 90% of the customers don&apos;t use.{' '}
               <span className="text-black">
                 <span className="highlight">
-                  There's beauty in keeping things simple
-                </span>. We're building a new kind of software company. How we work:
+                  There&apos;s beauty in keeping things simple
+                </span>. We&apos;re building a new kind of software company. How we work:
               </span>
             </p>
           </div>

@@ -43,7 +43,7 @@ export default function RecruitAgentPage() {
       <ValueProposition 
         title="Why this helps?"
         description="Letting in an unqualified candidate wastes time, resources, disppoints the panel. This impacts the overall candidate experience resulting in conversion problems. Imagine if you paid a lot of attention and you made sure only highly qualified 5 candidates get shortlisted. - High ROI for panel, Easier scheduling, Better candidate experience. This is the 20% effort that will give you 80% results."
-      />"
+      />
       
       <FeatureSection
         category="Recruitment"

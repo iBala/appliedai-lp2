@@ -1,7 +1,6 @@
 'use client'
 
-import Image from 'next/image'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useMemo, useCallback } from 'react'
 import clsx from 'clsx'
 import React from 'react'
 
@@ -58,7 +57,8 @@ export function Application({ className }: ApplicationProps) {
   const [matchPercentage, setMatchPercentage] = useState(0)
   const [connectionComplete, setConnectionComplete] = useState(false)
   
-  const steps: FlowStep[] = [
+  // Move steps outside of component or memoize it if it needs component scope
+  const steps: FlowStep[] = useMemo(() => [
     { 
       id: 1, 
       type: 'progress',
@@ -100,7 +100,7 @@ export function Application({ className }: ApplicationProps) {
       status: 'pending',
       type: 'step' 
     },
-  ]
+  ], []) // Empty dependency array since steps are static
 
   // Initialize first component
   useEffect(() => {
@@ -128,16 +128,16 @@ export function Application({ className }: ApplicationProps) {
       const dotIndex = Math.floor(elapsed / durationPerDot);
       const progressWithinDot = ((elapsed % durationPerDot) / durationPerDot) * 100;
 
-      // Update dots state
-      const dots = steps[0].progressSteps?.map((_, index) => ({
-        ...steps[0].progressSteps![index],
-        status: index < dotIndex ? 'complete' : 
-               index === dotIndex ? 'in-progress' : 
-               'pending',
-        progress: index < dotIndex ? 100 :
-                 index === dotIndex ? progressWithinDot :
-                 0
-      }));
+      // // Update dots state
+      // const dots = steps[0].progressSteps?.map((_, index) => ({
+      //   ...steps[0].progressSteps![index],
+      //   status: index < dotIndex ? 'complete' : 
+      //          index === dotIndex ? 'in-progress' : 
+      //          'pending',
+      //   progress: index < dotIndex ? 100 :
+      //            index === dotIndex ? progressWithinDot :
+      //            0
+      // }));
 
       if (dotIndex < 3) {
         setProgressState({
@@ -203,55 +203,8 @@ export function Application({ className }: ApplicationProps) {
     }
   }, [currentStep, steps.length])
 
-  // Modified match evaluation effect
-  useEffect(() => {
-    if (currentStep === 2) {
-      // Reset state at the start of step
-      setMatchStatus('evaluating');
-      setMatchPercentage(0);
-      
-      // Evaluation timer
-      const evaluationTimer = setTimeout(() => {
-        setMatchStatus('complete');
-        setMatchPercentage(78);
-      }, 1000); // Reduced to 1 second
-      
-      // Completion timer
-      const completionTimer = setTimeout(() => {
-        handleComponentComplete(steps[2].id);
-      }, 2000); // Total duration of 2 seconds
-      
-      // Cleanup both timers
-      return () => {
-        clearTimeout(evaluationTimer);
-        clearTimeout(completionTimer);
-      };
-    }
-  }, [currentStep]); // Remove matchStatus dependency to prevent re-runs
-
-  // Modified notification step timing
-  useEffect(() => {
-    if (currentStep === 1) {
-      // Reduced delay before completion
-      setTimeout(() => {
-        setComponentStates(prev => 
-          prev.map(state => 
-            state.id === steps[1].id 
-              ? { ...state, isCompleted: true }
-              : state
-          )
-        );
-        
-        // Reduced delay before next step
-        setTimeout(() => {
-          handleComponentComplete(steps[1].id);
-        }, 500); // Reduced from 1000ms
-      }, 1000); // Reduced from 2000ms
-    }
-  }, [currentStep]);
-
-  // Handle component completion and next component entry
-  const handleComponentComplete = (stepId: number) => {
+  // Memoize handleComponentComplete to prevent infinite re-renders
+  const handleComponentComplete = useCallback((stepId: number) => {
     console.log('handleComponentComplete called with stepId:', stepId)
     console.log('Current componentStates:', componentStates)
     
@@ -302,7 +255,48 @@ export function Application({ className }: ApplicationProps) {
       console.log('Moving to next step:', prev + 1)
       return prev + 1
     })
-  }
+  }, []) // No dependencies needed since it only uses setState functions which are stable
+
+  // Now update the useEffect hooks to include the dependencies
+  useEffect(() => {
+    if (currentStep !== 2) return;
+    
+    setMatchStatus('evaluating');
+    setMatchPercentage(0);
+    
+    const evaluationTimer = setTimeout(() => {
+      setMatchStatus('complete');
+      setMatchPercentage(78);
+    }, 1000);
+    
+    const completionTimer = setTimeout(() => {
+      handleComponentComplete(steps[2].id);
+    }, 2000);
+    
+    return () => {
+      clearTimeout(evaluationTimer);
+      clearTimeout(completionTimer);
+    };
+  }, [currentStep, handleComponentComplete, steps]); // Added missing dependencies
+
+  // Update other similar useEffect hooks
+  useEffect(() => {
+    if (currentStep !== 1) return;
+    
+    setTimeout(() => {
+      setComponentStates(prev => 
+        prev.map(state => 
+          state.id === steps[1].id 
+            ? { ...state, isCompleted: true }
+            : state
+        )
+      );
+      
+      setTimeout(() => {
+        handleComponentComplete(steps[1].id);
+      }, 500);
+    }, 1000);
+  }, [currentStep, handleComponentComplete, steps]); // Added missing dependencies
 
   const renderProgressContent = (step: FlowStep) => {
     if (!step.progressSteps) return null

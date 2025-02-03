@@ -1,21 +1,21 @@
 'use client';
 
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
 const FooterCirclesBackground = () => {
-  const [screenWidth, setScreenWidth] = useState(0);
+  // const [screenWidth, setScreenWidth] = useState(0);
 
-  useEffect(() => {
-    const updateWidth = () => setScreenWidth(window.innerWidth);
-    updateWidth();
-    window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
-  }, []);
+  // useEffect(() => {
+  //   const updateWidth = () => setScreenWidth(window.innerWidth);
+  //   updateWidth();
+  //   window.addEventListener('resize', updateWidth);
+  //   return () => window.removeEventListener('resize', updateWidth);
+  // }, []);
 
   // Using the same circle configuration but with different styling
-  const getCircleConfigs = (width: number) => {
-    const baseSize = width <= 768 ? 2400 : 3200;
+  const getCircleConfigs = () => {
+    // const baseSize = width <= 768 ? 2400 : 3200;
     
     return [
       { size: 4816, delay: null, opacity: 1 },
@@ -30,13 +30,13 @@ const FooterCirclesBackground = () => {
     ];
   };
 
-  const circles = getCircleConfigs(screenWidth);
+  const circles = getCircleConfigs();
 
   return (
     <div className="absolute hidden h-full w-full items-center justify-center overflow-hidden md:flex">
       <div className="absolute left-[calc(50%+300px)] flex scale-75 items-center justify-center md:left-[calc(50%+600px)] md:top-[280px] md:scale-100">
         <div className="relative flex items-center justify-center">
-          {circles.map(({ size, delay, opacity }, index) => (
+          {circles.map(({ size, delay }) => (
             <div 
               key={`footer-circle-${size}`}
               style={{

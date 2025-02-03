@@ -106,7 +106,7 @@ const CirclesBackground = ({
         positionClass
       )}
     >
-      {circles.map(({ size, delay, opacity }, index) => (
+      {circles.map(({ size, delay }) => (
         <div 
           key={`${size}-${positionClass}`}
           style={{

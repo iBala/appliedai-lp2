@@ -72,14 +72,14 @@ export default function JoinForm() {
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-black mb-3">Our club is invite only</h2>
               <p className="text-black text-lg">
-                If you'd like to join, please fill out the form below and we'll get back to you as soon as possible.
+                If you&apos;d like to join, please fill out the form below and we&apos;ll get back to you as soon as possible.
               </p>
             </div>
 
             {submitStatus === 'success' ? (
               <div className="mt-8 rounded-md bg-green-50 p-6">
                 <p className="text-green-800 text-lg">
-                  Thanks for your application! We'll review it and get back to you soon.
+                  Thanks for your application! We&apos;ll review it and get back to you soon.
                 </p>
               </div>
             ) : (

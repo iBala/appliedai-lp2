@@ -3,16 +3,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import CirclesBackground from './CirclesBackground';
-import { useEffect, useState } from 'react';
+// import { useState } from 'react';
 import { Application } from './recruit/application';
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import Header from './Header';
 
-type Tab = 'recruit' | 'returns' | 'tracking';
+// type Tab = 'recruit' | 'returns' | 'tracking';
 
 const HeroSection = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeTab, setActiveTab] = useState<Tab>('recruit');
+  // const [isScrolled, setIsScrolled] = useState(false);
+  // const [activeTab, setActiveTab] = useState<Tab>('recruit');
 
   return (
     <div className="relative overflow-hidden">

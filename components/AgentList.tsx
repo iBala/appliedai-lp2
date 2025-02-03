@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Application } from './recruit/application'
@@ -123,7 +123,7 @@ const AgentList = () => {
               Create return experiences that fit your brand
             </h2>
             <p className="text-lg md:text-xl text-black">
-              Delight your customers with returns that put money back in your pocket. Loop's automated, easy-to-use post-purchase tools make returns just as fun as shopping.
+              Automate your menial tasks with AI. AppliedAI&apos;s agents make your life easier.
             </p>
           </div>
         </div>
