@@ -1,0 +1,59 @@
+---
+description: All rules related to how to operate here
+globs: 
+---
+
+# Your rule content
+Create the smoothest, fastest landing page. The page should load in <50ms wherever the user sees. 
+
+## Practices:
+### SSR:
+- Server-Side Rendering (SSR) with Next.js. use server side rendering to pre render pages so it takes less time to load. 
+
+### Asset Optimization:
+- Preload critical assets 
+Eg., <link rel="preload" as="image" href="https://webassets.appliedai.club/..."
+- Use AVIF format for images so they are compressed better. 
+- Image requests include ?w=72&q=95&auto=format&dpr=2, which indicates dynamic resizing based on device pixel ratio.
+
+### Font Preloading & Caching:
+<link rel="preload" as="font" type="font/woff2" href="https://.../fonts/InterVariable.woff2?v=4" crossorigin="anonymous">
+
+### Efficient CSS Loading:
+<link rel="stylesheet" href="/_next/static/css/ca0edfa66df41f4d.css" data-precedence="next"
+Instead of one large CSS file, they use multiple smaller CSS chunks, reducing blocking time.
+
+### Code Splitting & Lazy Loading:
+JavaScript Chunking with Next.js:
+<script src="/_next/static/chunks/main-app-e1bf613aaff72d7d.js" async></script>
+The app should load only the necessary JavaScript chunks instead of a monolithic bundle.
+async loading ensures scripts don’t block rendering.
+
+### Component-Level Lazy Loading:
+Use dynamic imports (import() in Next.js) for non-critical components. This needs to be done at a page level. So you need to ask the user. 
+
+## Preconnect & DNS Prefetching
+### 	Faster External Asset Loading:
+<link rel="preconnect" href="https://client-api.linear.app/" crossorigin="anonymous">
+<link rel="preconnect" href="https://webassets.linear.app/" crossorigin="anonymous">
+Preconnect reduces latency for fetching external resources (images, fonts, APIs).
+
+## API Performance Enhancements
+Optimized REST API:
+If APIs return only necessary data, this reduces over-fetching.
+
+## Service Worker & PWA Enhancements
+### PWA Support via manifest.webmanifest:
+<link rel="manifest" href="https://....app/static/pwa.webmanifest?v=4" crossorigin="use-credentials">
+Supports offline caching.
+Enables faster page reloads with service workers.
+
+## Design:
+1. Think from the user point of your when they land on a page. 
+2. Load the components that the user will need first. 
+3. ALways show loading states
+4. App should be tighter, very clean. 
+5. No shadows, keep it very clean
+6. Use icons
+7. Explanatory text (like i icons or descriptions or hover text) wherever relevant
+8. Always handle error states.

@@ -1,0 +1,19 @@
+---
+description: How this project is set up
+globs: 
+---
+This project is my marketing website. 
+
+Website: appliedai.club
+What is it: AppliedAI offers a suite of micro agents to companies to make their employees 100x productive
+
+Agents: 
+We have 5 agents right now: 
+1. Recruit - Screen resumes, schedule interviews, and manage your hiring pipeline with precision.
+2. Image/Doc Extractor - Extract structured data from any document or image with high accuracy.
+3. User Research - Conduct user interviews, analyze feedback, and generate actionable insights.
+4. Scheduler - Coordinate meetings across time zones, handle follow-ups, and manage your calendar.
+5. Data analysis - Transform raw data into meaningful insights with automated analysis and visualization.
+
+
+
