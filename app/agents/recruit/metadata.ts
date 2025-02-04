@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: 'Stop wasting time on unqualified candidates. Our AI screens resumes, schedules interviews, and manages your hiring pipeline.',
     images: [
       {
-        url: `${siteConfig.url}/images/og/recruit.png`,
+        url: `${siteConfig.url}/public/images/og/recruit.png`,
         width: 1200,
         height: 630,
         alt: 'AppliedAI Recruit',
