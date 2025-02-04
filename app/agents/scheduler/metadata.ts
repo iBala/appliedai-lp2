@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { siteConfig } from '../../metadata';
+// import { siteConfig } from '../../metadata';
 
 export const metadata: Metadata = {
   title: 'Eva | Your scheduling assistant',

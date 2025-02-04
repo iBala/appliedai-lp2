@@ -32,8 +32,8 @@ export default function RecruitAgentPage() {
         theme="light"
         tag="Recruitment"
         tagIcon={<RecruitIcon />}
-        title="Screen candidates with precision"
-        description="Stop wasting time on unqualified candidates. Our AI screens resumes, schedules interviews, and manages your hiring pipeline."
+        title="Find the right hire among 1000s"
+        description="Among 1000s of applications, find the right candidate that suit the culture, skills and experience."
         rightContent={
           <DemoWrapper>
             <ApplicationScreen onComplete={() => {}} />
