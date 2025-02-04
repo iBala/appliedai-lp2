@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: 'Extract structured data from non-standard documents with AI. AI extractor deploys human level vision intelligence to improve accuracy.',
     images: [
       {
-        url: `${siteConfig.url}/images/og/extractor.png`,
+        url: `/images/og/extractor.png`,
         width: 1200,
         height: 630,
         alt: 'AppliedAI Extractor',

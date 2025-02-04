@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: 'Build better products by understanding your users. Our user research assistant will help you conduct in-depth research at scale.',
     images: [
       {
-        url: `${siteConfig.url}/images/og/user-research.png`,
+        url: `/images/og/user-research.png`,
         width: 1200,
         height: 630,
         alt: 'AppliedAI User Research',
