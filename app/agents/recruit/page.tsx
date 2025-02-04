@@ -8,6 +8,8 @@ import Footer from '@/components/Footer';
 import ApplicationScreen from '@/components/demo/screens/ApplicationScreen';
 import { DemoWrapper } from '@/components/demo/wrappers/DemoWrapper';
 import { FeatureDemoWrapper } from '@/components/agents/FeatureDemoWrapper';
+import { Metadata } from 'next';
+import { siteConfig } from '../../metadata';
 
 const RecruitIcon = () => (
   <svg 
@@ -24,6 +26,23 @@ const RecruitIcon = () => (
     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
   </svg>
 );
+
+export const metadata: Metadata = {
+  title: 'Recruit | Screen candidates with precision',
+  description: 'Stop wasting time on unqualified candidates. Our AI screens resumes, schedules interviews, and manages your hiring pipeline.',
+  openGraph: {
+    title: 'Recruit | Screen candidates with precision',
+    description: 'Stop wasting time on unqualified candidates. Our AI screens resumes, schedules interviews, and manages your hiring pipeline.',
+    images: [
+      {
+        url: `${siteConfig.url}/images/og/recruit.png`, // Create specific OG images for each agent
+        width: 1200,
+        height: 630,
+        alt: 'AppliedAI Recruit',
+      },
+    ],
+  },
+};
 
 export default function RecruitAgentPage() {
   return (

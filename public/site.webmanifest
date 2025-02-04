@@ -1,0 +1,19 @@
+{
+  "name": "AppliedAI",
+  "short_name": "AppliedAI",
+  "icons": [
+    {
+      "src": "/android-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0A40C2",
+  "background_color": "#ffffff",
+  "display": "standalone"
+} 
