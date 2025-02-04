@@ -169,7 +169,7 @@ const AgentList = () => {
               Create return experiences that fit your brand
             </h2>
             <p className="text-lg md:text-xl text-black">
-              Automate your menial tasks with AI. AppliedAI&apos;s agents make your life easier.
+              Make your teams 100x productive with AI. AppliedAI&apos;s agents make your life easier.
             </p>
           </div>
         </div>
