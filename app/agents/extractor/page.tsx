@@ -32,8 +32,8 @@ export default function ExtractorAgentPage() {
         theme="light"
         tag="Document Processing"
         tagIcon={<ExtractorIcon />}
-        title="Extract structured data from any document"
-        description="Stop wasting time manually processing documents. Our AI extracts key information from invoices, receipts, and more with high accuracy."
+        title="Extract structured data without templates"
+        description="Extractor is more than OCR. It can understand and extract the data from the an image or a doc. No template creation, no coding. Just works."
         rightContent={
           <DemoWrapper>
             <ExtractorScreen onComplete={() => {}} />
