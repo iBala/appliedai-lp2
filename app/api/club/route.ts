@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
 
 export async function POST(req: Request) {
   try {
