@@ -15,31 +15,31 @@ import * as AgentIcons from './agents/AgentIcons';
 const AGENTS = [
   {
     name: "Recruit",
-    description: "Find the right fit from a 1000 applicants",
+    description: "Find the right fit from a 1000+ applicants using past interviews",
     href: "/agents/recruit",
     icon: <AgentIcons.RecruitIcon />
   },
   {
     name: "Scheduler",
-    description: "Smart calendar scheduling that finds the perfect time",
+    description: "Just tag @eva to coordinate and schedule your meetings",
     href: "/agents/scheduler",
     icon: <AgentIcons.SchedulerIcon />
   },
   {
     name: "WhatsApp Reports",
-    description: "Get your reports directly from WhatsApp",
+    description: "Ask and get your business reports directly on WhatsApp",
     href: "/agents/whatsapp-reports",
     icon: <AgentIcons.WhatsappReportsIcon />
   },
   {
     name: "Extractor",
-    description: "Extract structured data from any document",
+    description: "Instantly extract data from paper documents with 98% accuracy",
     href: "/agents/extractor",
     icon: <AgentIcons.ExtractorIcon />
   },
   {
     name: "User Research",
-    description: "Automate user research and get insights",
+    description: "Have in depth conversations with your users at scale",
     href: "/agents/user-research",
     icon: <AgentIcons.UserResearchIcon />
   }
