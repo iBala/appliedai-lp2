@@ -1,19 +1,56 @@
 import { NextResponse } from 'next/server';
+import { supabase } from '@/lib/supabase/client';
 
 const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
 
 export async function POST(req: Request) {
   try {
-    const { fullName, email, reason } = await req.json();
+    const formData = await req.json();
+    const { fullName, email, linkedInUrl, reason } = formData;
 
-    // Send to Slack
-    const response = await fetch(SLACK_WEBHOOK_URL, {
+    // Add debug logging
+    console.log('Attempting to insert data:', {
+      type: 'club-signup',
+      page: '/club',
+      form_data: formData
+    });
+
+    // First, try to store in Supabase
+    const { error: supabaseError } = await supabase
+      .from('website_submissions')
+      .insert([
+        {
+          type: 'club-signup',
+          page: '/club',
+          form_data: formData
+        }
+      ]);
+
+    // Log the response
+    console.log('Supabase response:', { error: supabaseError });
+
+    if (supabaseError) {
+      // Enhanced error logging
+      console.error('Supabase error details:', {
+        message: supabaseError.message,
+        details: supabaseError.details,
+        hint: supabaseError.hint,
+        code: supabaseError.code
+      });
+      throw new Error(`Database error: ${supabaseError.message}`);
+    }
+
+    // Log successful insert
+    console.log('Successfully inserted data');
+
+    // If database insert succeeds, send to Slack
+    const slackResponse = await fetch(SLACK_WEBHOOK_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        text: `🎯 New Club Application!\n\n*Name:* ${fullName}\n*Email:* ${email}\n\n*Why they want to join:*\n>${reason}`,
+        text: `🎯 New Club Application!\n\n*Name:* ${fullName}\n*Email:* ${email}\n*LinkedIn:* ${linkedInUrl}\n\n*Why they want to join:*\n>${reason}`,
         blocks: [
           {
             type: "section",
@@ -32,6 +69,10 @@ export async function POST(req: Request) {
               {
                 type: "mrkdwn",
                 text: `*Email:*\n${email}`
+              },
+              {
+                type: "mrkdwn",
+                text: `*LinkedIn:*\n${linkedInUrl}`
               }
             ]
           },
@@ -46,7 +87,16 @@ export async function POST(req: Request) {
       }),
     });
 
-    if (!response.ok) {
+    if (!slackResponse.ok) {
+      // If Slack fails, we should probably clean up the database entry
+      await supabase
+        .from('website_submissions')
+        .delete()
+        .match({ 
+          type: 'club-signup',
+          page: '/club',
+          form_data: formData 
+        });
       throw new Error('Failed to send to Slack');
     }
 
