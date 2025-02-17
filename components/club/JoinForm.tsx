@@ -35,6 +35,7 @@ export default function JoinForm() {
     defaultValues: {
       fullName: "",
       email: "",
+      linkedInUrl: "",
       reason: defaultTemplate,
     },
   })
@@ -116,6 +117,25 @@ export default function JoinForm() {
                           <Input 
                             placeholder="you@example.com" 
                             type="email"
+                            className="bg-white text-black" 
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="linkedInUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-black">LinkedIn Profile</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="https://www.linkedin.com/..." 
+                            type="url"
                             className="bg-white text-black" 
                             {...field} 
                           />

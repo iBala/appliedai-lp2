@@ -10,6 +10,9 @@ export const clubFormSchema = z.object({
   reason: z.string().min(50, {
     message: "Please tell us more about yourself (minimum 50 characters).",
   }),
+  linkedInUrl: z.string().url({
+    message: "Please enter a valid LinkedIn profile URL.",
+  }),
 })
 
 export type ClubFormValues = z.infer<typeof clubFormSchema> 
