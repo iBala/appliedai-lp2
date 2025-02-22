@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from './metadata';
 import { PostHogProvider } from './providers';
+import '@/styles/mdx.css'
 const geistSans = Geist({
   subsets: ["latin"],
   display: "swap",

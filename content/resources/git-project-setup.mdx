@@ -1,0 +1,143 @@
+---
+title: "Working with Git"
+description: "A step-by-step guide to setting up a git project on your local machine. It also includes switching repos, debugging and more."
+date: "2024-03-27"
+---
+
+# Git Guide for Product Managers
+
+## 1. What is Git and Why is it Helpful?
+
+### What is Git?
+Git is a **version control system (VCS)** that allows multiple people to work on a project without overwriting each other's work. It keeps track of changes, enables collaboration, and ensures code stability by allowing rollbacks to previous versions if needed.
+
+### Why is Git Useful for Product Managers?
+- **Code Collaboration:** Helps PMs collaborate with developers and understand the development workflow.
+- **Change Tracking:** Keeps track of modifications to codebases.
+- **Safe Experimentation:** Allows developers to try new features without affecting the main code.
+- **Version Control:** Ensures that past versions of the project can be accessed if needed.
+
+## 2. How to Set Up a Git Account
+
+To use Git with remote repositories (such as GitHub, GitLab, or Bitbucket), follow these steps:
+
+1. **Choose a Git Service** (GitHub, GitLab, Bitbucket, etc.).
+2. **Create an Account**:
+   - Visit [GitHub](https://github.com/) and sign up.
+   - Follow the instructions to verify your email and set up two-factor authentication for security.
+3. **Set Up an SSH Key (Recommended for Authentication)**:
+    This set up helps your computer authenticate with the remote repository without entering your username and password every time you push or pull.
+   - Open your terminal (Mac/Linux) or Git Bash (Windows).
+   - Run:
+     ```sh
+     ssh-keygen -t ed25519 -C "your-email@example.com"
+     ```
+   - Copy the key to your clipboard:
+     ```sh
+     cat ~/.ssh/id_ed25519.pub
+     ```
+   - Add this key to your GitHub account under **Settings → SSH and GPG keys**.
+
+## 3. How to Set Up Git in Your Local System and Authenticate with the Remote
+
+### Install Git
+
+#### Windows
+1. Download and install Git from [git-scm.com](https://git-scm.com/).
+2. Open **Git Bash** and verify installation:
+   ```sh
+   git --version
+   ```
+
+#### Mac (via Homebrew)
+```sh
+brew install git
+```
+
+#### Linux (Ubuntu/Debian)
+```sh
+sudo apt update
+sudo apt install git
+```
+
+### Configure Git Locally
+Once Git is installed, set up your user details:
+```sh
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
+```
+
+### Authenticate with Remote Repository
+#### Using HTTPS (Password-Based)
+- When pushing code, GitHub will prompt you to enter your username and personal access token.
+
+#### Using SSH (Recommended)
+1. Ensure SSH key is added to GitHub.
+2. Test the connection:
+   ```sh
+   ssh -T git@github.com
+   ```
+   If successful, you should see a message like: `Hi username! You've successfully authenticated.`
+
+## 4. How to Set Up a New Repository
+
+### Create a Repository on GitHub
+1. Go to GitHub and click **New Repository**.
+2. Name your repo and choose **Public** or **Private**.
+3. Initialize with a README (optional) and click **Create Repository**.
+
+### Set Up a Local Repository
+1. Open your terminal and navigate to your project folder:
+   ```sh
+   cd path/to/your/project
+   ```
+2. Initialize Git:
+   ```sh
+   git init
+   ```
+3. Connect the local repo to GitHub:
+   ```sh
+   git remote add origin git@github.com:your-username/repository-name.git
+   ```
+4. Add and commit files:
+   ```sh
+   git add .
+   git commit -m "Initial commit"
+   ```
+5. Push code to GitHub:
+   ```sh
+   git branch -M main
+   git push -u origin main
+   ```
+
+## 5. How to Clone an Existing Repository and Switch to Your Git Account
+
+### Clone a Repository
+To work on an existing project:
+```sh
+git clone git@github.com:username/repository-name.git
+```
+Or, using HTTPS:
+```sh
+git clone https://github.com/username/repository-name.git
+```
+
+### Switch to Your Git Account
+If you've cloned a repo that belongs to someone else and want to push changes under your account:
+```sh
+git remote set-url origin git@github.com:your-username/repository-name.git
+```
+
+### Verify the Remote URL
+```sh
+git remote -v
+```
+You should see:
+```sh
+origin  git@github.com:your-username/repository-name.git (fetch)
+origin  git@github.com:your-username/repository-name.git (push)
+```
+
+---
+
+This guide provides a structured approach for product managers to get started with Git. With this setup, you can confidently collaborate with developers, track changes, and contribute to projects effectively.

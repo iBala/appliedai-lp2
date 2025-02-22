@@ -169,6 +169,15 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                 >
                   Club
                 </Link>
+                <Link 
+                  href="/resources"
+                  className={clsx(
+                    "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
+                    theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
+                  )}
+                >
+                  Resources
+                </Link>
               </div>
             </div>
             
