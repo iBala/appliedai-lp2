@@ -1,0 +1,130 @@
+---
+title: "Managing python packages with pip and poetry"
+description: "When you program with python, you need to manage your packages. This guide will help you understand how to manage these efficiently. It also includes the difference between pip and poetry and how to use them."
+date: "2025-02-21"
+order: 3
+---
+
+# Guide to Working with Pip and Poetry
+
+## Overview
+Pip and Poetry are both tools used for managing Python packages and virtual environments. Pip is the standard package manager for Python, while Poetry is a modern alternative that simplifies dependency management and project packaging.
+
+### When to Use What?
+- **Use Pip** if you want a simple way to install packages and manage dependencies manually.
+- **Use Poetry** if you want an all-in-one solution for dependency management, virtual environments, and project packaging.
+
+## Working with Pip
+### 1. Installing Pip
+Most Python installations come with Pip pre-installed. To check if you have Pip:
+```sh
+pip --version
+```
+If not installed, install it with:
+```sh
+python -m ensurepip --default-pip
+```
+
+### 2. Setting Up a Virtual Environment
+Creating a virtual environment ensures that dependencies remain isolated from system-wide Python packages.
+
+#### Create a Virtual Environment
+```sh
+python -m venv myenv
+```
+
+#### Activate the Virtual Environment
+- **Windows**:
+  ```sh
+  myenv\Scripts\activate
+  ```
+- **Mac/Linux**:
+  ```sh
+  source myenv/bin/activate
+  ```
+
+### 3. Loading the Virtual Environment in VS Code
+1. Open VS Code.
+2. Press `Ctrl + Shift + P` and type **Python: Select Interpreter**.
+3. Choose the Python interpreter from your virtual environment.
+
+### 4. Adding and Removing Packages
+#### Install a Package
+```sh
+pip install package_name
+```
+
+#### Uninstall a Package
+```sh
+pip uninstall package_name
+```
+
+#### Save Installed Packages to a File
+```sh
+pip freeze > requirements.txt
+```
+
+#### Install Packages from a Requirements File
+```sh
+pip install -r requirements.txt
+```
+
+---
+
+## Working with Poetry
+### 1. Installing Poetry
+Poetry can be installed using:
+```sh
+curl -sSL https://install.python-poetry.org | python3 -
+```
+Verify installation:
+```sh
+poetry --version
+```
+
+### 2. Setting Up a Virtual Environment
+#### Create a New Project
+```sh
+poetry new myproject
+cd myproject
+```
+
+#### Initialize Poetry in an Existing Project
+```sh
+poetry init
+```
+
+#### Activate the Virtual Environment
+```sh
+poetry shell
+```
+
+### 3. Loading the Virtual Environment in VS Code
+1. Open VS Code.
+2. Press `Ctrl + Shift + P` and type **Python: Select Interpreter**.
+3. Select the Poetry environment interpreter.
+
+### 4. Adding and Removing Packages
+#### Install a Package
+```sh
+poetry add package_name
+```
+
+#### Remove a Package
+```sh
+poetry remove package_name
+```
+
+#### Install Dependencies from `pyproject.toml`
+```sh
+poetry install
+```
+
+---
+
+## Summary
+- **Pip** is simpler and best for quick setups or small projects.
+- **Poetry** is more structured and useful for managing dependencies in larger projects.
+- Both tools help create virtual environments and manage dependencies efficiently.
+
+Choose based on your project needs!
