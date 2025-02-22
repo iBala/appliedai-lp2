@@ -11,6 +11,7 @@ export interface Resource {
   description: string;
   content: string;
   date: string;
+  order?: number;
 }
 
 export async function getAllResources(): Promise<Resource[]> {
@@ -37,12 +38,18 @@ export async function getAllResources(): Promise<Resource[]> {
             title: data.title,
             description: data.description,
             content,
-            date: data.date
+            date: data.date,
+            order: data.order || Infinity
           };
         })
     );
     
-    return resources.sort((a, b) => (a.date > b.date ? -1 : 1));
+    return resources.sort((a, b) => {
+      if (a.order !== b.order) {
+        return (a.order || Infinity) - (b.order || Infinity);
+      }
+      return a.date > b.date ? -1 : 1;
+    });
   } catch (error) {
     console.error('Error reading resources:', error);
     return [];
