@@ -1,18 +1,11 @@
 import * as z from "zod"
 
 export const clubFormSchema = z.object({
-  fullName: z.string().min(2, {
-    message: "Full name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  reason: z.string().min(50, {
-    message: "Please tell us more about yourself (minimum 50 characters).",
-  }),
-  linkedInUrl: z.string().url({
-    message: "Please enter a valid LinkedIn profile URL.",
-  }),
+  fullName: z.string().min(1, "Name is required"),
+  email: z.string().email().optional(),
+  whatsappNumber: z.string().min(1, "WhatsApp number is required"),
+  linkedInUrl: z.string().url().startsWith("https://www.linkedin.com/"),
+  reason: z.string().min(1, "Please tell us why you'd like to join"),
 })
 
 export type ClubFormValues = z.infer<typeof clubFormSchema> 

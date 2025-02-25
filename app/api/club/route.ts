@@ -6,7 +6,7 @@ const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/T08B80GFR5K/B08BM055
 export async function POST(req: Request) {
   try {
     const formData = await req.json();
-    const { fullName, email, linkedInUrl, reason } = formData;
+    const { fullName, email, whatsappNumber, linkedInUrl, reason } = formData;
 
     // Add debug logging
     console.log('Attempting to insert data:', {
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        text: `🎯 New Club Application!\n\n*Name:* ${fullName}\n*Email:* ${email}\n*LinkedIn:* ${linkedInUrl}\n\n*Why they want to join:*\n>${reason}`,
+        text: `🎯 New Club Application!\n\n*Name:* ${fullName}\n*WhatsApp:* ${whatsappNumber}${email ? `\n*Email:* ${email}` : ''}\n*LinkedIn:* ${linkedInUrl}\n\n*Why they want to join:*\n>${reason}`,
         blocks: [
           {
             type: "section",
@@ -68,7 +68,11 @@ export async function POST(req: Request) {
               },
               {
                 type: "mrkdwn",
-                text: `*Email:*\n${email}`
+                text: `*WhatsApp:*\n${whatsappNumber}`
+              },
+              {
+                type: "mrkdwn",
+                text: `*Email:*\n${email || 'Not provided'}`
               },
               {
                 type: "mrkdwn",

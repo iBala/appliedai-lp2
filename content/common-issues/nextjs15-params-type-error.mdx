@@ -1,0 +1,126 @@
+---
+title: "Next.js 15 Dynamic Route Params Type Error"
+description: "How to fix the Promise params type error in Next.js 15+ dynamic routes. A simple solution you can copy-paste into your LLM."
+date: "2024-03-27"
+order: 1
+---
+
+# Fixing Next.js 15 Dynamic Route Params Type Error
+
+## The Problem
+
+When using dynamic routes in Next.js 15+, you might see this error:
+
+```
+Type error: Type '{ params: PageProps; }' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type 'PageParams' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
+```
+
+## Quick Solution
+
+Copy this prompt and send it to your AI assistant:
+
+```
+I have a Next.js 15 dynamic route page ([slug]/page.tsx) with this error:
+"Type 'PageParams' is missing Promise properties"
+
+My current code:
+export default async function Page({ params }: { params: { slug: string } }) {
+  // ... using params.slug
+}
+
+Please help me:
+1. Update types to handle params as Promise
+2. Fix both the page component and generateMetadata
+3. Keep all existing functionality
+```
+
+## Understanding the Issue
+
+### What Changed?
+- In Next.js 15+, dynamic route parameters are now Promises
+- This is different from earlier versions where they were plain objects
+- This affects both page components and metadata functions
+
+### Why It Happens
+- Next.js 15 made params async for better performance
+- Your TypeScript types need to reflect this change
+- The error occurs when types don't match Next.js's expectations
+
+## The Solution
+
+### 1. Define the Params Type
+```typescript
+type Params = Promise<{ slug: string }>
+```
+
+### 2. Update Your Page Component
+```typescript
+export default async function Page({ params }: { params: Params }) {
+  const resolvedParams = await params
+  const slug = resolvedParams.slug
+  // Use slug here...
+}
+```
+
+### 3. Update Metadata Function
+```typescript
+export async function generateMetadata(
+  { params }: { params: Params }
+): Promise<Metadata> {
+  const resolvedParams = await params
+  const slug = resolvedParams.slug
+  // Use slug here...
+}
+```
+
+## Common Mistakes to Avoid
+
+1. **Forgetting to await params**
+   ```typescript
+   // ❌ Wrong
+   const slug = params.slug
+
+   // ✅ Correct
+   const resolvedParams = await params
+   const slug = resolvedParams.slug
+   ```
+
+2. **Inconsistent type usage**
+   ```typescript
+   // ❌ Wrong: Different types for page and metadata
+   type PageParams = { slug: string }
+   type MetadataParams = Promise<{ slug: string }>
+
+   // ✅ Correct: Same type everywhere
+   type Params = Promise<{ slug: string }>
+   ```
+
+3. **Missing Promise wrapper**
+   ```typescript
+   // ❌ Wrong
+   type Params = { slug: string }
+
+   // ✅ Correct
+   type Params = Promise<{ slug: string }>
+   ```
+
+## When to Use This Fix
+
+Apply this solution when:
+- You're using Next.js version 15 or newer
+- You have dynamic routes (pages with [brackets])
+- You're getting type errors about Promise properties
+- You're using TypeScript with server components
+
+## Verifying the Fix
+
+After applying the fix:
+1. The type error should be gone
+2. Your page should still work as before
+3. Both metadata and page component should handle params correctly
+
+---
+
+Remember: This is specific to Next.js 15+ server components. For client components or older Next.js versions, you might need different approaches. 

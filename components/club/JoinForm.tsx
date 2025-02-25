@@ -35,6 +35,7 @@ export default function JoinForm() {
     defaultValues: {
       fullName: "",
       email: "",
+      whatsappNumber: "",
       linkedInUrl: "",
       reason: defaultTemplate,
     },
@@ -109,14 +110,36 @@ export default function JoinForm() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-black">Your email</FormLabel>
+                        <FormLabel className="text-black">Your email (optional)</FormLabel>
                         <FormDescription className="text-gray-900">
-                          Further request or access will be sent to this email
+                          If provided, we&apos;ll send updates/newsletters to this email
                         </FormDescription>
                         <FormControl>
                           <Input 
                             placeholder="you@example.com" 
                             type="email"
+                            className="bg-white text-black" 
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="whatsappNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-black">WhatsApp Number</FormLabel>
+                        <FormDescription className="text-gray-900">
+                          This is the whatsapp number you&apos;ll use to join the club.
+                        </FormDescription>
+                        <FormControl>
+                          <Input 
+                            placeholder="+1234567890" 
+                            type="tel"
                             className="bg-white text-black" 
                             {...field} 
                           />
