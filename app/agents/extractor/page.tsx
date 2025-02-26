@@ -47,25 +47,25 @@ export default function ExtractorAgentPage() {
       />
       <ValueProposition 
         title="Why this helps?"
-        description="Letting in an unqualified candidate wastes time, resources, disppoints the panel. This impacts the overall candidate experience resulting in conversion problems. Imagine if you paid a lot of attention and you made sure only highly qualified 5 candidates get shortlisted. - High ROI for panel, Easier scheduling, Better candidate experience. This is the 20% effort that will give you 80% results."
+        description="Companies digitize their documents in two ways. 1. Set up templates for each document type to use OCR and extract data. 2. Manually type in the data from your scans or PDFs into the systems. Both of these are extremely time consuming and error prone. This solutions helps you digitize your documents with no templates, and no more manual data entry. We help you hit 98.6% accuracy in digitally created documents and 90%+ in legible handwritten documents."
       />
       
       <FeatureSection
         category="Document Processing"
         title="Extract data from any document"
-        description="Don't just depend on resume, use public data to improve candidate evaluation and find the right candidate"
+        description="Work with non-standard documents like invoices, receipts, and contracts with ease."
         features={[
           {
-            title: "Evaluate more than the technical skills",
-            description: "Evaluate candidates based on cultural value of company, functional team requirements and technical skills"
+            title: "Highest accuracy in extracting data",
+            description: "We use the latest in OCR and LLM technology to extract data from your documents with 98.6% accuracy in digitally created documents and 90%+ in legible handwritten documents."
           },
           {
-            title: "Smart interview scheduling",
-            description: "Eliminate back-and-forth emails with AI-powered scheduling that finds the perfect time for both parties."
+            title: "No templates, no coding",
+            description: "Got a new type of documents? No problem, just upload the document and we will extract the data for you."
           },
           {
-            title: "Keep the right candidates engaged",
-            description: "Recruit AI can talk to your candidates and keep them engaged throughout the hiring process and ensure their success."
+            title: "No just text, extract everything!",
+            description: "We help you extract signatures, stamps, tables, headers and more through smart OCR and LLM technology."
           }
         ]}
         imageSrc={
