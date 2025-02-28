@@ -45,6 +45,64 @@ const AGENTS = [
   }
 ];
 
+// Add Resources sections configuration
+const RESOURCES_SECTIONS = [
+  {
+    name: "Guides",
+    description: "Simple guides to common tasks in setting up an AI project",
+    href: "/resources",
+    icon: (
+      <svg 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2"
+      >
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+    )
+  },
+  {
+    name: "Blogs & Webinars",
+    description: "Blog posts and webinars around AI projects",
+    href: "/webinars",
+    icon: (
+      <svg 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2"
+      >
+        <path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Z"/>
+        <path d="M12 15l-3-3h6l-3 3z"/>
+        <path d="M12 9v3"/>
+      </svg>
+    )
+  },
+  {
+    name: "Common Issues",
+    description: "Common bugs and issues faced and how to solve them",
+    href: "/common-issues",
+    icon: (
+      <svg 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2"
+      >
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      </svg>
+    )
+  }
+]
+
 interface HeaderProps {
   theme?: 'light' | 'dark';
   isScrolled?: boolean;
@@ -54,6 +112,8 @@ interface HeaderProps {
 const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderProps) => {
   // const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  // const [isAgentsOpen, setIsAgentsOpen] = useState(false);
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   // const isRecruitPage = pathname.includes('/recruit');
 
   // Compute theme-based styles
@@ -169,15 +229,50 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                 >
                   Club
                 </Link>
-                <Link 
-                  href="/resources"
-                  className={clsx(
-                    "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
-                    theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
-                  )}
+                <div 
+                  className="relative"
+                  onMouseEnter={() => setIsResourcesOpen(true)}
+                  onMouseLeave={() => setIsResourcesOpen(false)}
                 >
-                  Resources
-                </Link>
+                  <DropdownMenu open={isResourcesOpen} onOpenChange={setIsResourcesOpen}>
+                    <DropdownMenuTrigger asChild>
+                      <button 
+                        className={clsx(
+                          "group inline-flex w-max items-center text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6",
+                          theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
+                        )}
+                      >
+                        Resources
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent 
+                      align="start"
+                      className="w-[500px] p-3"
+                      forceMount
+                    >
+                      <div className="grid grid-cols-1 gap-3">
+                        {RESOURCES_SECTIONS.map((section) => (
+                          <DropdownMenuItem key={section.name} asChild>
+                            <Link 
+                              href={section.href}
+                              className="flex items-start gap-3 rounded-lg p-3 hover:bg-gray-100 transition-colors"
+                            >
+                              <span className="text-[#0A40C2]">{section.icon}</span>
+                              <div className="flex flex-col">
+                                <span className="text-sm font-semibold text-gray-900">
+                                  {section.name}
+                                </span>
+                                <span className="text-sm text-gray-500">
+                                  {section.description}
+                                </span>
+                              </div>
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </div>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
               </div>
             </div>
             

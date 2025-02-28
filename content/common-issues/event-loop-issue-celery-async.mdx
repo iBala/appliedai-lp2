@@ -1,0 +1,122 @@
+---
+title: "Solving the 'Event Loop is Closed' Error in Celery with Async Tasks"
+description: "A comprehensive guide to handling async operations in Celery workers while maintaining resource efficiency and scalability"
+date: "2024-03-27"
+author: "Applied AI Team"
+order: 1
+tags: ["celery", "async", "python", "troubleshooting"]
+---
+
+# Taming the Event Loop: A Deep Dive into Celery's Async Challenge
+
+## The Problem: When Async and Celery Collide
+
+When running async operations in Celery workers, you might encounter this frustrating error:
+
+```python
+RuntimeError: Event loop is closed
+```
+
+This typically happens when:
+- The second request comes in
+- You're using `asyncio.run()` within Celery tasks
+- You have multiple async operations (HTTP requests, database queries, etc.)
+
+In our case, this occurred in an image extraction service where we needed to:
+- Process documents asynchronously
+- Make async HTTP calls to LLM services
+- Perform async database operations
+- Handle webhook notifications
+
+## Why Does This Happen?
+
+The root cause lies in how Celery and asyncio interact:
+
+1. **Event Loop Lifecycle**: Each Celery worker process creates an event loop when it starts
+2. **Task Execution**: When a task runs `asyncio.run()`, it creates a new event loop
+3. **Loop Closure**: After the task completes, the loop is closed
+4. **Subsequent Tasks**: When the next task tries to use async operations, it finds a closed loop
+
+> 💡 **Think of it like trying to reuse a one-time-use ticket** – once it's used and marked as invalid, you can't use it again.
+
+## Rethinking the Solution
+
+Instead of fighting against this behavior, we need to work with it. Here are the approaches we considered:
+
+### Option A: Full Synchronous Conversion
+- ✅ Simple to implement
+- ❌ Loses async benefits
+- ❌ Some libraries are primarily async
+
+### Option B: Dedicated Worker Process
+- ✅ Clean separation
+- ❌ Complex architecture
+- ❌ IPC overhead
+
+### Option C: Alternative Task Queue
+- ✅ Better async support
+- ❌ Major architectural change
+- ❌ Migration effort
+
+### Option D: Hybrid Approach (Our Choice)
+This is what we ultimately chose to implement.
+
+## The Solution: AsyncWorker Pattern
+
+We implemented a hybrid approach that provides:
+- Resource Efficiency: Proper cleanup of resources
+- Scalability: Works with multiple Celery workers
+- Reliability: Handles errors gracefully
+
+### Key Features
+
+**Resource Management:**
+- Periodic cleanup of resources
+- Proper handling of pending tasks
+- Memory leak prevention
+
+**Error Handling:**
+- Graceful error recovery
+- Task status updates
+- Comprehensive logging
+
+**Scalability:**
+- Thread-safe singleton pattern
+- Connection pooling
+- Resource limits
+
+## Best Practices and Lessons Learned
+
+### Resource Cleanup
+- Always implement proper cleanup mechanisms
+- Use context managers where possible
+- Implement periodic resource checks
+
+### Error Handling
+- Implement comprehensive error handling
+- Use proper logging
+- Set up monitoring and alerts
+
+### Connection Management
+- Use connection pooling
+- Implement retry mechanisms
+- Set appropriate timeouts
+
+## Conclusion
+
+The AsyncWorker pattern provides a robust solution for handling async operations in Celery while maintaining:
+- Resource efficiency
+- Scalability
+- Code maintainability
+- Error resilience
+
+**Remember:**
+- Always clean up resources
+- Handle errors gracefully
+- Monitor performance
+- Use connection pooling
+- Implement proper logging
+
+This solution allows us to leverage the benefits of both async operations and Celery's task queue system without compromising on reliability or performance.
+
+> 🔑 **Key Takeaway**: The key is not to fight against the event loop's lifecycle but to manage it effectively. This approach has successfully handled millions of document processing requests in production, proving its reliability and scalability.

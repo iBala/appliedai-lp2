@@ -1,0 +1,121 @@
+---
+title: "Unlocking AI Potential: Setting Up Your AI Project"
+description: "A practical guide to setting up and running the AI Travel Agent project, with step-by-step instructions from environment setup to deployment."
+date: "2025-02-28"
+author: "Bala Panneerselvam"
+order: 1
+tags: ["setup", "tutorial", "AI", "travel-agent"]
+---
+
+**Unlocking AI Potential: Setting Up Your AI Project**
+
+Hey everyone! Bala Panneerselvam from Applied AI here. I want to share a guide inspired by our recent Applied AI Club session. We dove into a hands-on project, setting up and running the "AI Travel Agent" project from this GitHub repository:
+
+[https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/ai_agent_tutorials/ai_travel_agent](https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/ai_agent_tutorials/ai_travel_agent)
+
+Consider this your step-by-step guide to getting this project up and running locally.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://youtu.be/8r5kkpZgat8" 
+    title="Setting Up Your AI Project - Applied AI Club Session" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
+
+**Why I Chose This Project:**
+
+I think the "AI Travel Agent" project is a great starting point because it's a practical, self-contained example of an AI application. By getting this project running locally, you'll get a feel for the key concepts and tools we use in AI development.
+
+**The Journey Begins:  Teamwork and Technical Boundaries**
+
+Having a team makes the project more accessible, and fun.  In my experience, to really understand the technology and its boundaries, it's essential to get your hands dirty and start working directly with the code. Even with that team, it will take months to progress, so it's important to get started.
+
+**My Tech Stack**
+
+For AI-based tools, Python is the base and you will use package managers for the different imports. You might find Streamlit a great option for the front end as well.
+
+**Setting Up Your Development Environment – A Step-by-Step Guide**
+First, you will need to get your setup set up, and then come back:
+1. Set up a GitHub account (if you don't have one)
+2. Install a code editor (VS Code is recommended): Cursor is also a good option.
+3. Install Python
+
+**Cloning the AI Travel Agent Project:**
+Now you can get yourself into the project.
+
+   * Open your editor and follow these steps
+   * git clone
+   * cd (go to your directory)
+
+What's this cloning that you did?
+
+**"Forking" for Enhanced Experimentation:**
+
+Forking is a similar but separate idea. Forking involves going into a new environment so that things don't break, which is helpful in case you mess things up. You can do it by following this guide: https://www.appliedai.club/resources/forking-an-existing-project
+
+1. Setting Up SSH Keys: You also need to use SSH keys to authenticate Git operations without entering credentials each time. Run the following code:
+```bash
+ssh-keygen -t rsa
+```
+And you can put into your system the following command:
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+Add this to your GitHub SSH key
+
+To check that is working properly, you can run the following command:
+
+```bash
+git remote -v
+```
+
+> **💡 Tip: Working with Environment Variables**
+>
+> There is a common need to work on one environment variable to fix any mistakes, because not loading will cause issues. In those cases, run the following command:
+```bash
+load environment variables from .env file
+```
+
+What's this cloning that you did?  It's great that you asked, there is an "Env" variable to get us going!
+
+What's this .ENV variable I'm talking about? Make sure to avoid this for a start:
+```bash
+Travel_agent/.venv
+TravelAgent/.DS
+```
+We're almost done! You've made it and it's time to put it in use. 
+
+To install one file at a time, just type:
+
+```bash
+pip3 install openai
+```
+Finally, run the command:
+
+```bash
+streamlit run travel_agent.py
+```
+That means we're ready to begin!
+
+**Testing the Code: It's Here and Won't Break!**
+Here is where the project will either work or fail to work.
+
+I'm sharing what you should do, not what will happen. These are for your notes:
+
+Now, a couple of things here:
+* This guide assumes that you know about that command.
+* I am aware that there will be a series of commands, all documented
+* I am going to give you a free version.
+
+**Summary**
+This guide should help you set up with the code. Make sure that it is efficient and the code is in its proper format to use. Now the hard work begins.
+
+**Conclusion**
+What you see in this guide is very simple; hopefully this can help some to be productive.
+
+Please ask questions if any.
