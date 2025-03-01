@@ -1,0 +1,277 @@
+---
+title: "Building a Daily AI News App: A Step-by-Step Guide"
+description: "Learn how to create an AI-powered news summarizer that fetches the latest articles and generates concise summaries using LLMs."
+date: "2025-03-1"
+author: "Applied AI Team"
+order: 2
+tags: ["tutorial", "AI", "news", "LLM", "python"]
+---
+
+# Building a Daily AI News App: A Step-by-Step Guide
+
+In this session of the Applied AI Club series, we built a simple yet powerful AI news summarizer app from scratch. In just about 15 minutes, we went from ideation to a working prototype that accepts a topic, pulls in the latest news from the web, and uses an LLM to summarize the content. Below is a detailed breakdown of the process along with the key code blocks and explanations to help you reproduce the project.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/-GOOTJFOiiI"
+    title="Building a Daily AI News App - Applied AI Club Session" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 1. Setting Up the Environment
+
+Before diving into the code, we prepared our development environment. Here are the key steps:
+
+### Creating a Project Folder
+Start by creating an empty folder for the project. This is where all files and code will reside.
+
+### Using a Notebook for Prototyping
+We used a Python notebook (e.g., via Cursor or Jupyter) for interactive development. Notebooks allow you to test logic step by step, making debugging easier.
+
+### Creating a Virtual Environment
+To keep dependencies isolated, we ran:
+
+```bash
+python3 -m venv news_env
+source news_env/bin/activate
+```
+
+This command creates and activates a virtual environment dedicated to our news summarizer project.
+
+### Installing Dependencies
+Once the virtual environment is active, install required packages:
+
+```bash
+pip install openai requests python-dotenv
+```
+
+> 💡 **Tip**: Always load API keys and sensitive data from a separate .env file. This not only keeps your code clean but also secures your credentials.
+
+## 2. Defining the Project Objective with Markdown
+
+In the notebook, our very first markdown cell outlined the app's objective:
+
+```markdown
+### Daily News Summarizer App
+
+This application takes a user-provided topic, fetches news articles from the last 24 hours, and then uses a language model to summarize the key points. The output will highlight the top three most important items along with explanations on why they matter.
+```
+
+This markdown cell sets the context for the project and helps both the developer and any collaborating AI agent understand the goal before writing any code.
+
+## 3. Importing Dependencies and Setting Up API Keys
+
+The first code cell imports all necessary libraries and loads environment variables:
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+
+# Load API keys from .env file
+load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+SERP_API_KEY = os.getenv("SERP_API_KEY")
+```
+
+What's happening here?
+- **Environment Variables**: The dotenv package loads API keys from a .env file to keep them secure.
+- **Library Imports**: Modules like requests help us make HTTP calls to fetch news data, and os is used to handle environment variables.
+
+## 4. Fetching News Articles with the Google Search API
+
+The next step is to collect news articles. A dedicated function is created for this purpose:
+
+```python
+def search_news(topic, max_articles=5):
+    """
+    Use the SERP API (powered by Google) to search for news articles related to the topic.
+    """
+    search_url = "https://serpapi.com/search"
+    params = {
+        "q": topic,
+        "engine": "google",
+        "tbm": "nws",
+        "api_key": SERP_API_KEY,
+        "num": max_articles,
+        "tbs": "qdr:d"  # search within the last day
+    }
+    response = requests.get(search_url, params=params)
+    results = response.json()
+    # Extract URLs from results
+    articles = [result['link'] for result in results.get("news_results", [])]
+    return articles
+
+# Example usage:
+topic = input("Enter the topic you're interested in: ")
+articles = search_news(topic, max_articles=5)
+print("Found articles:", articles)
+```
+
+Explanation:
+- The function builds a query for the SERP API to return news results (using parameters like "tbm": "nws" for news).
+- We limit the search to the past 24 hours using the tbs parameter.
+- Finally, the function extracts the article URLs from the API response.
+
+## 5. Processing Articles to Extract Content
+
+Once the URLs are obtained, we need to fetch and process the article content:
+
+```python
+def process_article(url):
+    """
+    Fetch and process the content of a news article from a given URL.
+    (For simplicity, this example just returns a placeholder text.)
+    """
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            # Here, you would parse the HTML and extract the main content.
+            # For demonstration, we assume the response text is the content.
+            return response.text[:500]  # returning first 500 characters as summary content
+        else:
+            return ""
+    except Exception as e:
+        print(f"Error fetching article {url}: {e}")
+        return ""
+
+# Process all articles
+article_contents = [process_article(url) for url in articles]
+```
+
+Explanation:
+- **Error Handling**: The function includes error handling in case an article fails to load.
+- **Content Extraction**: In a real application, you'd parse the HTML to extract just the article text (using libraries like BeautifulSoup). Here, we simplify by taking a snippet of the response text.
+
+## 6. Summarizing the Articles Using a Language Model
+
+Next, we integrate an LLM to summarize the fetched news content:
+
+```python
+import openai
+
+def summarize_articles(articles_content, topic, model="gpt-3.5-turbo"):
+    """
+    Summarizes the aggregated content from multiple articles.
+    Returns the top three important items along with their explanations.
+    """
+    prompt = (
+        f"Based on the following articles about '{topic}', "
+        "provide a summary that includes the top three most important items and why they matter.\n\n"
+    )
+    for i, content in enumerate(articles_content, start=1):
+        prompt += f"Article {i}: {content}\n\n"
+    
+    prompt += "Please list the top three items with explanations."
+    
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        api_key=OPENAI_API_KEY,
+    )
+    
+    summary = response["choices"][0]["message"]["content"]
+    return summary
+
+# Generate summary
+news_summary = summarize_articles(article_contents, topic)
+print("News Summary:")
+print(news_summary)
+```
+
+Explanation:
+- **Prompt Construction**: The prompt combines content from each article and instructs the LLM to extract the top three key items.
+- **Model Choice**: The code uses GPT-3.5-turbo by default (though you can easily switch to another model, like GPT-4).
+- **API Call**: The call to openai.ChatCompletion.create sends the prompt and retrieves a summarized response.
+
+## 7. Displaying the Results
+
+Finally, the summarized news is printed or can be displayed in the notebook's output:
+
+```python
+def display_summary(summary):
+    """
+    Prints the summary in a clear, readable format.
+    """
+    print("----- Daily News Summary -----")
+    print(summary)
+    print("------------------------------")
+
+display_summary(news_summary)
+```
+
+This simple display function ensures that the summary is neatly outputted to the terminal or notebook.
+
+## 8. Migrating the Notebook into a Modular Python Project
+
+Toward the end of the session, we discussed converting our notebook into a full-fledged Python project:
+
+### Creating a Project Structure
+
+```
+newsaroo/
+├── main.py
+├── config.py
+├── search.py
+├── content.py
+├── summarization.py
+├── utils.py
+├── tests/
+│   └── test_app.py
+└── .env
+```
+
+### Modularizing Code
+
+Each functionality (search, content extraction, summarization) gets its own module. This makes the code easier to maintain and test.
+
+### Using a Main Script
+
+The main.py script ties all the modules together:
+
+```python
+from search import search_news
+from content import process_article
+from summarization import summarize_articles
+from utils import display_summary
+
+def main():
+    topic = input("Enter your news topic: ")
+    articles = search_news(topic, max_articles=5)
+    articles_content = [process_article(url) for url in articles]
+    summary = summarize_articles(articles_content, topic)
+    display_summary(summary)
+
+if __name__ == "__main__":
+    main()
+```
+
+### Why Modularize?
+
+- **Easier Maintenance**: Breaking the code into modules (e.g., one file for search logic, one for summarization) helps manage changes and isolate bugs.
+- **Scalability**: As the app grows (for example, adding a web front end or integration with messaging platforms like WhatsApp), a modular structure simplifies expansion.
+
+## Conclusion
+
+In this webinar session, we walked through creating a daily news summarizer app from ideation to a working prototype. By:
+- Setting up a dedicated environment,
+- Using a notebook for rapid prototyping,
+- Integrating a news search API,
+- Processing and summarizing content with an LLM, and
+- Migrating the prototype into a modular Python project,
+
+we demonstrated a practical, step-by-step approach to building a complete AI application.
+
+Feel free to review the GitHub repository for the full project and the notebook for more details. If you have any questions, drop them in the WhatsApp group or comment below!
+
+Happy coding!
+
+## Additional Resources
+- [Previous Webinar Session: Setting Up an AI Project](/webinars/working-session-setting-up-a-project)
+- [GitHub Repository: newsaroo Project](https://github.com/appliedaiclub/newsaroo)
+- [Jupyter Notebook Setup Guide](/resources/setting-up-jupyter-notebook) 
