@@ -1,122 +1,223 @@
 ---
-title: "Solving the 'Event Loop is Closed' Error in Celery with Async Tasks"
-description: "A comprehensive guide to handling async operations in Celery workers while maintaining resource efficiency and scalability"
+title: "Fixing Celery Tasks with Asyncio Event Loop Issues"
+description: "A comprehensive guide to handling the 'Event loop is closed' error in Celery tasks with asyncio operations"
 date: "2024-03-27"
 author: "Applied AI Team"
 order: 1
-tags: ["celery", "async", "python", "troubleshooting"]
+tags: ["celery", "async", "python", "troubleshooting", "event-loop"]
 ---
 
-# Taming the Event Loop: A Deep Dive into Celery's Async Challenge
+# Fixing Celery Tasks with Asyncio Event Loop Issues
 
-## The Problem: When Async and Celery Collide
+## The Problem
 
-When running async operations in Celery workers, you might encounter this frustrating error:
+When using asyncio with Celery tasks, you might encounter this error:
 
 ```python
 RuntimeError: Event loop is closed
 ```
 
-This typically happens when:
-- The second request comes in
-- You're using `asyncio.run()` within Celery tasks
-- You have multiple async operations (HTTP requests, database queries, etc.)
+This typically occurs when:
+1. Running multiple async operations in a Celery task
+2. Using `run_async` helper functions
+3. Creating/closing event loops multiple times within the same task
 
-In our case, this occurred in an image extraction service where we needed to:
-- Process documents asynchronously
-- Make async HTTP calls to LLM services
-- Perform async database operations
-- Handle webhook notifications
+The error happens because each async operation tries to create and close its own event loop, but subsequent operations find the loop closed.
 
-## Why Does This Happen?
+## Quick Solution
 
-The root cause lies in how Celery and asyncio interact:
+Copy this pattern for your Celery tasks:
 
-1. **Event Loop Lifecycle**: Each Celery worker process creates an event loop when it starts
-2. **Task Execution**: When a task runs `asyncio.run()`, it creates a new event loop
-3. **Loop Closure**: After the task completes, the loop is closed
-4. **Subsequent Tasks**: When the next task tries to use async operations, it finds a closed loop
+```python
+@contextlib.contextmanager
+def task_event_loop():
+    """Context manager for task-level event loop"""
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    try:
+        yield loop
+    finally:
+        try:
+            # Cancel pending tasks
+            pending = asyncio.all_tasks(loop)
+            if pending:
+                loop.run_until_complete(asyncio.gather(*pending, return_exceptions=True))
+            if not loop.is_closed():
+                loop.close()
+        except Exception as e:
+            logger.warning(f"Error during event loop cleanup: {str(e)}")
 
-> 💡 **Think of it like trying to reuse a one-time-use ticket** – once it's used and marked as invalid, you can't use it again.
+@celery_app.task
+def my_celery_task():
+    with task_event_loop() as loop:
+        # Run all async operations with the same loop
+        result1 = loop.run_until_complete(async_operation1())
+        result2 = loop.run_until_complete(async_operation2())
+        result3 = loop.run_until_complete(async_operation3())
+```
 
-## Rethinking the Solution
+## Understanding the Issue
 
-Instead of fighting against this behavior, we need to work with it. Here are the approaches we considered:
+### What Changed?
 
-### Option A: Full Synchronous Conversion
-- ✅ Simple to implement
-- ❌ Loses async benefits
-- ❌ Some libraries are primarily async
+* Celery tasks are synchronous by nature
+* Asyncio operations require an event loop
+* Each async operation needs a running event loop
+* Closing loops prematurely breaks subsequent operations
 
-### Option B: Dedicated Worker Process
-- ✅ Clean separation
-- ❌ Complex architecture
-- ❌ IPC overhead
+### Why It Happens
 
-### Option C: Alternative Task Queue
-- ✅ Better async support
-- ❌ Major architectural change
-- ❌ Migration effort
+* Default approach creates/closes loops per operation
+* Subsequent operations find closed loops
+* Resource cleanup conflicts with operation needs
+* No task-level loop management
 
-### Option D: Hybrid Approach (Our Choice)
-This is what we ultimately chose to implement.
+## The Solution
 
-## The Solution: AsyncWorker Pattern
+### 1. Create a Task-Level Event Loop Manager
 
-We implemented a hybrid approach that provides:
-- Resource Efficiency: Proper cleanup of resources
-- Scalability: Works with multiple Celery workers
-- Reliability: Handles errors gracefully
+```python
+@contextlib.contextmanager
+def task_event_loop():
+    """Context manager for task-level event loop"""
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    try:
+        yield loop
+    finally:
+        try:
+            # Clean up pending tasks
+            pending = asyncio.all_tasks(loop)
+            if pending:
+                loop.run_until_complete(asyncio.gather(*pending, return_exceptions=True))
+            if not loop.is_closed():
+                loop.close()
+        except Exception as e:
+            logger.warning(f"Error during event loop cleanup: {str(e)}")
+```
 
-### Key Features
+### 2. Update Your Celery Task
 
-**Resource Management:**
-- Periodic cleanup of resources
-- Proper handling of pending tasks
-- Memory leak prevention
+```python
+@celery_app.task
+def process_async_task(task_id: str, data: Dict[str, Any]):
+    try:
+        with task_event_loop() as loop:
+            # Update status
+            loop.run_until_complete(
+                update_status_async(task_id, "PROCESSING")
+            )
+            
+            # Process data
+            result = loop.run_until_complete(
+                process_data_async(data)
+            )
+            
+            # Update results
+            loop.run_until_complete(
+                update_results_async(task_id, result)
+            )
+            
+        return {"status": "success", "result": result}
+        
+    except Exception as e:
+        # Handle errors
+        with task_event_loop() as loop:
+            loop.run_until_complete(
+                update_error_async(task_id, str(e))
+            )
+        raise
+```
 
-**Error Handling:**
-- Graceful error recovery
-- Task status updates
-- Comprehensive logging
+### 3. Handle Synchronous Operations
 
-**Scalability:**
-- Thread-safe singleton pattern
-- Connection pooling
-- Resource limits
+```python
+@celery_app.task
+def mixed_operations_task(task_id: str, data: Dict[str, Any]):
+    # Async operations within event loop
+    with task_event_loop() as loop:
+        result = loop.run_until_complete(async_operations())
+    
+    # Synchronous operations outside loop
+    process_sync_data(result)
+    call_webhook(task_id)
+```
 
-## Best Practices and Lessons Learned
+## Common Mistakes to Avoid
 
-### Resource Cleanup
-- Always implement proper cleanup mechanisms
-- Use context managers where possible
-- Implement periodic resource checks
+1. **Creating Multiple Loops**  
+```python
+# ❌ Wrong
+result1 = run_async(operation1())  # Creates/closes loop
+result2 = run_async(operation2())  # Creates/closes loop
 
-### Error Handling
-- Implement comprehensive error handling
-- Use proper logging
-- Set up monitoring and alerts
+# ✅ Correct
+with task_event_loop() as loop:
+    result1 = loop.run_until_complete(operation1())
+    result2 = loop.run_until_complete(operation2())
+```
 
-### Connection Management
-- Use connection pooling
-- Implement retry mechanisms
-- Set appropriate timeouts
+2. **Mixing Loop Management**  
+```python
+# ❌ Wrong
+loop = asyncio.new_event_loop()
+result = run_async(operation())  # Creates another loop
 
-## Conclusion
+# ✅ Correct
+with task_event_loop() as loop:
+    result = loop.run_until_complete(operation())
+```
 
-The AsyncWorker pattern provides a robust solution for handling async operations in Celery while maintaining:
-- Resource efficiency
-- Scalability
-- Code maintainability
-- Error resilience
+3. **Not Handling Cleanup**  
+```python
+# ❌ Wrong
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+result = loop.run_until_complete(operation())
+# Loop never closed!
 
-**Remember:**
-- Always clean up resources
-- Handle errors gracefully
-- Monitor performance
-- Use connection pooling
-- Implement proper logging
+# ✅ Correct
+with task_event_loop() as loop:
+    result = loop.run_until_complete(operation())
+# Loop automatically cleaned up
+```
 
-This solution allows us to leverage the benefits of both async operations and Celery's task queue system without compromising on reliability or performance.
+## When to Use This Pattern
 
-> 🔑 **Key Takeaway**: The key is not to fight against the event loop's lifecycle but to manage it effectively. This approach has successfully handled millions of document processing requests in production, proving its reliability and scalability.
+Apply this solution when:
+* Your Celery tasks contain multiple async operations
+* You're getting "Event loop is closed" errors
+* You need to manage async resources properly
+* You're mixing sync and async operations
+
+## Verifying the Fix
+
+After applying the fix:
+1. Event loop errors should be gone
+2. Tasks should complete successfully
+3. Resources should be properly cleaned up
+4. Error handling should work as expected
+
+## Best Practices
+
+1. **Use Context Managers**
+   - Always use `task_event_loop()` context manager
+   - Let Python handle loop cleanup
+   - Ensure proper resource management
+
+2. **Keep Loops Task-Scoped**
+   - One loop per task execution
+   - Don't share loops between tasks
+   - Don't store loops in global variables
+
+3. **Handle Errors Properly**
+   - Use try/except blocks
+   - Clean up resources in error cases
+   - Log errors with proper context
+
+4. **Separate Concerns**
+   - Keep async operations together
+   - Handle sync operations outside the loop
+   - Use proper error boundaries
+
+> 🔑 **Key Takeaway**: This pattern is specific to Celery tasks using asyncio. For other async frameworks or pure asyncio applications, different patterns might be more appropriate.
