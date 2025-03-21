@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 // import { usePathname } from 'next/navigation';
 import {
@@ -114,7 +114,24 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
   const [isOpen, setIsOpen] = useState(false);
   // const [isAgentsOpen, setIsAgentsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
-  // const isRecruitPage = pathname.includes('/recruit');
+  // Mobile menu state
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
+  
+  // Disable body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      // Reset submenu when menu closes
+      setMobileSubmenu(null);
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   // Compute theme-based styles
   const textColorClass = theme === 'light' ? 'text-gray-900' : 'text-white';
@@ -125,6 +142,11 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
   // Handle hover
   const handleMouseEnter = () => setIsOpen(true);
   const handleMouseLeave = () => setIsOpen(false);
+
+  // Handle mobile submenu toggle
+  const toggleMobileSubmenu = (menu: string) => {
+    setMobileSubmenu(prev => prev === menu ? null : menu);
+  };
 
   return (
     <header 
@@ -174,7 +196,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                 <span className="ml-2 text-lg font-semibold">Applied AI</span>
               </Link>
               
-              {/* Navigation items */}
+              {/* Navigation items - desktop */}
               <div className="hidden md:flex items-center space-x-6 flex-1 min-w-0">
                 <div 
                   className="relative"
@@ -289,8 +311,180 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
               >
                 Sign in
               </Link>
+              
+              {/* Hamburger menu button - mobile only */}
+              <button 
+                className="md:hidden flex items-center justify-center p-2 focus:outline-none"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+                aria-expanded={isMobileMenuOpen}
+              >
+                {isMobileMenuOpen ? (
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className={textColorClass}
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                ) : (
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className={textColorClass}
+                  >
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                  </svg>
+                )}
+              </button>
             </div>
           </nav>
+          
+          {/* Mobile Menu - Only shown when hamburger is clicked */}
+          {isMobileMenuOpen && (
+            <div 
+              className="fixed inset-0 z-[100] md:hidden bg-white dark:bg-gray-900 overflow-y-auto"
+              style={{ top: '56px' }}
+            >
+              <div className="container mx-auto py-4 px-4">
+                {/* Mobile menu items */}
+                <div className="space-y-2">
+                  {/* Agents menu */}
+                  <div className="border-b border-gray-100 pb-2">
+                    <button 
+                      className="flex items-center justify-between w-full py-2 font-semibold text-gray-900"
+                      onClick={() => toggleMobileSubmenu('agents')}
+                    >
+                      <span>Agents</span>
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="20" 
+                        height="20" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2"
+                        className={`transition-transform ${mobileSubmenu === 'agents' ? 'rotate-180' : ''}`}
+                      >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                    
+                    {/* Submenu for Agents */}
+                    {mobileSubmenu === 'agents' && (
+                      <div className="pl-4 mt-2 space-y-2">
+                        {AGENTS.map((agent) => (
+                          <Link 
+                            key={agent.name}
+                            href={agent.href}
+                            className="flex items-start py-2 gap-3"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            <span className="text-[#0A40C2] mt-0.5">{agent.icon}</span>
+                            <div className="flex flex-col">
+                              <span className="text-sm font-semibold text-gray-900">
+                                {agent.name}
+                              </span>
+                              <span className="text-sm text-gray-500">
+                                {agent.description}
+                              </span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Club link */}
+                  <div className="border-b border-gray-100 pb-2">
+                    <Link 
+                      href="/club"
+                      className="flex w-full py-2 font-semibold text-gray-900"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Club
+                    </Link>
+                  </div>
+                  
+                  {/* Resources menu */}
+                  <div className="border-b border-gray-100 pb-2">
+                    <button 
+                      className="flex items-center justify-between w-full py-2 font-semibold text-gray-900"
+                      onClick={() => toggleMobileSubmenu('resources')}
+                    >
+                      <span>Resources</span>
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="20" 
+                        height="20" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2"
+                        className={`transition-transform ${mobileSubmenu === 'resources' ? 'rotate-180' : ''}`}
+                      >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                    
+                    {/* Submenu for Resources */}
+                    {mobileSubmenu === 'resources' && (
+                      <div className="pl-4 mt-2 space-y-2">
+                        {RESOURCES_SECTIONS.map((section) => (
+                          <Link 
+                            key={section.name}
+                            href={section.href}
+                            className="flex items-start py-2 gap-3"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            <span className="text-[#0A40C2] mt-0.5">{section.icon}</span>
+                            <div className="flex flex-col">
+                              <span className="text-sm font-semibold text-gray-900">
+                                {section.name}
+                              </span>
+                              <span className="text-sm text-gray-500">
+                                {section.description}
+                              </span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Sign in link */}
+                  <div className="pt-2">
+                    <Link 
+                      href="https://dashboard.appliedai.club/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex w-full py-2 font-semibold text-gray-900"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Sign in
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </header>
