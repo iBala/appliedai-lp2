@@ -313,7 +313,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
             {/* Right side buttons */}
             <div className="flex items-center text-md font-semibold shrink-0 ml-4">
               <Link 
-                href="https://dashboard.appliedai.club/" 
+                href="/club" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className={clsx(
@@ -321,7 +321,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                   theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
                 )}
               >
-                Sign in
+                Join the Club
               </Link>
               
               {/* Hamburger menu button - mobile only */}
