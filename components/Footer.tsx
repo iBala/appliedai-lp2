@@ -27,10 +27,10 @@ const Footer = () => {
 
                 {/* Sign Up Button */}
                 <Link 
-                  href="https://dashboard.appliedai.club/sign-up" 
+                  href="/club" 
                   className="inline-flex items-center justify-center rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-white/90"
                 >
-                  Sign Up
+                  Join the Club
                 </Link>
               </div>
 

@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import CirclesBackground from './CirclesBackground';
 import Header from './Header';
-import { DemoCarousel } from './demo/DemoCarousel';
 
 const HeroSection = () => {
 
@@ -22,17 +21,17 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Content Container */}
-        <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-56px)] w-full flex-col px-8 py-12 md:py-16 lg:flex-row lg:items-center lg:py-10">
-          {/* Left Column */}
-          <div className="flex flex-1 flex-col items-start lg:max-w-[50%]">
+        {/* Content Container - Adjusted for proper vertical centering */}
+        <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-56px)] w-full flex-col justify-center px-6 sm:px-8">
+          {/* Main Content - Modified for center alignment with adjusted spacing */}
+          <div className="flex flex-col items-center mx-auto  text-center pt-16 md:pt-0">
             {/* Announcement Banner */}
             <Link 
               href="/club"
-              className="group relative mb-6 animate-[heroBannerIn_1s_ease_0s_1_normal_forwards_running] cursor-pointer overflow-hidden rounded-full border border-white/10 bg-white/10 px-2.5 py-1 text-md font-medium backdrop-blur-sm"
+              className="group relative mb-8 md:mb-10 animate-[heroBannerIn_1s_ease_0s_1_normal_forwards_running] cursor-pointer overflow-hidden rounded-full border border-white/10 bg-white/10 px-2.5 py-1 text-md font-medium backdrop-blur-sm"
             >
               <div className="pointer-events-none absolute inset-0 animate-[blurIn_0.1s_ease_0s_1_normal_forwards_running] rounded-full bg-white/0 transition-all duration-300 will-change-[opacity] hover:bg-white/20 group-hover:bg-white/10" />
-              <div className="relative flex  items-center">
+              <div className="relative flex items-center">
                 <Image
                   alt="Slack logo"
                   src="/images/slack-new-logo.svg"
@@ -57,30 +56,22 @@ const HeroSection = () => {
             </Link>
 
             {/* Main Content */}
-            <div className="flex w-full flex-col items-start">
-              <h1 className="mb-4 text-balance text-white text-[36px] font-semibold leading-[1.2] md:mb-6 md:text-[48px] lg:text-wrap lg:text-start lg:text-[60px] lg:leading-[1.15]">
-                Micro-agents to 100x your team&apos;s productivity
+            <div className="flex w-full flex-col items-center">
+              <h1 className="mb-6 md:mb-8 text-balance text-white text-[36px] font-semibold leading-[1.2] md:text-[48px] lg:text-[60px] lg:leading-[1.15]">
+              An invite-only club for operators to adapt to the AI world
               </h1>
-              <h2 className="mb-6 text-lg text-white/80 md:mb-8 md:text-xl lg:text-start lg:text-xl lg:leading-[1.55]">
-                You know those little tasks that eat up your day—like chasing status updates, scheduling calls, combing through resumes, or extracting data from yet another report? Yeah, those. Let our agents take them away.
+              <h2 className="mb-8 md:mb-10 text-lg text-white/80 md:text-xl lg:text-xl lg:leading-[1.55] max-w-[90%] md:max-w-[80%]">
+              We understand that while AI offers immense potential, many operators face challenges in getting started and implementing these technologies effectively. Our club is a place where you can learn, share, and grow together.
               </h2>
             </div>
-                <div className="flex items-center">
-                    <Link
-                      href='https://dashboard.appliedai.club/sign-up'
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-base font-semibold text-black transition-colors hover:bg-[white]/70"
-                    >
-                      Sign Up
-                    </Link>
-                </div>
-          </div>
-
-          {/* Right Column - Replace Application with DemoCarousel */}
-          <div className="flex flex-1 items-center justify-center lg:max-w-[50%]">
-            <div className="w-full max-w-[500px]">
-              <DemoCarousel />
+            <div className="flex items-center">
+                <Link
+                  href='/club'
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-base font-semibold text-black transition-colors hover:bg-[white]/70"
+                >
+                  Join the Club
+                </Link>
             </div>
           </div>
         </div>

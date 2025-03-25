@@ -211,7 +211,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                           theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
                         )}
                       >
-                        Agents
+                        We&apos;re working on
                       </button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent 
@@ -295,6 +295,18 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
+                {/* Newsletter Link - Desktop */}
+                <Link 
+                  href="https://appliedaiclub.substack.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={clsx(
+                    "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
+                    theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
+                  )}
+                >
+                  Newsletter
+                </Link>
               </div>
             </div>
             
@@ -467,6 +479,19 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                         ))}
                       </div>
                     )}
+                  </div>
+                  
+                  {/* Newsletter Link - Mobile */}
+                  <div className="border-b border-gray-100 pb-2">
+                    <Link 
+                      href="https://appliedaiclub.substack.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex w-full py-2 font-semibold text-gray-900"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Newsletter
+                    </Link>
                   </div>
                   
                   {/* Sign in link */}

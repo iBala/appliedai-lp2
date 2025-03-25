@@ -7,20 +7,20 @@ const HowItWorks = () => {
 
   const sections = [
     {
-      mainText: "Our agents solve specific problems. ⚡️",
-      description: "No more bloated one-size-fits-all solutions. Our micro-agents are laser-focused on specific tasks, ensuring they deliver outstanding results every single time."
+      mainText: "We conduct weekly sessions to teach practical topics on how to use AI.⚡️",
+      description: "We cover topics like how to build agents, different tools available, how to use agents, how to build agents that work with your existing systems, how to build agents that are scalable, etc."
     },
     {
-      mainText: "Pay only for what you use. 💸",
-      description: "No seat pricing, implementation charges, slab pricing, feature gating. Just pay for what you use. Sharing it with everyone. Nothing else."
+      mainText: "A newsletter for operators to learn about AI. 💸",
+      description: "We share advances in AI that are relevant to businesses and Operators. Not just research papers."
     },
     {
-      mainText: "We work well with your existing systems. 💯",
-      description: "All our agents are built to work with your existing systems. No complicated integrations, no new code, no new systems."
+      mainText: "A community of operators to discuss and learn from each other. 💯",
+      description: "A live community where you can interact with other operators, share your learnings, get help, and discuss AI."
     },
     {
-      mainText: "We are very small, by design. 🚀",
-      description: "We strongly believe in the power of having a small, high performing team of ridiculously high standards. "
+      mainText: "This is not a place to join and hang around. 🚀",
+      description: "We expect you to do the work to improve yourselves. If you're not putting in the effort, this is not the right place for you."
     }
   ]
 
@@ -39,11 +39,11 @@ const HowItWorks = () => {
         <div className="mx-auto max-w-[900px]">
           <div className="mb-10">
             <p className="text-[24px] leading-[1.3] text-black/60 md:text-[28px]">
-              Most software companies start to solve specific problems. But overtime, they end up justifying their valuation by building so many features that 90% of the customers don&apos;t use.{' '}
+            We (Praveen and Bala) started building agents with no coding experience. We went through our months of learning and building. Our years of work in building products at several large scale companies helped. But it was very hard to get started.{' '}
               <span className="text-black">
                 <span className="highlight">
-                  There&apos;s beauty in keeping things simple
-                </span>. We&apos;re building a new kind of software company. How we work:
+                  We could only do this because we worked together.
+                </span>. So we started the club to provide a platform for people to learn and build agents. Here&apos;s what we do at the club:
               </span>
             </p>
           </div>
