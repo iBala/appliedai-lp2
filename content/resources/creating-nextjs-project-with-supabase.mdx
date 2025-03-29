@@ -1,0 +1,239 @@
+---
+title: "Creating a Next.js Project with Supabase and Shadcn UI"
+description: "A comprehensive guide to setting up a modern web application using Next.js, Supabase, and Shadcn UI, from installation to deployment"
+date: "2025-03-29"
+author: "Applied AI Team"
+order: 5
+tags: ["nextjs", "supabase", "shadcn", "setup", "deployment"]
+---
+
+# Creating a Next.js Project with Supabase and Shadcn UI
+
+This guide will walk you through creating a modern web application using Next.js, Supabase, and Shadcn UI. Whether you're a Product Manager understanding the tech stack or a developer implementing it, this guide will help you understand and set up everything you need.
+
+## Understanding the Technology Stack
+
+Before we dive into the installation, let's understand what each technology does and why we're using it:
+
+### Next.js
+Next.js is a powerful framework built on top of React (a popular JavaScript library created by Facebook/Meta). Think of Next.js as a super-powered website builder that helps you create fast, SEO-friendly websites with modern features like:
+- **Server-side rendering**: Makes your website load faster and rank better in Google
+- **Automatic routing**: Creates URLs based on your file structure (like how Word organizes documents in folders)
+- **Built-in optimization**: Automatically makes images, scripts, and styles load faster
+- **Developer-friendly**: Makes it easier to build complex applications with less code
+
+### Supabase
+Think of Supabase as your modern, secure database-as-a-service (like Google Sheets on steroids). It provides:
+- **User Authentication**: Login/signup systems (like how Google accounts work)
+- **Database**: Stores your application data securely
+- **Real-time Updates**: Instantly updates data across all users (like collaborative Google Docs)
+- **File Storage**: Stores images, videos, and files (similar to Google Drive)
+
+### Tailwind CSS
+Tailwind is a styling framework that makes it easy to create beautiful websites without writing traditional CSS:
+- Instead of writing complex style rules, you use pre-built classes
+- Think of it like using formatting options in Microsoft Word, but for websites
+- Makes it easy to maintain consistent design across your application
+
+### Shadcn UI
+Shadcn UI is a collection of pre-built, beautiful components (like LEGO blocks for websites):
+- **Not a traditional component library**: You copy the components you need into your project
+- **Customizable**: Easy to modify and brand to your needs
+- **Built on Tailwind**: Uses the same styling system mentioned above
+- **Modern Design**: Follows current web design trends and best practices
+
+## Prerequisites Installation
+
+### 1. Installing Homebrew (macOS)
+Homebrew is like an app store for developers. It makes it easy to install the tools we need.
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+After installation, add Homebrew to your PATH (this is like telling your computer where to find the installed tools):
+```bash
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+### 2. Installing Node.js
+Node.js is the engine that powers our development environment (like having Microsoft Office installed to work with documents).
+
+Using Homebrew:
+```bash
+brew install node
+```
+
+Verify installations:
+```bash
+node --version
+npm --version
+```
+
+> 💡 **Tip**: We recommend using Node.js version 18.17 or later for optimal compatibility with Next.js.
+
+## Project Setup
+
+### 1. Creating a Next.js Project with Supabase
+
+```bash
+npx create-next-app -e with-supabase my-app
+cd my-app
+```
+
+This command creates a new project with everything set up for you. It's like creating a new document from a template in Microsoft Word, but for web applications.
+
+### 2. Environment Setup
+
+Create a `.env.local` file in your project root. This file stores sensitive information (like passwords) that your application needs:
+
+```plaintext
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
+
+> ⚠️ **Security Note**: Think of this file like a password manager. Never share it or commit it to version control.
+
+## Installing Shadcn UI
+
+Shadcn UI provides beautiful, pre-built components that you can customize. It's like having a design system similar to Material Design (used by Google) or Fluent Design (used by Microsoft), but more flexible.
+
+1. Initialize Shadcn UI:
+```bash
+npx shadcn-ui@latest init
+```
+
+2. Follow the CLI prompts (think of this as a setup wizard):
+```plaintext
+Would you like to use TypeScript? Yes
+Which style would you like to use? Default
+Which color would you like to use as base color? Slate
+Where is your global CSS file? app/globals.css
+Do you want to use CSS variables? Yes
+Where is your tailwind.config.js located? tailwind.config.js
+Configure the import alias for components? Yes
+Configure the import alias for utils? Yes
+```
+
+3. Install components as needed:
+```bash
+npx shadcn-ui@latest add button
+```
+
+## Project Structure and Development
+
+### Understanding the File Structure
+Think of this like organizing files in Windows Explorer or Mac Finder:
+
+```plaintext
+my-app/
+├── app/                    # Main folder for your pages (like a filing cabinet)
+│   ├── page.tsx           # Your homepage
+│   └── layout.tsx         # The template for all pages
+├── components/            # Reusable parts (like PowerPoint slides you reuse)
+├── lib/                   # Helper functions
+├── public/               # Images and other files
+├── styles/               # Design rules
+└── .env.local            # Secret configuration
+```
+
+### Making Changes
+
+1. **Page Modifications**: Edit `app/page.tsx` to change your homepage
+2. **Styling**: Update `app/globals.css` for overall design rules
+3. **Components**: Add new reusable parts in the `components/` directory
+4. **API Routes**: Create backend services in `app/api/` directory
+
+## Deployment
+
+### Understanding Deployment Platforms
+
+#### What is Vercel?
+Vercel is like having a professional IT team manage your website hosting:
+- **Created by the Next.js team**: Best platform for Next.js applications
+- **Automatic deployments**: Updates your site whenever you update your code
+- **Global delivery**: Makes your site fast everywhere in the world
+- **Free tier**: Perfect for personal projects and startups
+- **Professional monitoring**: Tracks your website's performance and issues
+
+### 1. Publishing to GitHub
+GitHub is like Google Drive for code. It keeps track of all changes and makes collaboration easier.
+
+1. Initialize Git repository:
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+```
+
+2. Create a new repository on GitHub (like creating a new folder in Google Drive)
+
+3. Push your code:
+```bash
+git remote add origin your-repo-url
+git push -u origin main
+```
+
+### 2. Deploying to Vercel
+
+Steps:
+1. Create a Vercel account (like signing up for any web service)
+2. Connect your GitHub repository
+3. Configure environment variables (copy from your `.env.local`)
+4. Click Deploy
+
+## Best Practices and Security
+
+### Understanding Security Best Practices
+
+1. **Environment Variables**
+   Think of these like passwords in a password manager:
+   - Keep them secret
+   - Never share them in code
+   - Use different values for development and production
+
+2. **API Security**
+   Like setting up security rules in a building:
+   - Check who can access what
+   - Set up proper authentication
+   - Monitor for suspicious activity
+
+3. **Performance Best Practices**
+   Like optimizing a PowerPoint presentation:
+   - Compress images
+   - Load only what's needed
+   - Cache frequently used data
+
+## Useful Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Supabase Auth Guide](https://supabase.com/docs/guides/auth/quickstarts/nextjs)
+- [Shadcn UI Components](https://ui.shadcn.com/docs/components)
+- [Vercel Deployment Guide](https://vercel.com/docs/deployments/overview)
+
+> 🎯 **Pro Tip**: Start small and add features gradually. It's like building with LEGO - start with a solid foundation and add pieces as needed.
+
+## Common Issues and Solutions
+
+Think of this section as your troubleshooting guide:
+
+1. **Build Errors**
+   Like when Word doesn't open a document properly:
+   - Check if you have the right version of Node.js
+   - Make sure all parts are installed
+   - Try clearing temporary files
+
+2. **Environment Setup Issues**
+   Like when your email settings aren't working:
+   - Double-check your configuration
+   - Restart the development server
+   - Verify all credentials
+
+3. **Design Problems**
+   Like when your PowerPoint formatting isn't consistent:
+   - Check your design settings
+   - Verify component styles
+   - Test on different screens
+
+Remember to join our community for support - it's like having a team of experts ready to help you succeed! 
