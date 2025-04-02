@@ -295,17 +295,15 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
-                {/* Newsletter Link - Desktop */}
+                {/* AIShots Link - Desktop */}
                 <Link 
-                  href="https://appliedaiclub.substack.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/shots"
                   className={clsx(
                     "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
                     theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
                   )}
                 >
-                  Newsletter
+                  AIShots
                 </Link>
               </div>
             </div>
@@ -481,16 +479,14 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                     )}
                   </div>
                   
-                  {/* Newsletter Link - Mobile */}
+                  {/* AIShots Link - Mobile */}
                   <div className="border-b border-gray-100 pb-2">
                     <Link 
-                      href="https://appliedaiclub.substack.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="/shots"
                       className="flex w-full py-2 font-semibold text-gray-900"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      Newsletter
+                      AIShots
                     </Link>
                   </div>
                   

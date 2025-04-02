@@ -102,6 +102,55 @@ export function Application({ className }: ApplicationProps) {
     },
   ], []) // Empty dependency array since steps are static
 
+  // Memoize handleComponentComplete to prevent infinite re-renders
+  const handleComponentComplete = useCallback((stepId: number) => {
+    console.log('handleComponentComplete called with stepId:', stepId)
+    
+    setComponentStates(prev => {
+      // Check if we already have this step
+      if (prev.some(state => state.id === stepId && state.isCompleted)) {
+        return prev
+      }
+
+      // Mark current component as completed
+      const updated = prev.map(state => 
+        state.id === stepId 
+          ? { ...state, isCompleted: true }
+          : state
+      )
+
+      // Add next component if available and not already present
+      const currentIndex = steps.findIndex(step => step.id === stepId)
+      console.log('Current step index:', currentIndex)
+      
+      if (currentIndex < steps.length - 1) {
+        const nextStep = steps[currentIndex + 1]
+        console.log('Next step to add:', nextStep)
+        
+        if (!updated.some(state => state.id === nextStep.id)) {
+          updated.push({
+            id: nextStep.id,
+            isVisible: true,
+            isCompleted: false,
+            position: updated.length
+          })
+        }
+        
+        // Update positions of all components
+        updated.forEach((state, idx) => {
+          state.position = idx
+        })
+      }
+
+      return updated
+    })
+    
+    // Move to next step after a delay
+    setTimeout(() => {
+      setCurrentStep(prev => prev + 1)
+    }, 1000)
+  }, [steps]) // Only depend on steps since componentStates is used in setState callback
+
   // Initialize first component
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -112,7 +161,7 @@ export function Application({ className }: ApplicationProps) {
     }, 500)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [steps]) // Added steps as dependency since we use it
 
   // --- Updated Progress Effect ---
   useEffect(() => {
@@ -127,17 +176,6 @@ export function Application({ className }: ApplicationProps) {
       const elapsed = time - startTime;
       const dotIndex = Math.floor(elapsed / durationPerDot);
       const progressWithinDot = ((elapsed % durationPerDot) / durationPerDot) * 100;
-
-      // // Update dots state
-      // const dots = steps[0].progressSteps?.map((_, index) => ({
-      //   ...steps[0].progressSteps![index],
-      //   status: index < dotIndex ? 'complete' : 
-      //          index === dotIndex ? 'in-progress' : 
-      //          'pending',
-      //   progress: index < dotIndex ? 100 :
-      //            index === dotIndex ? progressWithinDot :
-      //            0
-      // }));
 
       if (dotIndex < 3) {
         setProgressState({
@@ -160,7 +198,7 @@ export function Application({ className }: ApplicationProps) {
 
     animationFrameId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [currentStep]);
+  }, [currentStep, steps, handleComponentComplete]); // Added missing dependencies
 
   // Add effect to handle connection animation
   useEffect(() => {
@@ -202,60 +240,6 @@ export function Application({ className }: ApplicationProps) {
       return () => clearTimeout(timer)
     }
   }, [currentStep, steps.length])
-
-  // Memoize handleComponentComplete to prevent infinite re-renders
-  const handleComponentComplete = useCallback((stepId: number) => {
-    console.log('handleComponentComplete called with stepId:', stepId)
-    console.log('Current componentStates:', componentStates)
-    
-    setComponentStates(prev => {
-      // Check if we already have this step
-      if (prev.some(state => state.id === stepId && state.isCompleted)) {
-        console.log('Step already completed, returning:', prev)
-        return prev
-      }
-
-      // Mark current component as completed
-      const updated = prev.map(state => 
-        state.id === stepId 
-          ? { ...state, isCompleted: true }
-          : state
-      )
-
-      // Add next component if available and not already present
-      const currentIndex = steps.findIndex(step => step.id === stepId)
-      console.log('Current step index:', currentIndex)
-      
-      if (currentIndex < steps.length - 1) {
-        const nextStep = steps[currentIndex + 1]
-        console.log('Next step to add:', nextStep)
-        
-        if (!updated.some(state => state.id === nextStep.id)) {
-          updated.push({
-            id: nextStep.id,
-            isVisible: true,
-            isCompleted: false,
-            position: updated.length
-          })
-          console.log('Added new component:', nextStep.id)
-        }
-        
-        // Update positions of all components
-        updated.forEach((state, idx) => {
-          state.position = idx
-        })
-      }
-
-      console.log('Updated componentStates:', updated)
-      return updated
-    })
-
-    // Move to next step
-    setCurrentStep(prev => {
-      console.log('Moving to next step:', prev + 1)
-      return prev + 1
-    })
-  }, []) // No dependencies needed since it only uses setState functions which are stable
 
   // Now update the useEffect hooks to include the dependencies
   useEffect(() => {
