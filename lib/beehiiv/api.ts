@@ -10,6 +10,7 @@ export async function getBeehiivPosts(
   const url = new URL(`${BEEHIIV_API_URL}/publications/${process.env.BEEHIIV_PUBLICATION_ID_V2}/posts`);
   url.searchParams.set('page', page.toString());
   url.searchParams.set('limit', pageSize.toString());
+  url.searchParams.set('status', 'confirmed');  // Only fetch published posts
   if (searchQuery) {
     url.searchParams.set('search', searchQuery);
   }
@@ -26,7 +27,14 @@ export async function getBeehiivPosts(
     throw new Error(`Failed to fetch posts: ${response.statusText}`);
   }
 
-  return response.json();
+  const data = await response.json();
+  
+  // Filter out any unpublished posts that might slip through
+  if (Array.isArray(data.data)) {
+    data.data = data.data.filter((post: { status?: string }) => post.status === 'confirmed');
+  }
+
+  return data;
 }
 
 export async function getBeehiivPost(postId: string): Promise<BeehiivPost> {
@@ -89,6 +97,7 @@ export async function getBeehiivPost(postId: string): Promise<BeehiivPost> {
       title: data.data.title,
       subtitle: data.data.subtitle,
       content: content,
+      thumbnail_url: data.data.thumbnail_url,
       publishedAt: data.data.publish_date ? 
         new Date(data.data.publish_date * 1000).toISOString() : 
         new Date(data.data.created * 1000).toISOString(),

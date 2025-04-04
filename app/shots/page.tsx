@@ -41,7 +41,7 @@ function NewsletterHero() {
         </div>
       </div>
 
-      <Header theme="dark" />
+      <Header theme="dark" disableSticky={true} />
       
       <div className="container relative z-10 mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">

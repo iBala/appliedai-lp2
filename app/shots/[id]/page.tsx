@@ -20,7 +20,7 @@ export default async function PostPage({
 
     return (
       <div className="min-h-screen bg-white">
-        <Header theme="light" />
+        <Header theme="light" disableSticky={true} />
         <article className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="prose prose-lg prose-blue mx-auto">
             <div 

@@ -78,6 +78,7 @@ export interface BeehiivPost {
   subtitle?: string;
   content: string;
   publishedAt: string;
+  thumbnail_url?: string;
   author: {
     name: string;
     avatar?: string;
