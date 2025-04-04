@@ -26,7 +26,7 @@ export function EventSection({ embedCode }: EventSectionProps) {
         ) : (
           // If no embed code is available, show the message
           <div className="text-center text-gray-600 text-lg">
-            <p>We don't have an event scheduled right now. Watch this space for upcoming events.</p>
+            <p>We don&apos;t have an event scheduled right now. Watch this space for upcoming events.</p>
           </div>
         )}
       </div>
