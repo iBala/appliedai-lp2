@@ -32,8 +32,8 @@ const HowItWorks = () => {
 
   return (
     <section 
-      className="relative w-full bg-white py-20"
-      onMouseLeave={handleSectionLeave} // Added handler for entire section
+      className="w-full bg-white py-20"
+      onMouseLeave={handleSectionLeave}
     >
       <div className="container mx-auto px-8">
         <div className="mx-auto max-w-[900px]">
