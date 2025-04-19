@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase/client';
+import { createBeehiivSubscription } from '@/lib/beehiiv/api';
 
 const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
 
@@ -102,6 +103,18 @@ export async function POST(req: Request) {
           form_data: formData 
         });
       throw new Error('Failed to send to Slack');
+    }
+
+    // If email is provided, subscribe to Beehiiv newsletter
+    if (email) {
+      console.log('Attempting to subscribe to Beehiiv:', email);
+      const beehiivSuccess = await createBeehiivSubscription(email);
+      if (!beehiivSuccess) {
+        console.warn('Failed to subscribe to Beehiiv newsletter:', email);
+        // We don't throw here as this is not critical to the signup process
+      } else {
+        console.log('Successfully subscribed to Beehiiv:', email);
+      }
     }
 
     return NextResponse.json({ success: true });

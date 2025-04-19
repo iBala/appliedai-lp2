@@ -112,4 +112,42 @@ export async function getBeehiivPost(postId: string): Promise<BeehiivPost> {
     console.error('API: Error in getBeehiivPost:', error);
     throw error;
   }
+}
+
+/**
+ * Creates a new subscription in Beehiiv
+ * @param email - The email address to subscribe
+ * @returns Promise<boolean> - Whether the subscription was successful
+ */
+export async function createBeehiivSubscription(email: string): Promise<boolean> {
+  if (!email) return false;
+
+  try {
+    const url = new URL(`${BEEHIIV_API_URL}/publications/${process.env.BEEHIIV_PUBLICATION_ID_V2}/subscriptions`);
+    
+    const response = await fetch(url.toString(), {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.BEEHIIV_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        reactivate_existing: true, // Reactivate if they previously unsubscribed
+        send_welcome_email: true,
+        utm_source: 'club_signup'
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Beehiiv subscription error:', errorData);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Error creating Beehiiv subscription:', error);
+    return false;
+  }
 } 
