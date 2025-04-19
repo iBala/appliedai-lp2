@@ -134,7 +134,7 @@ export async function createBeehiivSubscription(email: string): Promise<boolean>
       body: JSON.stringify({
         email,
         reactivate_existing: true, // Reactivate if they previously unsubscribed
-        send_welcome_email: true,
+        send_welcome_email: false,
         utm_source: 'club_signup'
       })
     });
