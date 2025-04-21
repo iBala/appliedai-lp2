@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase/client';
 import { createBeehiivSubscription } from '@/lib/beehiiv/api';
 
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+// Get Slack webhook URL from environment variables
+const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 
 export async function POST(req: Request) {
   try {
@@ -15,6 +16,12 @@ export async function POST(req: Request) {
       page: '/club',
       form_data: formData
     });
+
+    // Validate Slack webhook URL
+    if (!SLACK_WEBHOOK_URL) {
+      console.error('SLACK_WEBHOOK_URL not found in environment variables');
+      throw new Error('Slack webhook URL not configured');
+    }
 
     // First, try to store in Supabase
     const { error: supabaseError } = await supabase
