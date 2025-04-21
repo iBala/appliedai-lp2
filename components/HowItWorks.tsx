@@ -43,7 +43,7 @@ const HowItWorks = () => {
               <span className="text-black">
                 <span className="highlight">
                   We could only do this because we worked together.
-                </span>. So we started the club to provide a platform for people to learn and build agents. Here&apos;s what we do at the club:
+                </span>. So we started the club to provide a platform for people to learn and build agents. Here&apos;s what we do at the club: 
               </span>
             </p>
           </div>
