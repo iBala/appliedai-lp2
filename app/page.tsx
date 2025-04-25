@@ -1,7 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
 import Footer from "@/components/Footer";
-import { EventSection } from "@/components/EventSection";
 import { getEventEmbed } from "@/lib/event";
 
 export default async function Home() {
@@ -11,10 +10,9 @@ export default async function Home() {
   return (
     <main className="relative">
       <div className="relative">
-        <HeroSection />
+        <HeroSection embedCode={eventEmbed} />
       </div>
       <div className="relative bg-white">
-        <EventSection embedCode={eventEmbed} />
         <HowItWorks />
       </div>
       <Footer />
