@@ -45,7 +45,7 @@ const HeroSection = ({ embedCode }: HeroSectionProps) => {
                     className="mr-2"
                     quality={95}
                   />
-                  <p className="max-w-[calc(100vw-100px)] truncate text-white">
+                  <p className="max-w-[calc(100vw-50px)] truncate text-white">
                     Want to learn to build agents? Join our community!
                   </p>
                   <p className="mx-2 hidden text-white/25 md:flex">·</p>
