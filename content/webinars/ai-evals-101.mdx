@@ -1,0 +1,61 @@
+---
+title: "Session 12: Introduction to AI Evals"
+description: "How to apply Evals to test your AI Agents"
+date: "2025-05-03"
+author: "Gowtham Muthukumar"
+order: 12
+tags: ["tutorial", "AI", "Agents", "LLM", "Evals"]
+---
+
+**Introduction to AI Evals**
+Hey, Bala again. In this session, [Gautham Muthukumar](https://www.linkedin.com/in/gautham-muthukumar-6a01334b/) from [Microsoft](microsoft.com) takes us through AI evals.
+
+*Key Takeaways*
+- Evals are critical for assessing AI model/agent performance and continuously improving them
+- Key eval types: benchmarks, programmatic evaluations, system performance metrics, human-in-the-loop, and LLM as judge
+- Tools like Langfuse provide observability and eval capabilities out-of-the-box
+- Evals should be precise yet continuously updated as models and use cases evolve
+
+*Topics*
+- Importance and Complexity of Evals
+- Evals are crucial for determining AI product success, considered "the real moat" by industry leaders
+- Evals cover general evaluations, observability metrics, and responsible AI aspects
+- Agent evals are more complex than traditional software/ML testing due to non-deterministic, multi-path nature
+
+*Types of Evals*
+- Benchmarks: Standard datasets (e.g. MMLU, GPQA) or custom synthetic data with golden answers
+- Programmatic evaluations: Simple automated checks (e.g. SQL syntax, summary length)
+- System performance: Latency, cost, error rates
+- Human-in-the-loop: Expert review of agent outputs
+- LLM as judge: Using another LLM to evaluate outputs based on rubrics
+
+*Eval Tools Demo (Langfuse)*
+- Provides observability metrics, trace visualization, and eval capabilities
+- Allows creating datasets, experiments, human annotations, and LLM judges
+- Integrates with notebooks/code via API keys and tracing libraries
+
+*Best Practices*
+- Combine offline and online evals
+- Be precise in metrics, but expect to evolve evals over time
+- Consider implicit user feedback (e.g. follow-up questions) in addition to explicit ratings
+- For subjective answers, use majority customer opinions and personalization
+
+*Next Steps*
+- Explore Hugging Face agents course and Weights & Biases apps evaluation course
+- Review shared YouTube video on setting up evals
+- Investigate Langfuse documentation for more advanced usage (e.g. tagging)
+- Continue evolving evals as models and use cases develop
+
+Here's the entire recording of the session.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/yFfGhKHsR-I" 
+    title="Applied AI Session 11: Introduction to AI voice agents" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
