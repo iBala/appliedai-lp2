@@ -1,0 +1,85 @@
+---
+title: "Session 13: RAG - Technical Foundation"
+description: "A technical foundational course on setting up RAG"
+date: "2025-05-10"
+author: "Kameshwara Pavan Kumar (Pavan Mantha) Mantha"
+order: 13
+tags: ["tutorial", "AI", "Agents", "LLM", "RAG"]
+---
+
+**Introduction to RAG**
+Hey, folks, happy Saturday. In this session, [Pavan Mantha](https://www.linkedin.com/in/kameshwara-pavan-kumar-mantha-91678b21/) from [Orbcomm](https://www.orbcomm.com/) takes us through the technical foundations of Retrieval-Augmented Generation.
+
+*Key Takeaways*
+- RAG is crucial for grounding LLMs with domain-specific knowledge not present in their training data
+- Effective RAG implementation requires addressing challenges at each stage: document processing, embedding, retrieval, and generation
+- Advanced techniques like hybrid embeddings, fine-tuned embedding models, and diverse chunking strategies can significantly improve RAG performance
+- Evaluation, observability, and continuous improvement are essential for production RAG systems
+
+*Introduction to RAG*
+- RAG allows incorporating domain-specific knowledge into LLM responses
+- Basic RAG pipeline: document chunking → embedding → vector storage → retrieval → augmentation → LLM generation
+- Key components: embedding models (dense/sparse vectors), vector databases, chunking strategies
+
+*RAG Implementation Challenges*
+- Document parsing: Handling unstructured data (images, tables, infographics)
+- Chunking: Determining optimal chunk size and overlap
+- Embedding: Selecting appropriate models and dimensions, handling multilingual content
+- Vector databases: Indexing and tuning for retrieval performance
+- Query processing: Addressing ambiguity and selecting effective search methodologies
+- Augmentation: Crafting clear instructions for LLMs
+- Generation: Ensuring high-quality, relevant responses
+
+*Advanced RAG Architectures*
+- Hybrid embedding methods: Combining dense and sparse vectors for improved retrieval
+- Fine-tuned embedding models: Domain-specific training for better vector representations
+- LLM ensembling: Using multiple LLMs and a "judge" LLM for more accurate responses
+
+*Chunking Strategies*
+- Token chunking: Basic splitting based on token count
+- Sentence chunking: Splitting based on sentence boundaries and semantics
+- Recursive chunking: Iterative splitting based on rules or document structure
+- Semantic chunking: Grouping semantically related content across document sections
+- Late chunking: Embedding full documents, then splitting embeddings
+- Neural chunking: Using fine-tuned models for intelligent splitting
+- Slumber chunking: Agent-based approach for adaptive chunking decisions
+
+*RAG vs. Fine-tuning*
+- Fine-tuning LLMs: Suitable for stable domain knowledge, less frequent updates
+- RAG: Better for dynamic data, frequent updates, and maintaining up-to-date information
+
+*Structured Data in RAG*
+- Approaches: Using agents (e.g., Agno, QAI frameworks) or SQL Alchemy
+- Process: Provide knowledge base of sample queries/answers, expose schema structure to LLM
+- LLM infers table relationships, generates SQL queries, executes in REPL for validation
+
+*Observability and Evaluation*
+- Observability tools: MLflow, Langfuse, Aris Phoenix, Openlit
+- Evaluation frameworks: Ragas, Deep Evals
+- Key metrics: Context relevance, answer relevancy, faithfulness, retrieval accuracy
+
+*Continuous Improvement*
+- Collect user feedback on response quality
+- Analyze traces of queries, retrievals, and contexts for dissatisfactory responses
+- Tune hyperparameters: top-K, embedding model, chunking strategy, instruction sets, LLM settings
+- Regularly update and refine the RAG pipeline based on performance metrics and user feedback
+
+*Next Steps*
+- Share additional resources: Medium articles, GitHub repositories, research papers
+- Schedule follow-up session focused on practical code implementation of RAG concepts
+- Explore advanced RAG architectures: context-enriched retrievals, fusion RAG, hide RAG
+- Dive deeper into observability, deployment, and evaluation strategies for production RAG systems
+
+Here's the entire recording of the session.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="" 
+    title="Applied AI Session 13: Technical foundation for Retrieval-Augmented Generation (RAG)" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
