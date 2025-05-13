@@ -1,6 +1,7 @@
 ---
 description: All rules related to how to operate here
 globs: 
+alwaysApply: false
 ---
 
 # Your rule content
@@ -51,7 +52,7 @@ Enables faster page reloads with service workers.
 ## Design:
 1. Think from the user point of your when they land on a page. 
 2. Load the components that the user will need first. 
-3. ALways show loading states
+3. Always show loading states
 4. App should be tighter, very clean. 
 5. No shadows, keep it very clean
 6. Use icons

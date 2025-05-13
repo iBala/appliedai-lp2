@@ -1,19 +1,24 @@
 ---
 description: How this project is set up
 globs: 
+alwaysApply: false
 ---
-This project is my marketing website. 
+This project is the landing page for my club Applied AI.
 
 Website: appliedai.club
-What is it: AppliedAI offers a suite of micro agents to companies to make their employees 100x productive
+What is it: AppliedAI club is a place for Operators to upskill themselves to participate in the AI economy.
 
-Agents: 
-We have 5 agents right now: 
-1. Recruit - Screen resumes, schedule interviews, and manage your hiring pipeline with precision.
-2. Image/Doc Extractor - Extract structured data from any document or image with high accuracy.
-3. User Research - Conduct user interviews, analyze feedback, and generate actionable insights.
-4. Scheduler - Coordinate meetings across time zones, handle follow-ups, and manage your calendar.
-5. Data analysis - Transform raw data into meaningful insights with automated analysis and visualization.
+What We Offer
+1. Curated AI Tool Directory: Access a comprehensive list of AI tools tailored for various business operations, helping you find the right solutions for your specific needs.
+2. Interactive Learning Forum: Join our vibrant community where you can ask questions, share experiences, and learn from peers and experts alike.
+3. Implementation Support: Receive guidance and assistance in integrating AI solutions into your business processes, ensuring smooth adoption and maximizing impact.
 
+# Webinars
+This section contains the list of webinars we have hosted, the key points and the YouTube video embedded. These are present in /content/webinars directory.
 
-
+#Jobs
+We also list curated jobs that are open in amazing companies in the new AI economy. 
+- The jobs are refreshed every day. 
+- People can suggest any jobs that are open
+- People can click on the link and go to the actual job site and apply.
+- Filtering based on job roles, location available.

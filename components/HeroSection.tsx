@@ -38,8 +38,8 @@ const HeroSection = ({ embedCode }: HeroSectionProps) => {
                 <div className="pointer-events-none absolute inset-0 animate-[blurIn_0.1s_ease_0s_1_normal_forwards_running] rounded-full bg-white/0 transition-all duration-300 will-change-[opacity] hover:bg-white/20 group-hover:bg-white/10" />
                 <div className="relative flex items-center">
                   <Image
-                    alt="Slack logo"
-                    src="/images/slack-new-logo.svg"
+                    alt="WhatsApp logo"
+                    src="/images/WhatsApp.webp"
                     width={20}
                     height={20}
                     className="mr-2"
