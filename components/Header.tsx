@@ -111,7 +111,7 @@ interface HeaderProps {
 
 const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderProps) => {
   // const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   // const [isAgentsOpen, setIsAgentsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   // Mobile menu state
@@ -140,8 +140,8 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
     : 'bg-transparent shadow-lg backdrop-blur-sm border-white/10';
 
   // Handle hover
-  const handleMouseEnter = () => setIsOpen(true);
-  const handleMouseLeave = () => setIsOpen(false);
+  // const handleMouseEnter = () => setIsOpen(true);
+  // const handleMouseLeave = () => setIsOpen(false);
 
   // Handle mobile submenu toggle
   const toggleMobileSubmenu = (menu: string) => {
