@@ -198,6 +198,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
               
               {/* Navigation items - desktop */}
               <div className="hidden md:flex items-center space-x-6 flex-1 min-w-0">
+                {/* We're working on dropdown - commented out
                 <div 
                   className="relative"
                   onMouseEnter={handleMouseEnter}
@@ -242,6 +243,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
+                */}
                 <Link 
                   href="/club"
                   className={clsx(
@@ -295,7 +297,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
-                {/* AIShots Link - Desktop */}
+                {/* AIShots Link - Desktop - commented out
                 <Link 
                   href="/shots"
                   className={clsx(
@@ -305,6 +307,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                 >
                   AIShots
                 </Link>
+                */}
               </div>
             </div>
             
@@ -479,7 +482,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                     )}
                   </div>
                   
-                  {/* AIShots Link - Mobile */}
+                  {/* AIShots Link - Mobile - commented out
                   <div className="border-b border-gray-100 pb-2">
                     <Link 
                       href="/shots"
@@ -489,6 +492,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                       AIShots
                     </Link>
                   </div>
+                  */}
                   
                   {/* Sign in link */}
                   <div className="pt-2">
