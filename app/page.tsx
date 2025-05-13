@@ -1,6 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
 import Footer from "@/components/Footer";
+import LogoScroll from "@/components/LogoScroll";
 import { getEventEmbed } from "@/lib/event";
 
 export default async function Home() {
@@ -12,6 +13,12 @@ export default async function Home() {
       <div className="relative">
         <HeroSection embedCode={eventEmbed} />
       </div>
+      
+      {/* Logo scroll section showing companies that use our platform */}
+      <div className="relative">
+        <LogoScroll />
+      </div>
+      
       <div className="relative bg-white">
         <HowItWorks />
       </div>
