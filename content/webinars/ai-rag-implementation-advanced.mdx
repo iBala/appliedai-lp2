@@ -1,0 +1,57 @@
+---
+title: "Session 14: RAG - Advanced Implementation Techniques"
+description: "An advanced session on effective RAG implementation"
+date: "2025-05-17"
+author: "Kameshwara Pavan Kumar (Pavan Mantha) Mantha"
+order: 14
+tags: ["tutorial", "AI", "Agents", "LLM", "RAG"]
+---
+
+**Introduction to RAG**
+Hey, folks, happy Saturday. In this session, [Pavan Mantha](https://www.linkedin.com/in/kameshwara-pavan-kumar-mantha-91678b21/) from [Orbcomm](https://www.orbcomm.com/) takes us through the an advanced session on how to implement Retrieval-Augmented Generation. This is a follow up session to our f[Foundational RAG session](https://www.appliedai.club/webinars/ai-rag-technical-foundation). We highly recommend you go through that first.
+
+The notebook and architecture presented in the session are available here - [repo](https://github.com/pavanjava/rag_sessions/tree/main/advanced_rag)
+
+🔑 Key Takeaways
+- Advanced RAG techniques like hypothetical document embedding, context enrichment, and fusion retrieval significantly improve retrieval accuracy.
+- Agentic RAG leverages autonomous agents across different RAG stages (query rewriting, retrieval, response generation).
+- Basic RAG is easy to set up, but tuning and evaluation are where the real challenge lies.
+- Local LLMs and embeddings help reduce cloud costs while maintaining flexibility.
+
+📚 Topics Covered
+🧠 Advanced RAG Techniques
+- Hypothetical Document Embedding: Generate possible answers and retrieve relevant documents against them.
+- Context Enrichment: Add surrounding context to improve grounding.
+- Fusion Retrieval: Combine dense (e.g. vector-based) and sparse (e.g. BM25) methods.
+- Ensemble LLMs: Use multiple models to cross-validate and refine outputs.
+- Agentic RAG: Deploy agents to manage different tasks in the RAG pipeline.
+
+🛠️ Practical Implementation
+- Used LlamaIndex, Qdrant, and local LLMs to build a basic RAG pipeline.
+- Extended RAG with hypothetical document embedding and fusion retrieval.
+- Discussed stages: document loading, embedding, storage, and query engine creation.
+- Stressed on hyperparameter tuning for retrieval performance.
+
+📊 RAG Evaluation & Optimization
+- Building a reliable ground truth dataset remains hard.
+- Need to track accuracy, latency, and cost metrics.
+- Observability tools can monitor token usage and system behavior.
+
+🚀 Production Considerations
+- Trade-off between speed and accuracy (especially with Agentic RAG).
+- Local models cut cost, while cloud APIs offer scalability and features.
+- No one-size-fits-all — success depends on experimentation and domain knowledge.
+
+Here's the entire recording of the session.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/u8ukupUMoNs" 
+    title="Applied AI Session 14: Advanced Implementation Techniques for Retrieval-Augmented Generation (RAG)" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
