@@ -11,8 +11,9 @@ export const metadata: Metadata = {
 async function getCompaniesDebug() {
   console.log('DEBUG PAGE: Starting to fetch companies');
   try {
-    // Use absolute URL to fetch from the API - directly use localhost to avoid any URL issues
-    const response = await fetch('http://localhost:3000/api/companies', {
+    // Use absolute URL to fetch from the API - use environment variable for production compatibility
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/companies`, {
       cache: 'no-store' // Disable caching to always get fresh data
     });
     

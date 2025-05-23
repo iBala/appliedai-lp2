@@ -5,7 +5,8 @@ export async function GET() {
     console.log('DEBUG API: Echoing companies API response');
     
     // Fetch from the internal API directly to see what's returned
-    const response = await fetch('http://localhost:3000/api/companies');
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/companies`);
     const rawData = await response.text(); // Get raw text first for debugging
     
     console.log('DEBUG API: Raw response from companies API:', rawData);
@@ -22,7 +23,7 @@ export async function GET() {
     
     return NextResponse.json({
       debug: {
-        apiUrl: 'http://localhost:3000/api/companies',
+        apiUrl: `${baseUrl}/api/companies`,
         rawLength: rawData.length,
         rawPreview: rawData.slice(0, 100) + '...',
         parsedType: typeof jsonData,

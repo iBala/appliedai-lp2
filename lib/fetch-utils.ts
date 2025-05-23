@@ -10,9 +10,10 @@ export function getApiUrl(path: string): string {
   // Remove leading slash if present to avoid double slashes
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
   
-  // During server-side rendering, use direct URL
+  // During server-side rendering, use the configured site URL
   if (typeof window === 'undefined') {
-    return `http://localhost:3000/api/${cleanPath}`;
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    return `${baseUrl}/api/${cleanPath}`;
   }
   
   // In the browser, use relative URL (avoids CORS issues)
