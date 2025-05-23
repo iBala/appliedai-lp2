@@ -1,6 +1,10 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
+import CreateTagsButton from '@/components/debug/CreateTagsButton';
+
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Debug Companies | AppliedAI Club',
@@ -226,19 +230,7 @@ export default async function DebugCompaniesPage() {
               <div>
                 <h3 className="text-lg font-medium mb-2">Actions:</h3>
                 <div className="space-y-2">
-                  <button
-                    onClick={() => fetch('/api/debug/create-sample-tags', { method: 'POST' })
-                      .then(res => res.json())
-                      .then(data => {
-                        alert(data.success ? 'Sample tags created successfully!' : `Error: ${data.error}`);
-                        window.location.reload();
-                      })
-                      .catch(err => alert('Error: ' + err.message))
-                    }
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                  >
-                    Create Sample Tags & Mappings
-                  </button>
+                  <CreateTagsButton />
                   <p className="text-sm text-gray-600">
                     Creates sample tags and maps them to companies if tables exist but are empty.
                   </p>

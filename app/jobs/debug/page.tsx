@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { fetchJobs, type Job } from '@/lib/fetch-utils';
+// import Header from '@/components/Header';
+// import { fetchJobFilterOptions } from '@/lib/fetch-utils';
+
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Jobs Debug | AppliedAI Club',

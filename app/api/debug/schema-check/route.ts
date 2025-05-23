@@ -81,8 +81,8 @@ export async function GET() {
       summary: {
         all_tables_exist: Object.values(tableChecks).every((check: TableCheck) => check.exists),
         missing_tables: Object.entries(tableChecks)
-          .filter(([_, check]: [string, TableCheck]) => !check.exists)
-          .map(([name, _]) => name),
+          .filter(([, check]: [string, TableCheck]) => !check.exists)
+          .map(([name]) => name),
       }
     });
 

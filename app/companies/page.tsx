@@ -6,6 +6,9 @@ import CompanyIcon from '@/components/companies/CompanyIcon'
 import { fetchCompanies, type Company } from '@/lib/fetch-utils'
 import CompaniesClientSection from '@/components/companies/CompaniesClientSection'
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Companies | AppliedAI Club',
   description: 'List of AI companies we are tracking',
