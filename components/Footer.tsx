@@ -37,12 +37,6 @@ const Footer = () => {
               {/* Navigation Links */}
               <div className="flex items-center space-x-8">
                 <Link 
-                  href="/agents" 
-                  className="text-sm font-semibold text-white/60 transition-colors hover:text-white"
-                >
-                  Agents
-                </Link>
-                <Link 
                   href="/contact" 
                   className="text-sm font-semibold text-white/60 transition-colors hover:text-white"
                 >
