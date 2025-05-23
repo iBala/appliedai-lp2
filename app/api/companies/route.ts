@@ -26,9 +26,11 @@ interface CompanyWithTags extends Company {
 // GET all companies with tags as an array using proper many-to-many relationships
 export async function GET() {
   console.log('API: Fetching all companies from Supabase using admin client with proper tag mapping');
+  console.log('API: Environment check - NODE_ENV:', process.env.NODE_ENV, 'NEXT_PUBLIC_SITE_URL:', process.env.NEXT_PUBLIC_SITE_URL || 'NOT_SET');
   try {
     // Log database connection attempt
     console.log('API: Attempting to connect to Supabase and run query with admin client');
+    console.log('API: Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL?.substring(0, 30) + '...');
     
     // First, get all companies
     const { data: companies, error: companiesError } = await supabaseAdmin
@@ -89,15 +91,32 @@ export async function GET() {
       tags: companyTagsMap[company.id] || [], // Empty array if no tags mapped
     }));
 
-    // Log the tags for debugging
-    console.log('API: Example company tags:', companiesWithTags.slice(0, 2).map(c => ({ id: c.id, name: c.name, tags: c.tags })));
+    // Log the tags for debugging - MORE DETAILED LOGGING
+    console.log('API: Tag mapping results:');
+    console.log('API: Companies with tags count:', companiesWithTags.filter(c => c.tags.length > 0).length);
+    console.log('API: Companies without tags count:', companiesWithTags.filter(c => c.tags.length === 0).length);
+    console.log('API: Sample companies with tags:', companiesWithTags.filter(c => c.tags.length > 0).slice(0, 2).map(c => ({ 
+      id: c.id, 
+      name: c.name, 
+      tags: c.tags,
+      tagCount: c.tags.length 
+    })));
+    console.log('API: All tag mappings found:', Object.keys(companyTagsMap).length);
+    console.log('API: Sample tag mappings:', Object.entries(companyTagsMap).slice(0, 3));
     
     // Log the data being returned (first few items only for brevity)
     const preview = companiesWithTags?.slice(0, 2).map(c => ({ id: c.id, name: c.name, tagCount: c.tags.length }));
     console.log('API: Returning data preview:', preview);
     console.log(`API: Total companies returned: ${companiesWithTags?.length || 0}`);
     
-    return NextResponse.json({ companies: companiesWithTags });
+    return NextResponse.json({ companies: companiesWithTags }, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+        'Surrogate-Control': 'no-store'
+      }
+    });
   } catch (error) {
     console.error('API CRITICAL ERROR: Companies API error:', error);
     return NextResponse.json({ error: 'Failed to fetch companies' }, { status: 500 });

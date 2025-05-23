@@ -177,6 +177,33 @@ export default async function DebugCompaniesPage() {
                   </li>
                   <li>
                     <a 
+                      href="/api/debug/env-check" 
+                      target="_blank"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Environment Variables Check (/api/debug/env-check)
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="/api/debug/schema-check" 
+                      target="_blank"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Database Schema Check (/api/debug/schema-check)
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="/api/debug/tags-check" 
+                      target="_blank"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Tags and Mappings Check (/api/debug/tags-check)
+                    </a>
+                  </li>
+                  <li>
+                    <a 
                       href="/api/debug/tables?table=ai_companies" 
                       target="_blank"
                       className="text-blue-600 hover:underline"
@@ -194,6 +221,28 @@ export default async function DebugCompaniesPage() {
                     </a>
                   </li>
                 </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-medium mb-2">Actions:</h3>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => fetch('/api/debug/create-sample-tags', { method: 'POST' })
+                      .then(res => res.json())
+                      .then(data => {
+                        alert(data.success ? 'Sample tags created successfully!' : `Error: ${data.error}`);
+                        window.location.reload();
+                      })
+                      .catch(err => alert('Error: ' + err.message))
+                    }
+                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                  >
+                    Create Sample Tags & Mappings
+                  </button>
+                  <p className="text-sm text-gray-600">
+                    Creates sample tags and maps them to companies if tables exist but are empty.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

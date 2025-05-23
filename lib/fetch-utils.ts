@@ -13,7 +13,9 @@ export function getApiUrl(path: string): string {
   // During server-side rendering, use the configured site URL
   if (typeof window === 'undefined') {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-    return `${baseUrl}/api/${cleanPath}`;
+    const fullUrl = `${baseUrl}/api/${cleanPath}`;
+    console.log('FETCH_UTILS: Server-side API URL constructed:', fullUrl, 'from NEXT_PUBLIC_SITE_URL:', process.env.NEXT_PUBLIC_SITE_URL || 'NOT_SET');
+    return fullUrl;
   }
   
   // In the browser, use relative URL (avoids CORS issues)
@@ -25,6 +27,7 @@ export function getApiUrl(path: string): string {
  */
 export async function fetchApi<T>(path: string, options?: RequestInit): Promise<T> {
   const url = getApiUrl(path);
+  console.log('FETCH_UTILS: Making API request to:', url);
   
   try {
     const response = await fetch(url, {
@@ -37,22 +40,28 @@ export async function fetchApi<T>(path: string, options?: RequestInit): Promise<
       },
     });
     
+    console.log('FETCH_UTILS: Response status:', response.status, 'for URL:', url);
+    
     if (!response.ok) {
+      console.error('FETCH_UTILS: API request failed with status:', response.status, 'for URL:', url);
       throw new Error(`API request failed with status ${response.status}`);
     }
     
     // Get raw text first to help with debugging if JSON parsing fails
     const text = await response.text();
+    console.log('FETCH_UTILS: Response text length:', text.length, 'for URL:', url);
     
     try {
-      return JSON.parse(text) as T;
+      const parsed = JSON.parse(text) as T;
+      console.log('FETCH_UTILS: Successfully parsed JSON response for URL:', url);
+      return parsed;
     } catch (e) {
-      console.error('Failed to parse API response as JSON:', e);
-      console.error('Raw response:', text);
+      console.error('FETCH_UTILS: Failed to parse API response as JSON for URL:', url, 'Error:', e);
+      console.error('FETCH_UTILS: Raw response:', text);
       throw new Error('Invalid JSON response from API');
     }
   } catch (error) {
-    console.error(`Error fetching ${url}:`, error);
+    console.error(`FETCH_UTILS: Error fetching ${url}:`, error);
     throw error;
   }
 }
