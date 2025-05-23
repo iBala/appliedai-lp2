@@ -37,7 +37,7 @@ const LogoScroll = () => {
     <section className="w-full bg-white py-12">
       <div className="container mx-auto px-4 mb-8">
         <h2 className="text-center text-2xl md:text-3xl font-semibold text-gray-800 mb-10">
-          We are glad to have participation from
+          We are glad to have our community members from
         </h2>
       </div>
 

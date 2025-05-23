@@ -66,7 +66,7 @@ const RESOURCES_SECTIONS = [
     )
   },
   {
-    name: "Blogs & Webinars",
+    name: "Webinars",
     description: "Blog posts and webinars around AI projects",
     href: "/webinars",
     icon: (
@@ -253,6 +253,24 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                 >
                   Club
                 </Link>
+                <Link 
+                  href="/companies"
+                  className={clsx(
+                    "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
+                    theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
+                  )}
+                >
+                  Companies
+                </Link>
+                <Link 
+                  href="/webinars"
+                  className={clsx(
+                    "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
+                    theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
+                  )}
+                >
+                  Webinars
+                </Link>
                 <div 
                   className="relative"
                   onMouseEnter={() => setIsResourcesOpen(true)}
@@ -433,6 +451,28 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Club
+                    </Link>
+                  </div>
+                  
+                  {/* Companies link */}
+                  <div className="border-b border-gray-100 pb-2">
+                    <Link 
+                      href="/companies"
+                      className="flex w-full py-2 font-semibold text-gray-900"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Companies
+                    </Link>
+                  </div>
+                  
+                  {/* Webinars link */}
+                  <div className="border-b border-gray-100 pb-2">
+                    <Link 
+                      href="/webinars"
+                      className="flex w-full py-2 font-semibold text-gray-900"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Webinars
                     </Link>
                   </div>
                   
