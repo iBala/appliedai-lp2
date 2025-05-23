@@ -73,7 +73,7 @@ export default function ContactPage() {
               Get in Touch
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Have a question, feedback, or want to collaborate? We'd love to hear from you.
+              Have a question, feedback, or want to collaborate? We&apos;d love to hear from you.
             </p>
           </div>
 
@@ -88,7 +88,7 @@ export default function ContactPage() {
                       Email Us
                     </CardTitle>
                     <CardDescription>
-                      Send us an email and we'll get back to you within 24 hours.
+                      Send us an email and we&apos;ll get back to you within 24 hours.
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -104,7 +104,7 @@ export default function ContactPage() {
                 <CardHeader>
                   <CardTitle>Send us a Message</CardTitle>
                   <CardDescription>
-                    Fill out the form below and we'll respond as soon as possible.
+                    Fill out the form below and we&apos;ll respond as soon as possible.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -166,7 +166,7 @@ export default function ContactPage() {
                     {submitStatus === 'success' && (
                       <div className="p-4 bg-green-50 border border-green-200 rounded-md">
                         <p className="text-green-800 text-sm">
-                          ✅ Your message has been sent successfully! We'll get back to you soon.
+                          ✅ Your message has been sent successfully! We&apos;ll get back to you soon.
                         </p>
                       </div>
                     )}
