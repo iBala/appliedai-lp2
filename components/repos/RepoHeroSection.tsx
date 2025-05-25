@@ -1,11 +1,14 @@
 import React from 'react';
+import clsx from 'clsx';
 import Header from '@/components/Header';
+import AgentCirclesBackground from '@/components/agents/AgentCirclesBackground';
 
 interface RepoHeroSectionProps {
   tag: string;
   tagIcon: React.ReactNode;
   title: string;
   description: string;
+  theme?: 'light' | 'dark';
   children?: React.ReactNode;
 }
 
@@ -14,38 +17,53 @@ const RepoHeroSection: React.FC<RepoHeroSectionProps> = ({
   tagIcon,
   title,
   description,
+  theme = 'light',
   children
 }) => {
+  const textColorClass = theme === 'light' ? 'text-gray-900' : 'text-white';
+  const bgColorClass = theme === 'light' ? 'bg-white' : 'bg-[#0A40C2]';
+
   return (
-    <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
-      
-      <Header theme="light" />
-      
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
-        <div className="text-center">
-          {/* Tag */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-6">
-            {tagIcon}
-            {tag}
+    <div className="relative overflow-hidden">
+      <div className={clsx(
+        "relative flex w-full flex-col overflow-hidden",
+        textColorClass,
+        bgColorClass
+      )}>
+        {/* Header integrated into hero */}
+        <Header theme={theme} />
+        
+        <AgentCirclesBackground theme={theme} />
+
+        {/* Content Container */}
+        <div className="container relative z-10 mx-auto flex w-full flex-col px-8 py-12 md:py-10">
+          <div className="flex flex-col max-w-5xl mx-auto w-full">
+            <div className="mb-4 flex items-center">
+              <div className="flex items-center gap-2">
+                {tagIcon && (
+                  <div className="text-gray-500 mr-2">
+                    {tagIcon}
+                  </div>
+                )}
+                <span className="text-sm font-medium text-gray-500">
+                  {tag}
+                </span>
+              </div>
+            </div>
+
+            <h1 className="text-4xl font-bold text-black mb-4">
+              {title}
+            </h1>
+            
+            <p className="text-xl text-gray-600 mt-2 mb-6">
+              {description}
+            </p>
+            
+            {children}
           </div>
-          
-          {/* Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-            {title}
-          </h1>
-          
-          {/* Description */}
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            {description}
-          </p>
-          
-          {/* Children (optional content like debug components) */}
-          {children}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
