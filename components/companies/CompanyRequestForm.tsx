@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect, useRef } from 'react';
-import { X, Upload, AlertCircle, CheckCircle, ChevronDown } from 'lucide-react';
+import Image from 'next/image';
+import { X, Upload, AlertCircle, CheckCircle, ChevronDown} from 'lucide-react';
 
 interface Tag {
   id: number;
@@ -347,7 +348,7 @@ export default function CompanyRequestForm({ isOpen, onClose }: CompanyRequestFo
                 </label>
                 {logoPreview && (
                   <div className="flex items-center space-x-2">
-                    <img src={logoPreview} alt="Logo preview" className="w-10 h-10 object-contain rounded" />
+                    <Image src={logoPreview} alt="Logo preview" width={40} height={40} className="rounded" />
                     <span className="text-sm text-gray-600">{logoFile?.name}</span>
                   </div>
                 )}

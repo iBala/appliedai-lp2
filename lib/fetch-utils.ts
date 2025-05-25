@@ -82,6 +82,24 @@ export interface Company {
 }
 
 /**
+ * Type for open source repository data
+ */
+export interface OpenSourceRepo {
+  id: number;
+  name: string;
+  description: string;
+  github_url: string;
+  homepage_url?: string;
+  stars_count: number;
+  language?: string;
+  license?: string;
+  created_at: string;
+  updated_at: string;
+  like_count: number;
+  tags: string[];
+}
+
+/**
  * Type for job data
  */
 export interface Job {
@@ -201,4 +219,32 @@ export async function fetchJobFilterOptions(): Promise<JobFilters> {
     roleTypes,
     companies
   };
+}
+
+/**
+ * Fetch all open source repositories
+ */
+export async function fetchRepos(): Promise<OpenSourceRepo[]> {
+  const data = await fetchApi<{ repos: OpenSourceRepo[] }>('repos');
+  return data.repos || [];
+}
+
+/**
+ * Fetch a specific repository with its details
+ */
+export async function fetchRepoWithDetails(id: string | number): Promise<OpenSourceRepo> {
+  const data = await fetchApi<{ repo: OpenSourceRepo }>(`repos/${id}`);
+  return data.repo;
+}
+
+/**
+ * Fetch user's liked repositories (requires authentication)
+ */
+export async function fetchLikedRepos(accessToken: string): Promise<OpenSourceRepo[]> {
+  const data = await fetchApi<{ repos: OpenSourceRepo[] }>('repos/liked', {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return data.repos || [];
 } 
