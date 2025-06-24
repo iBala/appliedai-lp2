@@ -1,0 +1,86 @@
+---
+title: "Session 18: Deploying MCP — From Local to Production"
+description: "How to deploy MCP servers to production"
+date: "2025-06-22"
+author: "John Robert"
+order: 18
+tags: ["tutorial", "AI", "Agents", "LLM", "MCP"]
+---
+
+I had a fun weekend playing Ticket to Ride with friends. Hope you had a fun one too. 
+
+Now, this Saturday, we had our amazing John Robert take us through how we can deploy MCP servers in production. 
+
+If you've missed the session or if you'd like to go through it again, here's the session video - 
+
+Here's the notes from the meeting: 
+Meeting Purpose
+To demonstrate how to build and deploy MCP (Managed Copy Protocol) servers, moving from local development to production environments.
+
+Key Takeaways
+- MCP standardizes how AI models connect to external tools and data sources
+- Three main deployment options were covered: local MCP Inspector, Cloud Desktop, and remote deployment on Render
+- Authentication and error handling remain challenges when working with MCP servers
+
+Topics
+Introduction to MCP
+- MCP is not a new model, agent, or RAG system - it's a standardized way to connect AI models to external tools and data
+- Described as the "USB-C of AI" - providing a common interface for connecting various tools
+- MCP uses a client-server architecture with protocols/transports for communication
+
+Building an MCP Server
+- Demonstrated creating a basic MCP server using Python and the Fast MCP library
+- Created simple tool functions for addition and subtraction
+- Showed how to define the server name and run it locally
+
+Deploying to MCP Clients
+Covered three main deployment options:
+- MCP Inspector (local development tool)
+
+Cloud Desktop
+- Remote deployment on Render.com
+
+MCP Inspector:
+- Used for local testing and development
+- Runs server using standard I/O transport
+
+Cloud Desktop:
+- Requires creating a JSON configuration file
+- Server needs to be added to Cloud Desktop settings
+
+Render.com deployment:
+- Allows hosting MCP server as a web service
+- Provides an endpoint for remote access
+
+MCP Standards and Benefits
+- MCP provides a common interface for tool integration across different platforms
+- Standardizes data formats and communication protocols
+- Makes it easier to share and reuse tools across projects and teams
+
+Authentication and Security
+- Discussed methods for passing credentials between clients and servers
+- Noted challenges with securely handling authentication in different deployment scenarios
+
+Current Limitations and Challenges
+- Command injection risks
+- Privilege and access control issues
+- Latency with SSE (Server-Sent Events) transport
+- Passing context between client and server
+
+Attendees encouraged to experiment with building their own MCP servers
+
+Further exploration of authentication methods and best practices recommended
+
+Here's the entire recording of the session.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/SFpjXS92rFU" 
+    title="Applied AI Session 18: Deploying MCP — From Local to Production" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
