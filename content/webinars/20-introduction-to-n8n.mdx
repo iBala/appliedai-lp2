@@ -1,0 +1,83 @@
+---
+title: "Session 20: Introduction to n8n"
+description: "In this introduction course, we're building an automated linkedin post generator using n8n"
+date: "2025-07-05"
+author: "Karthikeyan Natarajan"
+order: 19
+tags: ["User Research"]
+---
+
+n8n is on eof the best tools out there to build agents. We're very happy to bring a session on introduction to n8n.
+
+Today we have [Karthikeyan Natarajan](https://www.linkedin.com/in/karthiknitt/) taking us through this. He is a program management leader and a long time member of Applied AI Club.
+
+If you've missed the session or if you'd like to go through it again, here's the session video - https://youtu.be/j5WG2hXHKds?si=mt43adT_vaizo1WO
+
+Here's the notes from the meeting: 
+
+Below is a summary of Applied AI Club's session on Introduction to n8n with guest speaker Karthikeyan. 
+
+Meeting Purpose
+Demonstrate how to use N8N, an open-source workflow automation platform with AI capabilities, to create a LinkedIn post generator.
+
+Key Takeaways
+- N8N is a low-code automation tool that allows easy integration of AI models and various APIs
+- The demo showcased building a workflow to generate LinkedIn posts with AI-created images
+- N8N offers both cloud-hosted and self-hosted options, with pricing based on workflow executions rather than individual node runs
+- For complex workflows, N8N can be more cost-effective than alternatives like Zapier or Make
+
+Topics
+Introduction to N8N
+- Open-source workflow automation platform with native AI capabilities
+- Low-code tool written in TypeScript, running on Node.js
+- Over 150 integrations available
+- Offers 14-day free trial for cloud-hosted version
+- Open-source version available under fair-code license with some usage restrictions
+
+N8N Basics
+- Workflows built using "nodes" as basic building blocks
+- Triggers initiate workflows (e.g., chat, form, webhook)
+- Nodes perform actions and can be connected to create complex workflows
+- User interface allows easy visualization of inputs/outputs between nodes
+
+Demo: LinkedIn Post Generator Workflow
+1.  Form Trigger: Collects topic input
+2.  AI Agent (Post Writer): Generates post content using OpenAI GPT model
+3.  AI Agent (Prompt Writer): Creates image prompt based on post content
+4.  OpenAI Image Generation: Uses DALL-E 3 to create image from prompt
+5.  HTTP Request: Uploads generated image to ImageBB for storage
+6.  Human-in-the-Loop: Sends email for approval using Gmail integration
+7.  Switch Node: Handles approval/rejection logic
+8.  LinkedIn Integration: Posts approved content to LinkedIn
+
+N8N Features and Capabilities
+- Integration with various APIs and services (e.g., OpenAI, LinkedIn, Gmail)
+- Built-in AI agents with customizable prompts and models
+- HTTP request handling for external API calls
+- Conditional logic using switch nodes
+- Human-in-the-loop processes for approval workflows
+
+Hosting and Pricing Considerations
+- Cloud-hosted version: Easier setup, includes AI features, pricing based on workflow executions
+- Self-hosted version: More control, potential cost savings, requires technical setup
+- N8N can be more cost-effective for complex workflows compared to Zapier or Make
+
+Next Steps
+- Explore N8N's documentation for more advanced features and integrations
+- Consider use cases within your organization for workflow automation
+- Evaluate cloud-hosted vs. self-hosted options based on security and cost requirements
+- Sign up for Applied AI Club (www.applieday.club) for future sessions and discussions
+
+Here's the entire recording of the session.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/j5WG2hXHKds" 
+    title="Applied AI Session 20: Introduction to n8n" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
