@@ -1,0 +1,79 @@
+---
+title: "Session 20: Practical implementation of AI agents"
+description: "This is a refresher session on AI agents along with a sample demo in n8n"
+date: "2025-07-12"
+author: "Bala Panneerselvam"
+order: 21
+tags: ["User Research"]
+---
+
+It's been some time since we did a basics of AI agents. This is a refresher session on the same.
+
+The session is conducted by [Bala Panneerselvam](https://www.linkedin.com/in/balakumaranpanneerselvam/). Bala is a founding member of Applied AI club, founder of ZORP with 17+ years in technology and product.
+
+If you've missed the session or if you'd like to go through it again, here's the session video - https://youtu.be/UPY77vYjlv0
+
+Here's the notes from the meeting: 
+
+Meeting Purpose
+Introduce AI agents and demonstrate how to build a basic research assistant using N8N
+
+Key Takeaways
+- AI agents differ from AI assistants by their ability to take actions using tools, not just provide information
+- Agents typically consist of an LLM, memory systems, and tools/integrations
+- Building agents is simpler than traditional development, with platforms like N8N enabling no-code/low-code creation
+- A basic research agent was demonstrated using N8N, integrating Google search, document creation, and email notifications
+
+Topics
+AI Agents vs AI Assistants
+- AI assistants (e.g. ChatGPT) provide information based on internal knowledge and memory
+- AI agents can take actions using tools and integrations, not just provide information
+- Agents typically consist of an LLM, memory systems, and tools/integrations
+- Examples: meeting schedulers, research assistants, coding assistants
+
+Use Cases for AI Agents
+- Open-ended problems requiring multiple steps and back-and-forth (e.g. scheduling)
+- Multi-step processes (e.g. researching and summarizing many articles)
+- Self-improving systems that can learn from feedback
+
+Building AI Agents
+- Simpler than traditional development
+- Key steps: Define clear objective, choose platform, start with small use cases
+
+Platforms: Langchain, N8N, Relay.app, Agent.ai (HubSpot)
+- Can be built with no-code/low-code tools or programming frameworks
+- Research Assistant Agent Demo
+- Built using N8N platform
+
+Components:
+- Outline agent to structure research topics
+- Research agent to gather information on each topic
+- Google Docs integration to compile results
+- Email notification of completed research
+- Demonstrated basic workflow, though some refinements needed (e.g. looping through topics)
+
+N8N Platform Overview
+- Visual workflow builder for creating automations and agents
+- Connects various tools and services (e.g. LLMs, search, document creation, email)
+- Good for personal/small-scale use, may have limitations for large production deployments
+- Workflows exportable as JSON for portability
+
+Next Steps
+- Refine the research assistant demo (implement looping through topics)
+- Explore human-in-the-loop options for agent workflows
+- Watch previous session on N8N for more advanced usage examples
+- Consider appropriate tools based on scale (N8N for personal/small, custom code for production)
+
+Here's the entire recording of the session.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/UPY77vYjlv0" 
+    title="Applied AI Session 21: Practical implementation of AI agents" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
