@@ -1,0 +1,93 @@
+---
+title: "Session 22: GenAI and Analytics"
+description: "How to use GenAI for analytics"
+date: "2025-07-26"
+author: "Bala Panneerselvam"
+order: 22
+tags: ["Python", "Data Analytics"]
+---
+
+This week, we took a break from tools and talk about how to use GenAI for analytics. 
+
+The session is conducted by [Bala Panneerselvam](https://www.linkedin.com/in/balakumaranpanneerselvam/). Bala is a founding member of Applied AI club, founder of ZORP with 17+ years in technology and product.
+
+If you've missed the session or if you'd like to go through it again, here's the session video - [https://youtu.be/B0hSoPrFuDU](https://youtu.be/B0hSoPrFuDU)
+
+Here's the notes from the meeting: 
+
+Meeting Purpose
+Explore how to use generative AI for data analytics, covering different levels of implementation and key principles.
+
+Key Takeaways
+  - Five levels of Gen AI for analytics: 1) Basic data upload, 2) AI-assisted tools, 3) Analytics assistants, 4) Analytics copilots, 5) Autonomous agents
+  - Data governance and privacy are critical concerns when using Gen AI with enterprise data
+  - Implementing Gen AI for analytics requires careful consideration of data preparation, metadata, and context provision to LLMs
+  - Future developments in autonomous agents and fine-tuned models will further enhance analytics capabilities
+
+Topics
+Overview of Analytics Workflow
+  - Typical workflow: Data preparation (production DBs, data warehouses, data lakes) → Analytics process (BI tools, ad hoc analysis) → Publishing reports/dashboards
+  - Data governance becoming increasingly important as organizations grow and data complexity increases
+
+Level 0: Traditional Analytics Tools
+  - Current tools: Tableau, Looker, Metabase, Superset, Jupyter notebooks, SQL queries in BI tools
+  - Excel still widely used for data analysis, transformation, and visualization
+
+Level 1: Basic Gen AI Integration
+  - Uploading CSV files directly to ChatGPT or similar tools for analysis
+  - Major concern: Data privacy and governance issues when sharing sensitive data with third-party AI services
+
+Level 2: AI-Assisted Analytics Tools
+  - Using existing analytics tools with AI assistance (e.g., Google Colab, Jupyter notebooks with AI extensions)
+  - Allows non-technical users to perform analysis using natural language prompts
+  - Example demonstrated: Using Colab to analyze sales data with AI-generated code
+
+Level 3: Analytics Assistants
+  - Purpose-built AI assistants for data exploration and analysis
+  - Example tools: Julius.ai, custom-built chatbots connected to databases
+  - Provides more control over data access and processing compared to Level 1
+
+Level 4: Analytics Copilots
+  - Integration of analytics capabilities into existing communication tools (e.g., Slack, WhatsApp)
+  - Allows asynchronous, passive querying and analysis of data
+  - Useful for busy executives and managers who need quick insights
+
+Level 5: Autonomous Agents
+  - AI agents that proactively analyze data, identify patterns, and generate insights
+  - Utilizes historical context, user preferences, and relevance assessment to provide valuable information without explicit queries
+
+Data Preparation and Governance
+  - Importance of proper data structuring, labeling, and metadata creation
+  - Need for systems to identify relevant tables, columns, and data samples for each query
+  - Potential use of knowledge graphs or other frameworks to help AI understand data relationships
+
+Challenges and Considerations
+  - Handling multiple interconnected datasets and complex data relationships
+  - Ensuring accuracy and preventing hallucinations when dealing with large datasets
+  - Balancing between providing enough context and minimizing token usage/processing time
+
+Future Developments
+  - Fine-tuned models specifically for analytics tasks (e.g., Claude's finance-focused model)
+  - Improved integration of AI with existing BI and visualization tools
+  - Enhanced autonomous agents with better understanding of business context and user needs
+
+Next Steps
+  - Explore fine-tuned models for specific analytics use cases
+  - Implement robust data governance practices when using Gen AI for analytics
+  - Consider developing custom solutions for metadata management and context provision to LLMs
+  - Investigate ways to leverage query logs and user feedback to improve AI-powered analytics over time
+  - For those interested, review the code for the custom analytics assistant (to be shared via email)
+
+Here's the entire recording of the session.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/B0hSoPrFuDU" 
+    title="Applied AI Session 22: GenAI for Analytics" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
