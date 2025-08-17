@@ -1,0 +1,85 @@
+---
+title: "Session 26: Prompt Engineering Masterclass"
+description: "An in depth session on how to think about prompts"
+date: "2025-08-16"
+author: "Aditya Ramakrishnan"
+order: 23
+tags: ["LLMs", "Prompts"]
+---
+
+Hey folks! We're at session number 26. Half a year of running sessions in Applied AI club. This session convers the basics of how to think, understand and execute prompts.
+
+The session is conducted by [Aditya Ramakrishnan](https://www.linkedin.com/in/adityaramakrishnan/). Aditya is a Product Marketing Leader, currently heading PMM at Reo.dev.
+
+If you've missed the session or if you'd like to go through it again, here's the session video - [https://youtu.be/QEwmjl_4lDw](https://youtu.be/QEwmjl_4lDw)
+
+Here are the resources discussed and shared during the session. 
+
+Presentation Deck: [Link](https://www.canva.com/design/DAGv7DSihOE/0x8QHf4AGG_YfLlP-FTniQ/edit?utm_content=DAGv7DSihOE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+Prompt Engineering Resources: [Notion Link](https://www.notion.so/adityarr/Prompt-Engineering-Notes-23e7e9cd30a080f3b746c2876d20c777?source=copy_link)
+
+Here's the notes from the meeting: 
+
+Meeting Purpose
+Aditya Ramakrishnan delivers an in-depth session on advanced prompt engineering techniques and LLM behavior for the Uplight AI Club's 25th or 26th meeting.
+
+Key Takeaways
+  - Prompt engineering is closer to programming than natural language; LLMs are statistical language prediction engines, not human-like AI
+  - LLMs have compute budgets and process instructions sequentially; understanding this helps create more effective prompts
+  - Breaking complex tasks into subtasks and providing clear, structured instructions significantly improves LLM output quality
+  - Using techniques like cheat sheets, save points, and JSON specifications can make prompts more deterministic and reduce hallucinations
+
+Topics
+Uplight AI Club Introduction
+  - Club run by Bala and Praveen for ~6 months, with ~1,500 members
+  - Weekly expert sessions on Saturdays at 10 AM, available on YouTube
+  - Recently started study groups for more involved learning
+
+Prompt Engineering Basics
+  - Use examples, design for simplicity and unambiguity
+  - RICE FACT framework: Role, Instruction, Context, Example, Format, Aim, Constraints, Tone
+  - Output length and JSON format are helpful for structured outputs
+  - Various prompting techniques exist (e.g., one-shot, multi-shot, chain of thought)
+
+LLM Behavior and Processing
+  - LLMs are probabilistic, not deterministic; goal is to maximize probability of desired output
+  - They process tasks by breaking them into subtasks, similar to human brains but more rigidly
+  - Compute budget affects instruction processing and task execution
+  - Context window size doesn't equal processing capacity
+
+Task Difficulty for LLMs
+  - Basic recall and local reasoning are easy
+  - Systems thinking, creativity, and multi-step tasks are more difficult
+  - Understanding task difficulty helps in breaking down complex prompts
+
+Practical Prompt Engineering
+  - Break complex tasks into smaller, manageable subtasks
+  - Create cheat sheets and scoring mechanisms for reusable components
+  - Use tree of thought for exploring multiple solution paths
+  - Implement save points to manage context and reduce compute load
+
+Image Generation Example
+  - Demonstrated a custom GPT (GraphicsMaker) that generates on-brand images
+  - Uses JSON specifications to make image generation more deterministic
+  - Removes guesswork from style, color, font, etc., based on pre-defined rules
+
+Next Steps
+  - Share the presentation deck and Notion document with attendees
+  - Attendees to practice breaking down complex tasks into subtasks for LLMs
+  - Focus on understanding how LLMs process instructions and break tasks into subtasks
+  - Experiment with creating cheat sheets and JSON specifications for deterministic outputs
+  - Continue learning and improving prompt engineering skills through practice and analysis
+
+Here's the entire recording of the session.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/QEwmjl_4lDw" 
+    title="Applied AI Session 26: Prompt Engineering Masterclass" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
