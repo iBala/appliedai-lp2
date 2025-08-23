@@ -4,12 +4,12 @@ import Link from "next/link";
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 // import { usePathname } from 'next/navigation';
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import * as AgentIcons from './agents/AgentIcons';
 
 const AGENTS = [
@@ -139,52 +139,6 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
               
               {/* Navigation items - desktop */}
               <div className="hidden md:flex items-center space-x-6 flex-1 min-w-0">
-                {/* We're working on dropdown - commented out
-                <div 
-                  className="relative"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-                    <DropdownMenuTrigger asChild>
-                      <button 
-                        className={clsx(
-                          "group inline-flex w-max items-center text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6",
-                          theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
-                        )}
-                      >
-                        We&apos;re working on
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent 
-                      align="start"
-                      className="w-[600px] p-4"
-                      forceMount
-                    >
-                      <div className="grid grid-cols-2 gap-4">
-                        {AGENTS.map((agent) => (
-                          <DropdownMenuItem key={agent.name} asChild>
-                            <Link 
-                              href={agent.href}
-                              className="flex items-start gap-3 rounded-lg p-3 hover:bg-gray-100 transition-colors"
-                            >
-                              <span className="text-[#0A40C2]">{agent.icon}</span>
-                              <div className="flex flex-col">
-                                <span className="text-sm font-semibold text-gray-900">
-                                  {agent.name}
-                                </span>
-                                <span className="text-sm text-gray-500">
-                                  {agent.description}
-                                </span>
-                              </div>
-                            </Link>
-                          </DropdownMenuItem>
-                        ))}
-                      </div>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-                */}
                 <Link 
                   href="/club"
                   className={clsx(
@@ -194,32 +148,69 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                 >
                   Club
                 </Link>
+                {/* Our Programs dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      className={clsx(
+                        "group inline-flex items-center gap-1 text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6",
+                        theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
+                      )}
+                    >
+                      Our Programs
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-56 p-1" forceMount>
+                    <DropdownMenuItem asChild>
+                      <Link href="/webinars" className="w-full rounded-md px-2 py-2 hover:bg-gray-100 text-gray-900">
+                        Webinars
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/study-groups" className="w-full rounded-md px-2 py-2 hover:bg-gray-100 text-gray-900">
+                        Study Groups
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* AI Tools and Companies dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      className={clsx(
+                        "group inline-flex items-center gap-1 text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6",
+                        theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
+                      )}
+                    >
+                      AI Tools and Companies
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-64 p-1" forceMount>
+                    <DropdownMenuItem asChild>
+                      <Link href="/companies" className="w-full rounded-md px-2 py-2 hover:bg-gray-100 text-gray-900">
+                        Companies
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/repos" className="w-full rounded-md px-2 py-2 hover:bg-gray-100 text-gray-900">
+                        Open Source Projects
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* For Corporates link */}
                 <Link 
-                  href="/companies"
+                  href="/for-corporates"
                   className={clsx(
                     "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
                     theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
                   )}
                 >
-                  Companies
-                </Link>
-                <Link 
-                  href="/repos"
-                  className={clsx(
-                    "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
-                    theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
-                  )}
-                >
-                  Open Source Projects
-                </Link>
-                <Link 
-                  href="/webinars"
-                  className={clsx(
-                    "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
-                    theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
-                  )}
-                >
-                  Webinars
+                  For Corporates
                 </Link>
                 {/* AIShots Link - Desktop - commented out
                 <Link 
@@ -360,36 +351,52 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                     </Link>
                   </div>
                   
-                  {/* Companies link */}
+                  {/* Our Programs (mobile) */}
                   <div className="border-b border-gray-100 pb-2">
-                    <Link 
-                      href="/companies"
-                      className="flex w-full py-2 font-semibold text-gray-900"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                    <button 
+                      className="flex items-center justify-between w-full py-2 font-semibold text-gray-900"
+                      onClick={() => toggleMobileSubmenu('programs')}
                     >
-                      Companies
-                    </Link>
+                      <span>Our Programs</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform ${mobileSubmenu === 'programs' ? 'rotate-180' : ''}`}> 
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                    {mobileSubmenu === 'programs' && (
+                      <div className="pl-4 mt-2 space-y-2">
+                        <Link href="/webinars" className="flex w-full py-2 text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Webinars</Link>
+                        <Link href="/study-groups" className="flex w-full py-2 text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Study Groups</Link>
+                      </div>
+                    )}
                   </div>
-                  
-                  {/* Open Source link */}
+
+                  {/* AI Tools and Companies (mobile) */}
                   <div className="border-b border-gray-100 pb-2">
-                    <Link 
-                      href="/repos"
-                      className="flex w-full py-2 font-semibold text-gray-900"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                    <button 
+                      className="flex items-center justify-between w-full py-2 font-semibold text-gray-900"
+                      onClick={() => toggleMobileSubmenu('tools')}
                     >
-                      Open Source Projects
-                    </Link>
+                      <span>AI Tools and Companies</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform ${mobileSubmenu === 'tools' ? 'rotate-180' : ''}`}> 
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                    {mobileSubmenu === 'tools' && (
+                      <div className="pl-4 mt-2 space-y-2">
+                        <Link href="/companies" className="flex w-full py-2 text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Companies</Link>
+                        <Link href="/repos" className="flex w-full py-2 text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Open Source Projects</Link>
+                      </div>
+                    )}
                   </div>
-                  
-                  {/* Webinars link */}
+
+                  {/* For Corporates link (mobile) */}
                   <div className="border-b border-gray-100 pb-2">
                     <Link 
-                      href="/webinars"
+                      href="/for-corporates"
                       className="flex w-full py-2 font-semibold text-gray-900"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      Webinars
+                      For Corporates
                     </Link>
                   </div>
                   
