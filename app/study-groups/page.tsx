@@ -16,7 +16,7 @@ export default function StudyGroupsPage() {
         tag="Study Groups"
         tagIcon={<Users />}
         title="Applied AI Study Groups"
-        description="Work as a group and learn AI skills fast"
+        description="Study groups are a way to work with others to build AI skills fast"
       />
 
       <section className="bg-white">
@@ -24,7 +24,7 @@ export default function StudyGroupsPage() {
           <div>
             <h2 className="text-2xl font-semibold mb-4 text-black">How it works</h2>
             <p className="text-black/70 mb-4">
-              Study groups run for three weeks with a small cohort focused on building real automations.
+              We've realized that it's easier to learn new skills when you have partners. Study groups provide a way for you to learn a new AI skill in a short timeframe as a group.
             </p>
             <ul className="list-disc pl-6 text-black/70 space-y-2">
               <li>Pick a specific use case to build.</li>
@@ -35,7 +35,7 @@ export default function StudyGroupsPage() {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mb-4 text-black">The monetary component</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-black">There's a fun catch!</h2>
             <p className="text-black/70 mb-4">
               To keep everyone accountable, there is a ₹499 deposit. Complete the program and you get it back in full.
             </p>
