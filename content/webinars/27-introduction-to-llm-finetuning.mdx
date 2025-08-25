@@ -1,0 +1,90 @@
+---
+title: "Session 27: Introduction to LLM Finetuning"
+description: "When, why and how to finetune LLMs"
+date: "2025-08-23"
+author: "Sandhya Nallakkiniyan"
+order: 27
+tags: ["LLMs", "Finetuning"]
+---
+
+Welcome to session 27! This week, we go through how LLMs can be finetuned. 
+
+The session is conducted by [Sandhya Nallakkiniyan](https://www.linkedin.com/in/sandhya-nallarkkiniyan/). Sandhya is a Product Manager for AI/ML platform from PayPal.
+
+If you've missed the session or if you'd like to go through it again, here's the session video - [https://youtu.be/smjGkbtd2K4](https://youtu.be/smjGkbtd2K4)
+
+Here are the resources discussed and shared during the session. 
+
+Resources discussion in the video: 
+Deck: [Link](https://gamma.app/docs/Fine-tuning-101-5evszx4wtckk419)
+OpenAI Platform: [Link](https://platform.openai.com/docs/guides/model-optimization)
+Gemini Finetuning: [Link](https://www.cloudskillsboost.google/course_templates/1368/documents/557031)
+Open source finetuning service: [Link](https://github.com/hiyouga/LLaMA-Factory)
+
+Here's the notes from the meeting: 
+
+Meeting Purpose
+To provide an overview of fine-tuning large language models (LLMs), including techniques, applications, and considerations.
+
+Key Takeaways
+- Fine-tuning allows customizing pre-trained LLMs for specific tasks, improving performance while reducing costs compared to full model training
+- Key approaches include supervised fine-tuning, reinforcement learning, and instruction tuning, each with different tradeoffs in terms of data requirements, compute costs, and skill needed
+- Fine-tuning should be considered after exploring prompt engineering and retrieval-augmented generation (RAG), as it requires more resources but can achieve higher accuracy for specialized tasks
+- Both closed-source (e.g. Azure, Google) and open-source frameworks are available, with tradeoffs in flexibility, cost, and control
+
+Topics
+Introduction to Fine-Tuning
+- Fine-tuning customizes pre-trained LLMs for specific tasks when context window or performance is insufficient
+- Allows achieving high performance on specialized tasks at lower cost than full model training
+- Complementary to techniques like distillation for creating smaller, task-specific models
+
+Applications of Fine-Tuning
+- Creating digital twins/assistants that mimic specific individuals or roles
+- Improving chatbots and customer service agents with company-specific knowledge
+- Enhancing fraud detection by continuously adapting to new patterns
+- Customizing model outputs for brand voice, tone, or domain-specific language
+
+When to Fine-Tune
+- Start with prompt engineering and RAG before considering fine-tuning
+- Fine-tune when accuracy goals can't be met with simpler techniques
+- Consider compute costs and data availability when deciding to fine-tune
+- Hybrid approaches combining RAG and fine-tuning are common for production systems
+
+Fine-Tuning Platforms and Frameworks
+- Closed-source options: Azure OpenAI, Google Vertex AI
+    - Easier to use, less flexibility, pay per token
+- Open-source frameworks: Hugging Face, TRL, Axolotl
+    - More control and flexibility, requires managing own compute
+- Free options for experimentation: Google Colab, Kaggle (limited GPU access)
+
+Fine-Tuning Techniques
+- Supervised fine-tuning: Most straightforward, uses labeled datasets
+- Instruction tuning: Similar to prompt engineering, teaches specific behaviors
+- Reinforcement learning: Trains model through rewards in simulated environments
+- Parameter-efficient techniques (LoRA, QLoRA): Freeze some layers to reduce compute and prevent catastrophic forgetting
+
+Practical Considerations
+- Data quality is crucial - 50 high-quality examples can outperform 1000 low-quality ones
+- Continuous fine-tuning may be needed as data/requirements evolve
+- Evaluation and benchmarking are critical, especially for safety-critical applications
+- Cost varies widely based on approach, data volume, and compute requirements
+
+Next Steps
+- Explore free fine-tuning options on platforms like Google Colab for initial experimentation
+- Consider hybrid approaches combining RAG and fine-tuning for production systems
+- Evaluate compute costs and accuracy improvements to justify fine-tuning investments
+- Stay updated on emerging techniques like on-device fine-tuning and efficient approaches
+
+Here's the entire recording of the session.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/smjGkbtd2K4" 
+    title="Applied AI Session 26: Prompt Engineering Masterclass" 
+    frameBorder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  ></iframe>
+</div>
