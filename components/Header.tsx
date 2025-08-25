@@ -202,6 +202,33 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                   </DropdownMenuContent>
                 </DropdownMenu>
 
+                {/* Apps dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      className={clsx(
+                        "group inline-flex items-center gap-1 text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6",
+                        theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
+                      )}
+                    >
+                      Apps
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-64 p-1" forceMount>
+                    <DropdownMenuItem asChild>
+                      <a 
+                        href="https://documatcher.com?ref=appliedai.club" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-full rounded-md px-2 py-2 hover:bg-gray-100 text-gray-900"
+                      >
+                        Extract documents with LLM
+                      </a>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
                 {/* For Corporates link */}
                 <Link 
                   href="/for-corporates"
@@ -385,6 +412,32 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                       <div className="pl-4 mt-2 space-y-2">
                         <Link href="/companies" className="flex w-full py-2 text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Companies</Link>
                         <Link href="/repos" className="flex w-full py-2 text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Open Source Projects</Link>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Apps (mobile) */}
+                  <div className="border-b border-gray-100 pb-2">
+                    <button 
+                      className="flex items-center justify-between w-full py-2 font-semibold text-gray-900"
+                      onClick={() => toggleMobileSubmenu('apps')}
+                    >
+                      <span>Apps</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform ${mobileSubmenu === 'apps' ? 'rotate-180' : ''}`}> 
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                    {mobileSubmenu === 'apps' && (
+                      <div className="pl-4 mt-2 space-y-2">
+                        <a 
+                          href="https://documatcher.com?ref=appliedai.club"
+                          target="_blank"
+                          rel="noopener noreferrer" 
+                          className="flex w-full py-2 text-gray-900" 
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          Extract documents with LLM
+                        </a>
                       </div>
                     )}
                   </div>

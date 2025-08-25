@@ -36,6 +36,14 @@ const Footer = () => {
 
               {/* Navigation Links */}
               <div className="flex items-center space-x-8">
+                <a 
+                  href="https://documatcher.com?ref=appliedai.club" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-semibold text-white/60 transition-colors hover:text-white"
+                >
+                  Extract documents with LLM
+                </a>
                 <Link 
                   href="/contact" 
                   className="text-sm font-semibold text-white/60 transition-colors hover:text-white"
