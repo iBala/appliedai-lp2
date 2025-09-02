@@ -46,7 +46,7 @@ const HeroSection = ({ embedCode }: HeroSectionProps) => {
                     quality={95}
                   />
                   <p className="max-w-[calc(100vw-50px)] truncate text-white">
-                    Want to learn to build agents? Join our community!
+                    Want to learn to build agents? Join our 1000+ members community!
                   </p>
                   <p className="mx-2 hidden text-white/25 md:flex">·</p>
                   <p className="hidden items-center text-white/60 md:flex">
@@ -66,7 +66,7 @@ const HeroSection = ({ embedCode }: HeroSectionProps) => {
                   An invite-only club for operators to adapt to the AI world
                 </h1>
                 <h2 className="mb-8 md:mb-10 text-lg text-white/80 md:text-xl lg:text-xl lg:leading-[1.55]">
-                  We understand that while AI offers immense potential, many operators face challenges in getting started and implementing these technologies effectively. Our club is a place where you can learn, share, and grow together.
+                  Everyone wants to learn and use AI. But we don&apos;t have the time or resources to do it on our own. Our club is a place where you can learn, share, and grow together.
                 </h2>
                 <div className="flex items-center">
                   <Link

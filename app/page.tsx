@@ -3,6 +3,7 @@ import HowItWorks from "@/components/HowItWorks";
 import Footer from "@/components/Footer";
 import LogoScroll from "@/components/LogoScroll";
 import { getEventEmbed } from "@/lib/event";
+import PastSessions from "@/components/webinars/PastSessions";
 
 export default async function Home() {
   // Fetch the event embed code
@@ -21,6 +22,11 @@ export default async function Home() {
       
       <div className="relative bg-white">
         <HowItWorks />
+      </div>
+
+      {/* Past Sessions - webinars list */}
+      <div className="relative">
+        <PastSessions />
       </div>
       <Footer />
     </main>
