@@ -1,26 +1,26 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Users } from 'lucide-react';
-import Footer from '@/components/Footer';
+import { Rocket } from 'lucide-react';
 import ResourceHeroSection from '@/components/resources/ResourceHeroSection';
-import { getStudyGroupPrograms } from '@/lib/learn/programs';
+import Footer from '@/components/Footer';
+import { getBootcampPrograms } from '@/lib/learn/programs';
 import { formatDate } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Study Groups | Applied AI Club',
-  description: 'Learn by doing with Applied AI Club study groups.',
+  title: 'Bootcamps | Applied AI Club',
+  description: 'Immersive bootcamps to build with AI alongside experts.',
 };
 
-const programs = getStudyGroupPrograms();
+const programs = getBootcampPrograms();
 
-export default function StudyGroupsPage() {
+export default function BootcampsPage() {
   return (
     <main className="min-h-screen">
       <ResourceHeroSection
         tag="Learn AI"
-        tagIcon={<Users />}
-        title="Self learning via Study Groups"
-        description="Join a focused cohort, learn with peers, and ship a live demo with support from the Applied AI Club community."
+        tagIcon={<Rocket />}
+        title="Bootcamps to build with AI"
+        description="Learn from experts in immersive cohorts where you design, build, and ship production-grade AI workflows."
       />
 
       <section className="bg-white">
@@ -33,8 +33,8 @@ export default function StudyGroupsPage() {
               >
                 <div className="flex flex-col gap-6 p-8">
                   <div className="flex flex-col gap-3">
-                    <span className="inline-flex w-fit items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-800">
-                      Study Group
+                    <span className="inline-flex w-fit items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-purple-800">
+                      Bootcamp
                     </span>
                     <h2 className="text-2xl font-semibold text-black">{program.name}</h2>
                     <p className="text-base text-gray-600">{program.tagline}</p>
@@ -44,13 +44,13 @@ export default function StudyGroupsPage() {
                     <ul className="space-y-2 text-sm text-gray-700">
                       {program.bulletPoints.slice(0, 3).map((point) => (
                         <li key={point} className="flex items-start gap-2">
-                          <span className="mt-1 h-2 w-2 rounded-full bg-blue-600" />
+                          <span className="mt-1 h-2 w-2 rounded-full bg-purple-600" />
                           <span>{point}</span>
                         </li>
                       ))}
                     </ul>
                     <div className="rounded-xl bg-gray-50 p-4">
-                      <p className="text-sm font-semibold text-black">Next cohort</p>
+                      <p className="text-sm font-semibold text-black">Upcoming cohort</p>
                       <p className="mt-2 text-sm text-gray-700">
                         {program.cohort.label} · {formatDate(program.cohort.startDate)} →{' '}
                         {formatDate(program.cohort.demoDate)}
@@ -61,7 +61,7 @@ export default function StudyGroupsPage() {
 
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <Link
-                      href={`/study-groups/${program.slug}`}
+                      href={`/bootcamps/${program.slug}`}
                       className="inline-flex items-center rounded-full bg-black px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-black/80"
                     >
                       Explore the {program.name}
@@ -76,20 +76,20 @@ export default function StudyGroupsPage() {
           </div>
 
           <div className="mt-16 rounded-2xl border border-gray-200 bg-white p-8">
-            <h3 className="text-xl font-semibold text-black">How the study groups run</h3>
+            <h3 className="text-xl font-semibold text-black">Bootcamp format</h3>
             <div className="mt-6 grid gap-6 md:grid-cols-2">
               <div>
-                <h4 className="text-sm font-semibold uppercase tracking-wide text-blue-600">01 · Learn together</h4>
+                <h4 className="text-sm font-semibold uppercase tracking-wide text-purple-600">Instructor-led</h4>
                 <p className="mt-2 text-sm text-gray-600">
-                  Kick off with a shared goal, keep momentum with weekly syncs, and lean on your peers in the WhatsApp
-                  space to unblock quickly.
+                  Deep dives from practitioners who have shipped production workflows. Every session includes live
+                  walkthroughs and code reviews.
                 </p>
               </div>
               <div>
-                <h4 className="text-sm font-semibold uppercase tracking-wide text-blue-600">02 · Build &amp; share</h4>
+                <h4 className="text-sm font-semibold uppercase tracking-wide text-purple-600">Project-focused</h4>
                 <p className="mt-2 text-sm text-gray-600">
-                  Ship your project in public, collect feedback early, and present live during demo day to celebrate the
-                  wins.
+                  You will complete a capstone project, present it live, and receive detailed feedback on the architecture
+                  and execution.
                 </p>
               </div>
             </div>

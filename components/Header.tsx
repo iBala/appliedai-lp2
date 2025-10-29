@@ -45,6 +45,37 @@ const AGENTS = [
   }
 ];
 
+const STUDY_GROUP_LINKS = [
+  {
+    name: 'n8n Study Group',
+    description: 'Automate real workflows in 4 weeks.',
+    href: '/study-groups/n8n',
+  },
+  {
+    name: 'Vibe Coding Study Group',
+    description: 'Ship a vibe bot and present it live.',
+    href: '/study-groups/vibe-coding',
+  },
+];
+
+const BOOTCAMP_LINKS = [
+  {
+    name: 'n8n Bootcamp',
+    description: 'Weekend intensive on production-grade automations.',
+    href: '/bootcamps/n8n',
+  },
+  {
+    name: 'Vibe Coding Bootcamp',
+    description: 'Design and launch vibe companions with expert guidance.',
+    href: '/bootcamps/vibe-coding',
+  },
+  {
+    name: 'LangGraph Bootcamp',
+    description: 'Master multi-agent orchestration with LangGraph.',
+    href: '/bootcamps/langgraph',
+  },
+];
+
 interface HeaderProps {
   theme?: 'light' | 'dark';
   isScrolled?: boolean;
@@ -138,118 +169,94 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
               </Link>
               
               {/* Navigation items - desktop */}
-              <div className="hidden md:flex items-center space-x-6 flex-1 min-w-0">
-                <Link 
+              <div className="hidden flex-1 min-w-0 items-center space-x-6 md:flex">
+                <Link
                   href="/club"
                   className={clsx(
-                    "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
+                    "group inline-flex w-max px-3 text-md font-semibold leading-6 transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50",
                     theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
                   )}
                 >
                   Club
                 </Link>
-                {/* Our Programs dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <button
                       className={clsx(
-                        "group inline-flex items-center gap-1 text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6",
+                        "group inline-flex items-center gap-1 px-3 text-md font-semibold leading-6 transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50",
                         theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
                       )}
                     >
-                      Our Programs
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                      Learn AI
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
                     </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-56 p-1" forceMount>
-                    <DropdownMenuItem asChild>
-                      <Link href="/webinars" className="w-full rounded-md px-2 py-2 hover:bg-gray-100 text-gray-900">
-                        Webinars
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link href="/study-groups" className="w-full rounded-md px-2 py-2 hover:bg-gray-100 text-gray-900">
-                        Study Groups
-                      </Link>
-                    </DropdownMenuItem>
+                  <DropdownMenuContent align="start" className="w-[460px] rounded-2xl p-4" forceMount>
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <div className="text-left">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                          Self learning via Study Groups
+                        </p>
+                        <p className="mt-1 text-xs text-gray-500">
+                          Learn with a focused peer cohort, build your project, and present it live.
+                        </p>
+                        <div className="mt-4 space-y-2">
+                          {STUDY_GROUP_LINKS.map((item) => (
+                            <DropdownMenuItem
+                              key={item.href}
+                              asChild
+                              className="rounded-lg px-3 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900"
+                            >
+                              <Link href={item.href} className="text-sm font-semibold text-gray-900">
+                                {item.name}
+                              </Link>
+                            </DropdownMenuItem>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="text-left">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                          Bootcamps to build with AI
+                        </p>
+                        <p className="mt-1 text-xs text-gray-500">
+                          Instructor-led immersions where you master the stack and ship production workflows.
+                        </p>
+                        <div className="mt-4 space-y-2">
+                          {BOOTCAMP_LINKS.map((item) => (
+                            <DropdownMenuItem
+                              key={item.href}
+                              asChild
+                              className="rounded-lg px-3 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900"
+                            >
+                              <Link href={item.href} className="text-sm font-semibold text-gray-900">
+                                {item.name}
+                              </Link>
+                            </DropdownMenuItem>
+                          ))}
+                          <DropdownMenuItem
+                            asChild
+                            className="rounded-lg px-3 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900"
+                          >
+                            <Link href="/webinars" className="text-sm font-semibold text-gray-900">
+                              Weekly webinars
+                            </Link>
+                          </DropdownMenuItem>
+                        </div>
+                      </div>
+                    </div>
                   </DropdownMenuContent>
                 </DropdownMenu>
-
-                {/* AI Tools and Companies dropdown */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button
-                      className={clsx(
-                        "group inline-flex items-center gap-1 text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6",
-                        theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
-                      )}
-                    >
-                      AI Tools and Companies
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-64 p-1" forceMount>
-                    <DropdownMenuItem asChild>
-                      <Link href="/companies" className="w-full rounded-md px-2 py-2 hover:bg-gray-100 text-gray-900">
-                        Companies
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link href="/repos" className="w-full rounded-md px-2 py-2 hover:bg-gray-100 text-gray-900">
-                        Open Source Projects
-                      </Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-
-                {/* Apps dropdown */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button
-                      className={clsx(
-                        "group inline-flex items-center gap-1 text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6",
-                        theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
-                      )}
-                    >
-                      Labs
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-64 p-1" forceMount>
-                    <DropdownMenuItem asChild>
-                      <a 
-                        href="https://documatcher.com?ref=appliedai.club" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="w-full rounded-md px-2 py-2 hover:bg-gray-100 text-gray-900"
-                      >
-                        Extract documents with LLM
-                      </a>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-
-                {/* For Corporates link */}
-                <Link 
+                <Link
                   href="/for-corporates"
                   className={clsx(
-                    "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
+                    "group inline-flex w-max px-3 text-md font-semibold leading-6 transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50",
                     theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
                   )}
                 >
                   For Corporates
                 </Link>
-                {/* AIShots Link - Desktop - commented out
-                <Link 
-                  href="/shots"
-                  className={clsx(
-                    "group inline-flex w-max text-md font-semibold transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50 px-3 leading-6 shrink-0",
-                    theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
-                  )}
-                >
-                  AIShots
-                </Link>
-                */}
               </div>
             </div>
             
@@ -369,7 +376,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                   
                   {/* Club link */}
                   <div className="border-b border-gray-100 pb-2">
-                    <Link 
+                    <Link
                       href="/club"
                       className="flex w-full py-2 font-semibold text-gray-900"
                       onClick={() => setIsMobileMenuOpen(false)}
@@ -377,67 +384,84 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                       Club
                     </Link>
                   </div>
-                  
-                  {/* Our Programs (mobile) */}
-                  <div className="border-b border-gray-100 pb-2">
-                    <button 
-                      className="flex items-center justify-between w-full py-2 font-semibold text-gray-900"
-                      onClick={() => toggleMobileSubmenu('programs')}
-                    >
-                      <span>Our Programs</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform ${mobileSubmenu === 'programs' ? 'rotate-180' : ''}`}> 
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    </button>
-                    {mobileSubmenu === 'programs' && (
-                      <div className="pl-4 mt-2 space-y-2">
-                        <Link href="/webinars" className="flex w-full py-2 text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Webinars</Link>
-                        <Link href="/study-groups" className="flex w-full py-2 text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Study Groups</Link>
-                      </div>
-                    )}
-                  </div>
 
-                  {/* AI Tools and Companies (mobile) */}
+                  {/* Learn AI (mobile) */}
                   <div className="border-b border-gray-100 pb-2">
-                    <button 
-                      className="flex items-center justify-between w-full py-2 font-semibold text-gray-900"
-                      onClick={() => toggleMobileSubmenu('tools')}
+                    <button
+                      className="flex w-full items-center justify-between py-2 font-semibold text-gray-900"
+                      onClick={() => toggleMobileSubmenu('learn')}
                     >
-                      <span>AI Tools and Companies</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform ${mobileSubmenu === 'tools' ? 'rotate-180' : ''}`}> 
+                      <span>Learn AI</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        className={`transition-transform ${mobileSubmenu === 'learn' ? 'rotate-180' : ''}`}
+                      >
                         <polyline points="6 9 12 15 18 9"></polyline>
                       </svg>
                     </button>
-                    {mobileSubmenu === 'tools' && (
-                      <div className="pl-4 mt-2 space-y-2">
-                        <Link href="/companies" className="flex w-full py-2 text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Companies</Link>
-                        <Link href="/repos" className="flex w-full py-2 text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Open Source Projects</Link>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Apps (mobile) */}
-                  <div className="border-b border-gray-100 pb-2">
-                    <button 
-                      className="flex items-center justify-between w-full py-2 font-semibold text-gray-900"
-                      onClick={() => toggleMobileSubmenu('apps')}
-                    >
-                      <span>Apps</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform ${mobileSubmenu === 'apps' ? 'rotate-180' : ''}`}> 
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    </button>
-                    {mobileSubmenu === 'apps' && (
-                      <div className="pl-4 mt-2 space-y-2">
-                        <a 
-                          href="https://documatcher.com?ref=appliedai.club"
-                          target="_blank"
-                          rel="noopener noreferrer" 
-                          className="flex w-full py-2 text-gray-900" 
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          Extract documents with LLM
-                        </a>
+                    {mobileSubmenu === 'learn' && (
+                      <div className="mt-2 space-y-6 pl-4">
+                        <div>
+                          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                            Self learning via Study Groups
+                          </p>
+                          <div className="mt-2 space-y-2">
+                            <Link
+                              href="/study-groups"
+                              className="flex w-full py-2 text-sm font-semibold text-gray-900"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              Explore study groups
+                            </Link>
+                            {STUDY_GROUP_LINKS.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                className="flex w-full py-2 text-sm text-gray-900"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                {item.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                            Bootcamps to build with AI
+                          </p>
+                          <div className="mt-2 space-y-2">
+                            <Link
+                              href="/bootcamps"
+                              className="flex w-full py-2 text-sm font-semibold text-gray-900"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              Explore bootcamps
+                            </Link>
+                            {BOOTCAMP_LINKS.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                className="flex w-full py-2 text-sm text-gray-900"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                {item.name}
+                              </Link>
+                            ))}
+                            <Link
+                              href="/webinars"
+                              className="flex w-full py-2 text-sm text-gray-900"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              Weekly webinars
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
