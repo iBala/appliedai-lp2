@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { ReactNode } from 'react';
 import { formatDate } from '@/lib/utils';
 import ResourceHeroSection from '@/components/resources/ResourceHeroSection';
@@ -7,17 +6,24 @@ import Footer from '@/components/Footer';
 import type { LearningProgram } from '@/lib/learn/programs';
 import { CONTACT_EMAIL } from '@/lib/learn/programs';
 import ProgramCompanyLogos from '@/components/learn/ProgramCompanyLogos';
+import RegisterInterestForm from '@/components/learn/RegisterInterestForm';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 interface ProgramDetailProps {
   program: LearningProgram;
   tagLabel: string;
   tagIcon: ReactNode;
-  ctaLabel?: string;
 }
 
-const DEFAULT_CTA = 'Enroll now';
-
-export default function ProgramDetail({ program, tagLabel, tagIcon, ctaLabel }: ProgramDetailProps) {
+export default function ProgramDetail({ program, tagLabel, tagIcon }: ProgramDetailProps) {
   return (
     <main className="min-h-screen bg-white">
       <ResourceHeroSection
@@ -55,8 +61,8 @@ export default function ProgramDetail({ program, tagLabel, tagIcon, ctaLabel }: 
               </div>
             </div>
 
-            <aside className="space-y-6 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-              <div>
+            <aside className="space-y-6">
+              <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
                 <p className="text-sm font-semibold uppercase tracking-wide text-blue-600">Investment</p>
                 <p className="mt-2 text-2xl font-semibold text-black">{program.priceLabel}</p>
                 {program.depositLabel && (
@@ -65,36 +71,53 @@ export default function ProgramDetail({ program, tagLabel, tagIcon, ctaLabel }: 
                 {program.refundPolicy && (
                   <p className="mt-1 text-xs text-gray-500">{program.refundPolicy}</p>
                 )}
+
+                <div className="mt-4 space-y-3 rounded-xl bg-gray-50 p-4 text-sm text-gray-700">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-gray-800">Duration</span>
+                    <span>{program.duration}</span>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="font-semibold text-gray-800">Format</span>
+                    <span>{program.cadenceDescription}</span>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="font-semibold text-gray-800">Next cohort</span>
+                    <span>
+                      {program.cohort.label || 'Upcoming'} · {formatDate(program.cohort.startDate)} →{' '}
+                      {formatDate(program.cohort.endDate)}
+                    </span>
+                    <span className="text-xs text-gray-500">Demo day · {formatDate(program.cohort.demoDate)}</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="space-y-2 rounded-xl bg-gray-50 p-4 text-sm text-gray-700">
-                <div className="flex items-center justify-between">
-                  <span className="font-semibold text-gray-800">Duration</span>
-                  <span>{program.duration}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  {/* <span className="font-semibold text-gray-800">Cadence</span> */}
-                  {/* <span className="text-right">{program.cadenceDescription}</span> */}
-                </div>
-                <div className="flex flex-col gap-1">
-                  <span className="font-semibold text-gray-800">Next cohort</span>
-                  <span>
-                    {formatDate(program.cohort.startDate)} →{' '}
-                    {formatDate(program.cohort.endDate)}
-                  </span>
-                  <span className="text-xs text-gray-500">Demo day · {formatDate(program.cohort.demoDate)}</span>
-                </div>
-              </div>
-
-              <Link
-                href={program.cohort.enrollmentLink}
-                className="flex w-full items-center justify-center rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-black/80"
-              >
-                {ctaLabel ?? DEFAULT_CTA}
-              </Link>
-
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="w-full bg-black text-white hover:bg-black/85">
+                    Register interest
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Register your interest</DialogTitle>
+                    <DialogDescription>
+                      Share your details and we&apos;ll send the payment link and onboarding instructions on email and
+                      WhatsApp.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <RegisterInterestForm
+                    programSlug={program.slug}
+                    programType={program.type}
+                    programName={program.name}
+                    cohortLabel={program.cohort.label}
+                    layout="plain"
+                  />
+                </DialogContent>
+              </Dialog>
               <p className="text-xs text-gray-500">
-                When you enroll, we send the detailed curriculum, tooling set up guide, and cohort onboarding steps.
+                We process forms within 24 hours. You&apos;ll get the payment link, cohort calendar, and onboarding
+                checklist in your inbox and WhatsApp.
               </p>
             </aside>
           </div>
