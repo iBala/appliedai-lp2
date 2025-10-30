@@ -129,12 +129,12 @@ export default function ProgramDetail({ program, tagLabel, tagIcon, ctaLabel }: 
                 A project that you present live, plus a published case study. We showcase your demo on the Applied AI
                 Club channels once the cohort wraps up.
               </p>
-              <div className="mt-6 h-40 rounded-xl bg-gradient-to-br from-blue-100 via-white to-purple-100 p-6 text-sm text-gray-600">
+              {/* <div className="mt-6 h-40 rounded-xl bg-gradient-to-br from-blue-100 via-white to-purple-100 p-6 text-sm text-gray-600">
                 <p className="font-medium text-gray-700">Program visuals coming soon</p>
                 <p className="mt-2 text-xs text-gray-500">
                   We are working with alumni to document their builds and will add their screenshots here shortly.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
 
