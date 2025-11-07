@@ -75,17 +75,7 @@ const BOOTCAMP_LINKS = [
   //   href: '/bootcamps/langgraph',
   // },
   {
-    name: 'n8n Bootcamp',
-    description: 'Coming soon',
-    href: '/bootcamps/',
-  },
-  {
-    name: 'Vibe Coding Bootcamp',
-    description: 'Coming soon',
-    href: '/bootcamps/',
-  },
-  {
-    name: 'LangGraph Bootcamp',
+    name: 'Coming Soon',
     description: 'Coming soon',
     href: '/bootcamps/',
   },

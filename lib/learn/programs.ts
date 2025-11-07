@@ -150,7 +150,7 @@ const STUDY_GROUP_PROGRAMS: LearningProgram[] = [
     slug: 'vibe-coding',
     type: 'study-group',
     name: 'Vibe Coding Study Group',
-    tagline: 'A commitment based 3 week cohort where you learn to vieb code and build a project of your choice. Learn by yourself using material provided and advisor help.',
+    tagline: 'A commitment based 3 week cohort where you learn to vibe code and build a project of your choice. Learn by yourself using material provided and advisor help.',
     description:
       'Are you looking to learn vibe coding? Join a group of potential builders and learn vibe coding together through a self learning study group. Demo your product at the end of the course.',
     heroImage: PLACEHOLDER_IMAGE,
