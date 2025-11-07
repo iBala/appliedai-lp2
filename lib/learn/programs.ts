@@ -55,9 +55,9 @@ const STUDY_GROUP_PROGRAMS: LearningProgram[] = [
     slug: 'n8n',
     type: 'study-group',
     name: 'n8n Study Group',
-    tagline: 'Learn to build AI workflows with n8n',
+    tagline: 'A commitment based 3 week cohort where you learn to use n8n and build a project of your choice. Learn by yourself using material provided and advisor help.',
     description:
-      'Start learning to build with AI in an easy way. Ship real automations with guidance from peers. You will pick a workflow, build it end-to-end, and demo it live.',
+      "You'll be added to a whatsapp group of similar enthusiasts. Learn and build your project. Present to the world at the end of 3 weeks.",
     heroImage: PLACEHOLDER_IMAGE,
     priceLabel: '₹499 refundable deposit',
     depositLabel: 'Deposit refunded on successful demo',
@@ -70,15 +70,15 @@ const STUDY_GROUP_PROGRAMS: LearningProgram[] = [
       'Demo day where every participant presents their project live',
     ],
     whoIsItFor: [
-      'Operators and product folks who want hands-on automation skills',
+      'This is ideal if you can learn by yourself with some guidance. If you need to be taught, explore our bootcamps',
       'Beginners who know the basics of n8n and want structured accountability',
-      'Builders looking to showcase a polished workflow within a month',
+      'You have some understanding of technology',
     ],
     cohort: {
       label: '',
-      startDate: '2025-11-03',
-      endDate: '2025-11-23',
-      demoDate: '2025-11-23',
+      startDate: '2025-11-11',
+      endDate: '2025-11-29',
+      demoDate: '2025-11-29',
       syncUps: 'Tuesdays & Thursdays · 7 PM IST',
       whatsappGroupDescription: 'Dedicated WhatsApp space to share progress, blockers, and resources.',
       enrollmentLink: '#',
@@ -122,7 +122,7 @@ const STUDY_GROUP_PROGRAMS: LearningProgram[] = [
       {
         question: 'Do I need prior n8n experience?',
         answer:
-          'You should have experimented with n8n or watched the basics. We will help you go from idea to shipped workflow.',
+          'This is a self learning course. Having some knowledge around what n8n is or similar tools is important. ',
       },
       {
         question: 'What happens if I miss a sync?',
@@ -133,6 +133,16 @@ const STUDY_GROUP_PROGRAMS: LearningProgram[] = [
         question: 'How does the refund work?',
         answer:
           'Attend the syncs, post weekly updates, and present during demo day. We process the refund within 7 business days.',
+      },
+      {
+        question: 'What if I need dedicated teaching courses?',
+        answer:
+          'Check out our bootcamps for structured training courses.',
+      },
+      {
+        question: "Why should I pay you if I'm going to learn myself?",
+        answer:
+          "This is meant for people who know they can learn but they don't find the time or motivation. The commitment is to make sure there's some skin in the game. The amount will be refunded if you finish the course.",
       },
     ],
   },
@@ -161,9 +171,9 @@ const STUDY_GROUP_PROGRAMS: LearningProgram[] = [
     ],
     cohort: {
       label: '',
-      startDate: '2025-11-03',
-      endDate: '2025-11-30',
-      demoDate: '2025-11-30',
+      startDate: '2025-11-11',
+      endDate: '2025-12-06',
+      demoDate: '2025-12-06',
       syncUps: 'Wednesdays · 8 PM IST',
       whatsappGroupDescription: 'Daily check-ins and peer feedback channel to keep momentum high.',
       enrollmentLink: '#',
@@ -207,16 +217,26 @@ const STUDY_GROUP_PROGRAMS: LearningProgram[] = [
       {
         question: 'Can I join if I am new to coding?',
         answer:
-          'Yes. We share templates and walk you through the tech stack. Some scripting comfort helps but is not mandatory.',
+          'Yes. Since this is a self learning course, we recommend you have a technical background. You should understand what is happening. ',
       },
       {
-        question: 'Will I get continued support after the cohort?',
+        question: 'Will the course material be shared?',
         answer:
-          'Graduates stay in the alumni WhatsApp space where we collect feedback and share upgrades to the vibe framework.',
+          "We share videos and posts on working with vibe coding which are fairly clear. We also have dedicated sessions where you can use the facilitator's help to learn.",
       },
       {
         question: 'How many hours should I budget each week?',
         answer: 'Expect 3-4 hours including syncs, async build time, and demo prep.',
+      },
+      {
+        question: 'What if I need dedicated teaching courses?',
+        answer:
+          'Check out our bootcamps for structured training courses.',
+      },
+      {
+        question: "Why should I pay you if I'm going to learn myself?",
+        answer:
+          "This is meant for people who know they can learn but they don't find the time or motivation. The commitment is to make sure there's some skin in the game. The amount will be refunded if you finish the course.",
       },
     ],
   },
