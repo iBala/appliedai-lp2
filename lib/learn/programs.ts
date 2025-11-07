@@ -150,7 +150,7 @@ const STUDY_GROUP_PROGRAMS: LearningProgram[] = [
     slug: 'vibe-coding',
     type: 'study-group',
     name: 'Vibe Coding Study Group',
-    tagline: 'Join this self learning group tp build a real project with vibe coding tools.',
+    tagline: 'A commitment based 3 week cohort where you learn to vieb code and build a project of your choice. Learn by yourself using material provided and advisor help.',
     description:
       'Are you looking to learn vibe coding? Join a group of potential builders and learn vibe coding together through a self learning study group. Demo your product at the end of the course.',
     heroImage: PLACEHOLDER_IMAGE,
@@ -165,9 +165,9 @@ const STUDY_GROUP_PROGRAMS: LearningProgram[] = [
       'Work on your project, take help and complete the demo.',
     ],
     whoIsItFor: [
+      'This is ideal if you can learn by yourself with some guidance. If you need to be taught, explore our bootcamps',
       'You have some basic experience with scripting or coding.',
-      'You are finding it hard to learn to work with AI.',
-      'You are ok with learning by yourselves.',
+      'You are finding it hard to find the time and motivation to learn.',
     ],
     cohort: {
       label: '',
@@ -267,9 +267,9 @@ const BOOTCAMP_PROGRAMS: LearningProgram[] = [
     ],
     cohort: {
       label: 'Bootcamp · March 2025',
-      startDate: '2025-03-15',
-      endDate: '2025-03-16',
-      demoDate: '2025-03-16',
+      startDate: 'TBD',
+      endDate: 'TBD',
+      demoDate: 'TBD',
       syncUps: 'Live sessions · 10 AM – 5 PM IST',
       whatsappGroupDescription: 'Pop-up WhatsApp cohort for peer support and Q&A with instructors.',
       enrollmentLink: '#',

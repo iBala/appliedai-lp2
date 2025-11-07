@@ -59,20 +59,35 @@ const STUDY_GROUP_LINKS = [
 ];
 
 const BOOTCAMP_LINKS = [
+  // {
+  //   name: 'n8n Bootcamp',
+  //   description: 'Weekend intensive on production-grade automations.',
+  //   href: '/bootcamps/n8n',
+  // },
+  // {
+  //   name: 'Vibe Coding Bootcamp',
+  //   description: 'Design and launch vibe companions with expert guidance.',
+  //   href: '/bootcamps/vibe-coding',
+  // },
+  // {
+  //   name: 'LangGraph Bootcamp',
+  //   description: 'Master multi-agent orchestration with LangGraph.',
+  //   href: '/bootcamps/langgraph',
+  // },
   {
     name: 'n8n Bootcamp',
-    description: 'Weekend intensive on production-grade automations.',
-    href: '/bootcamps/n8n',
+    description: 'Coming soon',
+    href: '/bootcamps/',
   },
   {
     name: 'Vibe Coding Bootcamp',
-    description: 'Design and launch vibe companions with expert guidance.',
-    href: '/bootcamps/vibe-coding',
+    description: 'Coming soon',
+    href: '/bootcamps/',
   },
   {
     name: 'LangGraph Bootcamp',
-    description: 'Master multi-agent orchestration with LangGraph.',
-    href: '/bootcamps/langgraph',
+    description: 'Coming soon',
+    href: '/bootcamps/',
   },
 ];
 
