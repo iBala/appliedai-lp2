@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { clubFormSchema, type ClubFormValues } from "@/lib/validations/club"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const defaultTemplate = `## A bit about your experience
 I am a ...
@@ -38,8 +38,15 @@ export default function JoinForm() {
       whatsappNumber: "",
       linkedInUrl: "",
       reason: defaultTemplate,
+      gotcha: "",
+      startTime: Date.now(),
     },
   })
+
+  useEffect(() => {
+    // Update start time on client side to ensure it captures when user actually sees the form
+    form.setValue("startTime", Date.now());
+  }, [form]);
 
   const isSubmitting = form.formState.isSubmitting;
 
@@ -94,10 +101,10 @@ export default function JoinForm() {
                       <FormItem>
                         <FormLabel className="text-black">Your full name</FormLabel>
                         <FormControl>
-                          <Input 
-                            placeholder="John Doe" 
-                            className="bg-white text-black" 
-                            {...field} 
+                          <Input
+                            placeholder="John Doe"
+                            className="bg-white text-black"
+                            {...field}
                           />
                         </FormControl>
                         <FormMessage />
@@ -115,11 +122,11 @@ export default function JoinForm() {
                           If provided, we&apos;ll send updates/newsletters to this email
                         </FormDescription>
                         <FormControl>
-                          <Input 
-                            placeholder="you@example.com" 
+                          <Input
+                            placeholder="you@example.com"
                             type="email"
-                            className="bg-white text-black" 
-                            {...field} 
+                            className="bg-white text-black"
+                            {...field}
                           />
                         </FormControl>
                         <FormMessage />
@@ -137,11 +144,11 @@ export default function JoinForm() {
                           This is the whatsapp number you&apos;ll use to join the club.
                         </FormDescription>
                         <FormControl>
-                          <Input 
-                            placeholder="+1234567890" 
+                          <Input
+                            placeholder="+1234567890"
                             type="tel"
-                            className="bg-white text-black" 
-                            {...field} 
+                            className="bg-white text-black"
+                            {...field}
                           />
                         </FormControl>
                         <FormMessage />
@@ -156,11 +163,11 @@ export default function JoinForm() {
                       <FormItem>
                         <FormLabel className="text-black">LinkedIn Profile</FormLabel>
                         <FormControl>
-                          <Input 
-                            placeholder="https://www.linkedin.com/..." 
+                          <Input
+                            placeholder="https://www.linkedin.com/..."
                             type="url"
-                            className="bg-white text-black" 
-                            {...field} 
+                            className="bg-white text-black"
+                            {...field}
                           />
                         </FormControl>
                         <FormMessage />
@@ -178,13 +185,31 @@ export default function JoinForm() {
                           Tell us a bit about yourself. We look for people who are passionate about building agents and are willing to contribute to the community.
                         </FormDescription>
                         <FormControl>
-                          <Textarea 
+                          <Textarea
                             rows={8}
-                            className="bg-white text-black whitespace-pre-wrap resize-none" 
-                            {...field} 
+                            className="bg-white text-black whitespace-pre-wrap resize-none"
+                            {...field}
                           />
                         </FormControl>
                         <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Hidden Honeypot Field */}
+                  <FormField
+                    control={form.control}
+                    name="gotcha"
+                    render={({ field }) => (
+                      <FormItem style={{ opacity: 0, position: 'absolute', top: 0, left: 0, height: 0, width: 0, zIndex: -1, overflow: 'hidden' }} aria-hidden="true">
+                        <FormLabel>Bot Field</FormLabel>
+                        <FormControl>
+                          <Input
+                            tabIndex={-1}
+                            autoComplete="off"
+                            {...field}
+                          />
+                        </FormControl>
                       </FormItem>
                     )}
                   />
@@ -197,8 +222,8 @@ export default function JoinForm() {
                     </div>
                   )}
 
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     disabled={isSubmitting}
                     className="w-full"
                   >

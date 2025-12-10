@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase/client';
 import { createBeehiivSubscription } from '@/lib/beehiiv/api';
+import { createConvertKitSubscription } from '@/lib/convertkit/api';
 
 // Get Slack webhook URL from environment variables
 const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
@@ -8,7 +9,30 @@ const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 export async function POST(req: Request) {
   try {
     const formData = await req.json();
-    const { fullName, email, whatsappNumber, linkedInUrl, reason } = formData;
+    const { fullName, email, whatsappNumber, linkedInUrl, reason, gotcha, startTime } = formData;
+
+    // --- BOT PROTECTION CHECKS ---
+    // 1. Honeypot check
+    if (gotcha) {
+      console.warn(`Bot detected (honeypot): ${email || 'no-email'}`);
+      // Silently fail to fool the bot
+      return NextResponse.json({ success: true });
+    }
+
+    // 2. Time-based check (minimum 2 seconds)
+    // If startTime is missing or submission is too fast (< 2000ms)
+    // Valid human users take time to fill forms.
+    const submissionTime = Date.now();
+    const cleanStartTime = typeof startTime === 'number' ? startTime : submissionTime;
+    const duration = submissionTime - cleanStartTime;
+
+    // If startTime was missing (duration === 0) or too fast
+    if (!startTime || duration < 2000) {
+      console.warn(`Bot detected (too fast/missing time: ${duration}ms): ${email || 'no-email'}`);
+      // Silently fail
+      return NextResponse.json({ success: true });
+    }
+    // -----------------------------
 
     // Add debug logging
     console.log('Attempting to insert data:', {
@@ -104,23 +128,34 @@ export async function POST(req: Request) {
       await supabase
         .from('website_submissions')
         .delete()
-        .match({ 
+        .match({
           type: 'club-signup',
           page: '/club',
-          form_data: formData 
+          form_data: formData
         });
       throw new Error('Failed to send to Slack');
     }
 
-    // If email is provided, subscribe to Beehiiv newsletter
+    // If email is provided, subscribe to Beehiiv and ConvertKit
     if (email) {
+      // 1. Beehiiv
       console.log('Attempting to subscribe to Beehiiv:', email);
       const beehiivSuccess = await createBeehiivSubscription(email);
       if (!beehiivSuccess) {
         console.warn('Failed to subscribe to Beehiiv newsletter:', email);
-        // We don't throw here as this is not critical to the signup process
       } else {
         console.log('Successfully subscribed to Beehiiv:', email);
+      }
+
+      // 2. ConvertKit
+      console.log('Attempting to subscribe to ConvertKit:', email);
+      // Extract first name (simple logic: take first part of full name)
+      const firstName = fullName.split(' ')[0];
+      const convertKitSuccess = await createConvertKitSubscription(email, firstName);
+      if (!convertKitSuccess) {
+        console.warn('Failed to subscribe to ConvertKit:', email);
+      } else {
+        console.log('Successfully subscribed to ConvertKit:', email);
       }
     }
 

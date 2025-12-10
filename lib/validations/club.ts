@@ -6,6 +6,9 @@ export const clubFormSchema = z.object({
   whatsappNumber: z.string().min(1, "WhatsApp number is required"),
   linkedInUrl: z.string().url().startsWith("https://www.linkedin.com/"),
   reason: z.string().min(1, "Please tell us why you'd like to join"),
+  // Anti-bot fields
+  gotcha: z.string().optional(),
+  startTime: z.number().optional(), 
 })
 
 export type ClubFormValues = z.infer<typeof clubFormSchema> 
