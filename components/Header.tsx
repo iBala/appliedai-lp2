@@ -94,7 +94,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
   // Mobile menu state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
-  
+
   // Disable body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -104,7 +104,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
       // Reset submenu when menu closes
       setMobileSubmenu(null);
     }
-    
+
     return () => {
       document.body.style.overflow = '';
     };
@@ -112,8 +112,8 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
 
   // Compute theme-based styles
   const textColorClass = theme === 'light' ? 'text-gray-900' : 'text-white';
-  const scrolledBgClass = theme === 'light' 
-    ? 'bg-white/80 shadow-lg backdrop-blur-sm border-gray-200' 
+  const scrolledBgClass = theme === 'light'
+    ? 'bg-white/80 shadow-lg backdrop-blur-sm border-gray-200'
     : 'bg-transparent shadow-lg backdrop-blur-sm border-white/10';
 
   // Handle hover
@@ -126,7 +126,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
   };
 
   return (
-    <header 
+    <header
       className={clsx(
         "w-full z-50 bg-transparent",
         !disableSticky && "sticky top-0"
@@ -137,8 +137,8 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
         isScrolled ? `${scrolledBgClass} rounded-full border` : 'bg-transparent'
       )}>
         <div className="container relative mx-auto bg-transparent">
-          <nav 
-            aria-label="Main" 
+          <nav
+            aria-label="Main"
             className={clsx(
               "relative z-[60] flex h-14 w-full justify-between transition-all duration-300 px-2 md:px-4 bg-transparent",
               textColorClass
@@ -146,24 +146,24 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
           >
             {/* Logo and Nav items container */}
             <div className="flex items-center flex-1 min-w-0">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className={clsx(
                   "flex items-center mr-5 transition-all duration-300 will-change-[opacity] hover:opacity-70 shrink-0",
                   textColorClass
                 )}
                 aria-label="navigate to home"
               >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="24" 
-                  height="24" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   className={textColorClass}
                 >
                   <path d="M7 2h10"></path>
@@ -172,7 +172,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                 </svg>
                 <span className="ml-2 text-lg font-semibold">Applied AI</span>
               </Link>
-              
+
               {/* Navigation items - desktop */}
               <div className="hidden flex-1 min-w-0 items-center space-x-6 md:flex">
                 <Link
@@ -262,13 +262,24 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                 >
                   For Corporates
                 </Link>
+                <Link
+                  href="https://agency.appliedai.club"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={clsx(
+                    "group inline-flex w-max px-3 text-md font-semibold leading-6 transition-all duration-300 will-change-[opacity] hover:opacity-70 focus:outline-none disabled:pointer-events-none disabled:opacity-50",
+                    theme === 'light' ? 'text-gray-900/90' : 'text-white/90'
+                  )}
+                >
+                  Agency
+                </Link>
               </div>
             </div>
-            
+
             {/* Right side buttons */}
             <div className="flex items-center text-md font-semibold shrink-0 ml-4">
-              <Link 
-                href="/club" 
+              <Link
+                href="/club"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={clsx(
@@ -278,41 +289,41 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
               >
                 Join the Club
               </Link>
-              
+
               {/* Hamburger menu button - mobile only */}
-              <button 
+              <button
                 className="md:hidden flex items-center justify-center p-2 focus:outline-none"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
                 aria-expanded={isMobileMenuOpen}
               >
                 {isMobileMenuOpen ? (
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    width="24" 
-                    height="24" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     className={textColorClass}
                   >
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>
                 ) : (
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    width="24" 
-                    height="24" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     className={textColorClass}
                   >
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -323,10 +334,10 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
               </button>
             </div>
           </nav>
-          
+
           {/* Mobile Menu - Only shown when hamburger is clicked */}
           {isMobileMenuOpen && (
-            <div 
+            <div
               className="fixed inset-0 z-[100] md:hidden bg-white dark:bg-gray-900 overflow-y-auto"
               style={{ top: '56px' }}
             >
@@ -335,30 +346,30 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                 <div className="space-y-2">
                   {/* Agents menu */}
                   <div className="border-b border-gray-100 pb-2">
-                    <button 
+                    <button
                       className="flex items-center justify-between w-full py-2 font-semibold text-gray-900"
                       onClick={() => toggleMobileSubmenu('agents')}
                     >
                       <span>Agents</span>
-                      <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="20" 
-                        height="20" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
                         strokeWidth="2"
                         className={`transition-transform ${mobileSubmenu === 'agents' ? 'rotate-180' : ''}`}
                       >
                         <polyline points="6 9 12 15 18 9"></polyline>
                       </svg>
                     </button>
-                    
+
                     {/* Submenu for Agents */}
                     {mobileSubmenu === 'agents' && (
                       <div className="pl-4 mt-2 space-y-2">
                         {AGENTS.map((agent) => (
-                          <Link 
+                          <Link
                             key={agent.name}
                             href={agent.href}
                             className="flex items-start py-2 gap-3"
@@ -378,7 +389,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                       </div>
                     )}
                   </div>
-                  
+
                   {/* Club link */}
                   <div className="border-b border-gray-100 pb-2">
                     <Link
@@ -473,7 +484,7 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
 
                   {/* For Corporates link (mobile) */}
                   <div className="border-b border-gray-100 pb-2">
-                    <Link 
+                    <Link
                       href="/for-corporates"
                       className="flex w-full py-2 font-semibold text-gray-900"
                       onClick={() => setIsMobileMenuOpen(false)}
@@ -481,7 +492,20 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                       For Corporates
                     </Link>
                   </div>
-                  
+
+                  {/* Agency link (mobile) */}
+                  <div className="border-b border-gray-100 pb-2">
+                    <Link
+                      href="https://agency.appliedai.club"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex w-full py-2 font-semibold text-gray-900"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Agency
+                    </Link>
+                  </div>
+
                   {/* AIShots Link - Mobile - commented out
                   <div className="border-b border-gray-100 pb-2">
                     <Link 
@@ -493,10 +517,10 @@ const Header = ({ theme = 'light', isScrolled = false, disableSticky }: HeaderPr
                     </Link>
                   </div>
                   */}
-                  
+
                   {/* Sign in link */}
                   <div className="pt-2">
-                    <Link 
+                    <Link
                       href="https://dashboard.appliedai.club/"
                       target="_blank"
                       rel="noopener noreferrer"
